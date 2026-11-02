@@ -3113,7 +3113,7 @@ def mezclar():
     fx = np.zeros(n, np.float32)
     E = {e["nombre"]: e for e in ESC}
     r = np.random.default_rng(1).standard_normal(n).astype(np.float32)
-    fx += (np.convolve(r, np.ones(40) / 40, mode="same") * 0.5 * (0.6 + 0.4 * np.sin(2 * np.pi * 0.11 * tt))).astype(np.float32)
+    fx += (np.convolve(r, np.ones(40) / 40, mode="same") * 0.28 * (0.6 + 0.4 * np.sin(2 * np.pi * 0.11 * tt))).astype(np.float32)
     rg = E["regla"]
     colocar(fx, braam(), 0.0, 0.6)
     for k in range(3):
@@ -3147,7 +3147,7 @@ def mezclar():
     t = tl + 2.0
     p = 0.9
     while t < E["foto"]["t0"] + 4:
-        colocar(fx, latido(0.7), t, 0.6)
+        colocar(fx, latido(0.7), t, 0.42)
         t += p
         p = max(0.55, p * 0.97)
     mi = E["mirilla"]
