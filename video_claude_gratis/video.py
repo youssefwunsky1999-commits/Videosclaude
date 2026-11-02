@@ -32,18 +32,23 @@ COLA = 0.75               # aire tras cada frase
 LEAD = 0.6                # silencio inicial
 
 # Paleta
-NARANJA = (217, 119, 87)
-NARANJA2 = (240, 150, 110)
-CREMA = (240, 238, 230)
-GRIS = (150, 148, 140)
-FONDO = (20, 20, 19)
-AZUL = (110, 160, 230)
-VERDE = (120, 200, 140)
-AMARILLO = (240, 200, 100)
+# Paleta clara inspirada en la marca de Anthropic (crema + arcilla + tinta)
+NARANJA = (217, 119, 87)      # arcilla
+NARANJA2 = (196, 98, 66)      # arcilla oscura (texto sobre crema)
+CREMA = (25, 25, 23)          # tinta: color principal del texto
+GRIS = (120, 117, 108)
+FONDO = (250, 249, 245)       # texto claro sobre botones
+PAPEL = (240, 238, 230)       # fondo del vídeo
+BLANCO = (255, 255, 252)
+LINEA = (214, 209, 196)
+AZUL = (106, 155, 204)
+VERDE = (120, 140, 93)
+AMARILLO = (212, 162, 127)
 
+SERIF = os.path.join(AQUI, "fuentes", "SourceSerif4.ttf")
 FUENTES = {
-    "black": "/usr/share/fonts/opentype/inter/InterDisplay-Black.otf",
-    "bold": "/usr/share/fonts/opentype/inter/InterDisplay-Bold.otf",
+    "black": SERIF,
+    "bold": SERIF,
     "semi": "/usr/share/fonts/opentype/inter/Inter-SemiBold.otf",
     "reg": "/usr/share/fonts/opentype/inter/Inter-Regular.otf",
     "mono": "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
@@ -54,7 +59,10 @@ FUENTES = {
 
 @lru_cache(maxsize=512)
 def F(nombre, px):
-    return ImageFont.truetype(FUENTES[nombre], max(1, int(px)))
+    f = ImageFont.truetype(FUENTES[nombre], max(1, int(px)))
+    if FUENTES[nombre] == SERIF:
+        f.set_variation_by_name("SemiBold" if nombre == "black" else "Medium")
+    return f
 
 
 # ---------------------------------------------------------------- easing
@@ -249,9 +257,8 @@ def _fondo_base():
     nx, ny = (x - IW / 2) / IW, (y - IH / 2) / IH
     r = np.sqrt(nx ** 2 * 1.2 + ny ** 2)
     v = np.clip(1 - r * 1.25, 0, 1) ** 1.6
-    base = np.array(FONDO, np.float32)
-    img = base[None, None, :] * (0.55 + 0.6 * v[..., None])
-    img += np.array([18, 10, 6], np.float32)[None, None, :] * v[..., None]
+    base = np.array(PAPEL, np.float32)
+    img = base[None, None, :] * (0.95 + 0.05 * v[..., None])
     return np.clip(img, 0, 255).astype(np.uint8)
 
 
@@ -270,20 +277,19 @@ def fondo(T, tinte=NARANJA, intensidad=1.0):
         FONDO_BASE = _fondo_base()
     # manchas de luz que flotan
     acc = np.zeros((SH, SW, 3), np.float32)
-    for k, (fx, fy, fase, col, rad) in enumerate([(0.13, 0.17, 0, tinte, .28), (0.09, 0.11, 2, (90, 60, 140), .32),
-                                                  (0.07, 0.15, 4, tinte, .22)]):
+    for k, (fx, fy, fase, col, rad) in enumerate([(0.13, 0.17, 0, (30, 70, 90), .30), (0.09, 0.11, 2, (40, 30, 10), .34)]):
         cx = SW * (0.5 + 0.38 * math.sin(T * fx + fase))
         cy = SH * (0.5 + 0.35 * math.cos(T * fy * 1.3 + fase))
         g = np.exp(-(((_xx - cx) / (SW * rad)) ** 2 + ((_yy - cy) / (SW * rad)) ** 2))
-        acc += g[..., None] * np.array(col, np.float32)[None, None, :] * 0.16 * intensidad
+        acc += g[..., None] * np.array(col, np.float32)[None, None, :] * 0.18 * intensidad
     manchas = Image.fromarray(np.clip(acc, 0, 255).astype(np.uint8)).resize((IW, IH), Image.BILINEAR)
-    img = ImageChops.add(Image.fromarray(FONDO_BASE), manchas)
+    img = ImageChops.subtract(Image.fromarray(FONDO_BASE), manchas)
     d = ImageDraw.Draw(img, "RGBA")
     for (x, y, r, vel, fase) in POLVO:
         yy = (y - T * vel) % (H + 20) - 10
         xx = x + 8 * math.sin(T * 0.5 + fase)
         a = 0.25 + 0.25 * math.sin(T * 2 + fase)
-        d.ellipse(P(xx - r, yy - r, xx + r, yy + r), fill=(240, 220, 200, int(255 * a * 0.6)))
+        d.ellipse(P(xx - r, yy - r, xx + r, yy + r), fill=(217, 119, 87, int(255 * a * 0.35)))
     return img
 
 
@@ -292,12 +298,12 @@ def esc_intro(L, e, t, D, T, fr):
     k = prog(t, 0.55, 0.9)
     R = 105 * eob(k)
     cy = 290 - 20 * eio(prog(t, 2.2, 1.0))
-    logo(L, 640, cy, R, 30 * t + 40 * (1 - eo3(k)))
+    logo(L, 640, cy, R, 30 * t + 40 * (1 - eo3(k)), glow=False)
     # onda expansiva
     for j, t0 in enumerate([0.75, 1.0]):
         q = prog(t, t0, 1.3)
         if 0 < q < 1:
-            circulo(L, 640, cy, 60 + 520 * eo3(q), outline=NARANJA2, w=6 * (1 - q) + 1, a=(1 - q) * .8, glow=True)
+            circulo(L, 640, cy, 60 + 520 * eo3(q), outline=NARANJA, w=4 * (1 - q) + 1, a=(1 - q) * .6)
     # "Claude" letra a letra
     tc = wt(e, "Claude") - 0.25
     nombre = "Claude"
@@ -308,7 +314,7 @@ def esc_intro(L, e, t, D, T, fr):
         q = prog(t, tc + j * 0.06, 0.45)
         wch = ancho(ch, size, "black")
         if q > 0:
-            texto(L, ch, x + wch / 2, 475 + 40 * (1 - eo3(q)), size, CREMA, a=q, fuente="black")
+            texto(L, ch, x + wch / 2, 470 + 40 * (1 - eo3(q)), size * 1.1, CREMA, a=q, fuente="black")
         x += wch
     q = prog(t, wt(e, "inteligencia") - 0.1, 0.6)
     texto(L, "INTELIGENCIA ARTIFICIAL", 640, 560 + 10 * (1 - eo3(q)), 22, NARANJA2, a=q, fuente="semi")
@@ -336,8 +342,8 @@ def esc_gratis(L, e, t, D, T, fr):
             amp = 14 * math.exp(-dt * 6)
             L.shake = (int(amp * math.sin(dt * 70) * K), int(amp * math.cos(dt * 53) * K))
         y = 250 - 40 * eio(prog(t, wt(e, "Entras") - 0.3, 0.7))
-        texto(L, "GRATIS", 640, y, 170 * s, NARANJA, a=a * 0.55, fuente="black", glow=True)
-        texto(L, "GRATIS", 640, y, 170 * s, NARANJA2, a=a, fuente="black")
+        texto(L, "Gratis", 640, y + 6, 190 * s, CREMA, a=a * 0.5, fuente="black", glow=True)
+        texto(L, "Gratis", 640, y, 190 * s, NARANJA, a=a, fuente="black")
         # confeti
         dt = t - ti - 0.2
         if dt > 0:
@@ -368,7 +374,8 @@ def esc_gratis(L, e, t, D, T, fr):
     if q > 0:
         y0 = 470 + 120 * (1 - eo3(q))
         x0, x1 = 330, 950
-        rrect(L, x0, y0, x1, y0 + 74, 37, fill=(38, 37, 34), outline=(80, 78, 72), w=2, a=q)
+        rrect(L, x0, y0 + 4, x1, y0 + 78, 37, fill=CREMA, a=q * 0.3, glow=True)
+        rrect(L, x0, y0, x1, y0 + 74, 37, fill=BLANCO, outline=LINEA, w=2, a=q)
         # candado
         rrect(L, x0 + 30, y0 + 34, x0 + 52, y0 + 52, 4, fill=VERDE, a=q)
         L.dtop.arc(P(x0 + 33, y0 + 22, x0 + 49, y0 + 42), 180, 360, fill=L.c(VERDE, q), width=3 * K)
@@ -425,11 +432,11 @@ def esc_planes(L, e, t, D, T, fr):
         resalta = prog(t, tfin, 0.4) if j == 0 else 0
         atenua = 1 - 0.55 * prog(t, tfin, 0.4) if j > 0 else 1
         a *= atenua
-        rrect(L, cx - 150, y - 140, cx + 150, y + 140, 28, fill=(34, 33, 31), outline=mezcla((70, 68, 62), col, resalta),
-              w=2 + 3 * resalta, a=a)
+        rrect(L, cx - 150, y - 134, cx + 150, y + 146, 28, fill=CREMA, a=a * 0.25, glow=True)
+        rrect(L, cx - 150, y - 140, cx + 150, y + 140, 28, fill=BLANCO, outline=mezcla(LINEA, col, resalta),
+              w=1.5 + 3 * resalta, a=a)
         if resalta:
-            rrect(L, cx - 150, y - 140, cx + 150, y + 140, 28, outline=col, w=5, a=resalta * (0.6 + 0.4 * math.sin(t * 6)),
-                  glow=True)
+            rrect(L, cx - 156, y - 146, cx + 156, y + 146, 32, outline=col, w=3, a=resalta * (0.5 + 0.5 * math.sin(t * 6)))
         circulo(L, cx, y - 62, 38, fill=col, a=a * 0.18)
         if ico == "check":
             icono_check(L, cx, y - 62, 40, col, a)
@@ -447,7 +454,7 @@ def esc_planes(L, e, t, D, T, fr):
         elif j == 1:
             # barra de uso que se llena
             pu = eio(prog(t, t0 + 0.3, 1.5))
-            rrect(L, cx - 100, y + 52, cx + 100, y + 70, 9, fill=(60, 58, 54), a=a)
+            rrect(L, cx - 100, y + 52, cx + 100, y + 70, 9, fill=(222, 217, 206), a=a)
             rrect(L, cx - 100, y + 52, cx - 100 + 200 * pu * 0.86, y + 70, 9, fill=col, a=a)
         else:
             texto(L, "Pro · Max · Team", cx, y + 62, 22, col, a=a, fuente="semi")
@@ -475,7 +482,7 @@ def esc_red(L, e, t, D, T, fr):
     for (ci, a, b) in ARISTAS:
         (x0, y0), (x1, y1) = NODOS[ci][a], NODOS[ci + 1][b]
         aparece = prog(t, 0.4 + ci * 0.25, 0.6)
-        linea(L, [(x0, y0), (x1, y1)], (120, 110, 100), w=1.2, a=0.35 * aparece * qr)
+        linea(L, [(x0, y0), (x1, y1)], (160, 152, 140), w=1.2, a=0.35 * aparece * qr)
     # pulsos viajando por las conexiones
     tp = wt(e, "entrenaron") - 0.3
     if t > tp:
@@ -486,14 +493,14 @@ def esc_red(L, e, t, D, T, fr):
             if u > 1:
                 continue
             x, y = x0 + (x1 - x0) * u, y0 + (y1 - y0) * u
-            circulo(L, x, y, 4 + 2 * brillo, fill=NARANJA2, a=qr * math.sin(u * math.pi), glow=True)
+            circulo(L, x, y, 4 + 2 * brillo, fill=NARANJA, a=qr * math.sin(u * math.pi))
     for ci, capa in enumerate(NODOS):
         for k, (x, y) in enumerate(capa):
             ap = eob(prog(t, 0.3 + ci * 0.2 + k * 0.04, 0.5))
             act = 0.5 + 0.5 * math.sin(t * 5 + k * 1.7 + ci)
-            col = mezcla((90, 86, 80), NARANJA, cl(brillo * act + 0.15))
-            circulo(L, x, y, 17 * ap, fill=(30, 29, 27), outline=col, w=3, a=qr)
-            circulo(L, x, y, 9 * ap, fill=col, a=qr, glow=brillo > 0)
+            col = mezcla((185, 179, 168), NARANJA, cl(brillo * act + 0.15))
+            circulo(L, x, y, 17 * ap, fill=BLANCO, outline=col, w=3, a=qr)
+            circulo(L, x, y, 9 * ap, fill=col, a=qr)
     # fragmentos de texto que entran en la red
     for j, frag in enumerate(FRAGMENTOS):
         t0 = 0.6 + j * 0.38
@@ -505,7 +512,7 @@ def esc_red(L, e, t, D, T, fr):
         x = 90 + (objetivo[0] - 120) * eio(u)
         y = y_ini + (objetivo[1] - y_ini) * eio(u)
         a = math.sin(u * math.pi) * (1 - u * 0.6)
-        texto(L, frag, x, y, 22 - 8 * u, CREMA, a=a, fuente="mono")
+        texto(L, frag, x, y, 22 - 8 * u, GRIS, a=a, fuente="mono")
     q = prog(t, wt(e, "patrones") - 0.1, 0.6)
     texto(L, "patrones del lenguaje", 640 + 175, 600 - 10 * (1 - eo3(q)), 26, NARANJA2, a=q, fuente="bold")
 
@@ -536,11 +543,12 @@ def esc_tokens(L, e, t, D, T, fr):
         if sep > 0:
             col = TOKEN_COLS[j]
             bob = math.sin(t * 3 + j) * 4 * sep
-            rrect(L, x - 8, 320 - 46 + bob, x + w + 8, 320 + 46 + bob, 14, fill=col, a=0.22 * sep)
-            rrect(L, x - 8, 320 - 46 + bob, x + w + 8, 320 + 46 + bob, 14, outline=col, w=2, a=0.9 * sep, glow=True)
+            rrect(L, x - 8, 320 - 40 + bob, x + w + 8, 320 + 52 + bob, 14, fill=CREMA, a=0.25 * sep, glow=True)
+            rrect(L, x - 8, 320 - 46 + bob, x + w + 8, 320 + 46 + bob, 14, fill=mezcla(BLANCO, col, 0.28), a=sep)
+            rrect(L, x - 8, 320 - 46 + bob, x + w + 8, 320 + 46 + bob, 14, outline=col, w=2, a=sep)
             texto(L, tok, x, 322 + bob, size, CREMA, fuente="bold", anchor="lm")
             qi = prog(t, tt + j * 0.07, 0.4)
-            texto(L, TOKEN_IDS[j], cx, 400 + 12 * (1 - eo3(qi)), 20, col, a=qi, fuente="mono")
+            texto(L, TOKEN_IDS[j], cx, 400 + 12 * (1 - eo3(qi)), 20, mezcla(col, CREMA, 0.35), a=qi, fuente="mono")
         else:
             texto(L, vis, x, 322, size, CREMA, fuente="bold", anchor="lm")
         x += w + gap
@@ -548,13 +556,13 @@ def esc_tokens(L, e, t, D, T, fr):
         cxp = 640 - total / 2 + ancho(frase[:nvis], size, "bold") + 4
         rrect(L, cxp, 290, cxp + 4, 354, 2, fill=NARANJA)
     q = prog(t, tt, 0.6)
-    rrect(L, 520, 470, 760, 530, 30, fill=(38, 37, 34), outline=NARANJA, w=2, a=q)
+    rrect(L, 520, 470, 760, 530, 30, fill=BLANCO, outline=NARANJA, w=2, a=q)
     texto(L, f"{len(TOKENS)} tokens", 640, 500, 28, CREMA, a=q, fuente="bold")
     # tijera simbólica
     if 0 < prog(t, td - 0.2, 1.0) < 1:
         u = prog(t, td - 0.2, 1.0)
         xx = 640 - total / 2 - 60 + (total + 120) * eio(u)
-        linea(L, [(xx, 250), (xx, 390)], NARANJA2, w=3, a=math.sin(u * math.pi), glow=True)
+        linea(L, [(xx, 250), (xx, 390)], NARANJA, w=3, a=math.sin(u * math.pi))
 
 
 CANDIDATOS = [("azul", 0.71), ("gris", 0.13), ("infinito", 0.08), ("precioso", 0.05)]
@@ -580,19 +588,18 @@ def esc_prediccion(L, e, t, D, T, fr):
             continue
         y = 330 + j * 70
         elegido = j == 0 and t > ts
-        col = NARANJA if elegido else (110, 106, 98)
+        col = NARANJA if elegido else (195, 189, 177)
         texto(L, pal, 470, y, 32, CREMA if elegido else GRIS, a=q, fuente="bold", anchor="rm")
-        rrect(L, 495, y - 20, 495 + 420, y + 20, 10, fill=(40, 39, 36), a=q)
+        rrect(L, 495, y - 20, 495 + 420, y + 20, 10, fill=(228, 224, 214), a=q)
         ww = 420 * p * eo3(prog(t, tb + j * 0.15 + 0.2, 0.9))
-        rrect(L, 495, y - 20, 495 + max(20, ww), y + 20, 10, fill=col, a=q, glow=elegido)
+        rrect(L, 495, y - 20, 495 + max(20, ww), y + 20, 10, fill=col, a=q)
         texto(L, f"{int(p * 100 * eo3(prog(t, tb + j * .15 + .2, .9)))} %", 935, y, 26, col if elegido else GRIS,
               a=q, fuente="semi", anchor="lm")
     if t > ts + 0.3:
         x = (470 - ancho("azul", 32, "bold") / 2) + (x0 + wbase + wazul / 2 - (470 - ancho("azul", 32, "bold") / 2)) * vuela
         y = 330 + (210 - 330) * vuela
         s = 32 + (size - 32) * vuela
-        texto(L, "azul", x, y, s, NARANJA, a=0.6, fuente="bold", glow=True)
-        texto(L, "azul", x, y, s, NARANJA2)
+        texto(L, "azul", x, y, s, NARANJA, fuente="bold")
     # contexto: mensajes anteriores a la izquierda
     tc = wt(e, "contexto") - 0.3
     q = prog(t, tc, 0.6)
@@ -601,8 +608,8 @@ def esc_prediccion(L, e, t, D, T, fr):
             qq = prog(t, tc + j * 0.08, 0.4)
             w = [150, 110, 170, 90][j]
             x = 60 if j % 2 == 0 else 100
-            rrect(L, x, 290 + j * 62, x + w, 330 + j * 62, 18, fill=NARANJA if j % 2 else (60, 58, 54), a=0.7 * qq)
-        rrect(L, 40, 270, 290, 540, 22, outline=NARANJA2, w=2, a=q * (0.6 + 0.4 * math.sin(t * 6)), glow=True)
+            rrect(L, x, 290 + j * 62, x + w, 330 + j * 62, 18, fill=NARANJA if j % 2 else (222, 217, 206), a=0.7 * qq)
+        rrect(L, 40, 270, 290, 540, 22, outline=NARANJA, w=2, a=q * (0.6 + 0.4 * math.sin(t * 6)))
         texto(L, "contexto", 165, 570, 22, NARANJA2, a=q, fuente="semi")
         # flecha hacia las barras
         linea(L, [(300, 405), (360, 405)], NARANJA2, w=3, a=q)
@@ -615,9 +622,10 @@ def esc_herramientas(L, e, t, D, T, fr):
     x0, y0, x1, y1 = 250, 150, 1030, 560
     y0 += 30 * (1 - eo3(q))
     y1 += 30 * (1 - eo3(q))
-    rrect(L, x0, y0, x1, y1, 18, fill=(16, 16, 15), outline=(80, 78, 72), w=2, a=q * 0.96)
-    rrect(L, x0, y0, x1, y0 + 40, 18, fill=(36, 35, 33), a=q)
-    L.dtop.rectangle(P(x0, y0 + 22, x1, y0 + 40), fill=L.c((36, 35, 33), q))
+    rrect(L, x0, y0 + 6, x1, y1 + 6, 18, fill=CREMA, a=q * 0.5, glow=True)
+    rrect(L, x0, y0, x1, y1, 18, fill=(28, 28, 26), a=q)
+    rrect(L, x0, y0, x1, y0 + 40, 18, fill=(44, 43, 40), a=q)
+    L.dtop.rectangle(P(x0, y0 + 22, x1, y0 + 40), fill=L.c((44, 43, 40), q))
     for j, c in enumerate([(235, 95, 85), (240, 190, 80), (110, 200, 110)]):
         circulo(L, x0 + 24 + j * 22, y0 + 20, 7, fill=c, a=q)
     texto(L, "claude — terminal", 640, y0 + 20, 16, GRIS, a=q, fuente="semi")
@@ -625,15 +633,15 @@ def esc_herramientas(L, e, t, D, T, fr):
     tx = wt(e, "ejecuto") - 0.3
     tr = wt(e, "reviso") - 0.2
     lineas = [
-        (0.7, "> crea un vídeo explicando quién soy", CREMA, 0.9),
-        (tw, "● Write   video.py", NARANJA2, 0.5),
-        (tw + 0.4, "  + 500 líneas de Python", VERDE, 0),
-        (tx, "● Bash    python3 video.py", NARANJA2, 0.5),
-        (tx + 0.5, "  ✓ voz sintetizada", VERDE, 0),
-        (tx + 0.8, f"  ✓ {NFRAMES} fotogramas renderizados", VERDE, 0),
-        (tx + 1.1, "  ✓ música generada", VERDE, 0),
-        (tr, "● Read    claude_gratis.mp4", NARANJA2, 0.5),
-        (tr + 0.5, "  ✓ todo correcto", VERDE, 0),
+        (0.7, "> crea un vídeo explicando quién soy", PAPEL, 0.9),
+        (tw, "● Write   video.py", NARANJA, 0.5),
+        (tw + 0.4, "  + 500 líneas de Python", (150, 200, 120), 0),
+        (tx, "● Bash    python3 video.py", NARANJA, 0.5),
+        (tx + 0.5, "  ✓ voz sintetizada", (150, 200, 120), 0),
+        (tx + 0.8, f"  ✓ {NFRAMES} fotogramas renderizados", (150, 200, 120), 0),
+        (tx + 1.1, "  ✓ música generada", (150, 200, 120), 0),
+        (tr, "● Read    claude_gratis.mp4", NARANJA, 0.5),
+        (tr + 0.5, "  ✓ todo correcto", (150, 200, 120), 0),
     ]
     ly = y0 + 72
     for (t0, s, col, dur) in lineas:
@@ -643,7 +651,7 @@ def esc_herramientas(L, e, t, D, T, fr):
         texto(L, s[:n], x0 + 30, ly, 21, col, a=q, fuente="mono", anchor="lm")
         if n < len(s) or (t0 == lineas[-1][0] and (t * 2) % 1 < .6):
             cx = x0 + 32 + ancho(s[:n], 21, "mono")
-            L.dtop.rectangle(P(cx, ly - 12, cx + 11, ly + 12), fill=L.c(CREMA, q * 0.8))
+            L.dtop.rectangle(P(cx, ly - 12, cx + 11, ly + 12), fill=L.c(PAPEL, q * 0.8))
         ly += 40
     # chips orbitando
     chips = ["Código", "Terminal", "Archivos", "Web"]
@@ -655,7 +663,7 @@ def esc_herramientas(L, e, t, D, T, fr):
         if math.sin(ang) < -0.2 and abs(math.cos(ang)) < 0.75:
             continue
         w = ancho(ch, 20, "semi") + 36
-        rrect(L, cx - w / 2, cy - 20, cx + w / 2, cy + 20, 20, fill=(42, 40, 37), outline=NARANJA, w=2, a=qo * 0.95)
+        rrect(L, cx - w / 2, cy - 20, cx + w / 2, cy + 20, 20, fill=BLANCO, outline=NARANJA, w=2, a=qo * 0.95)
         texto(L, ch, cx, cy, 20, CREMA, a=qo, fuente="semi")
 
 
@@ -672,14 +680,13 @@ def esc_meta(L, e, t, D, T, fr):
             idx = (col * 97 + k + off) % len(CODIGO)
             y = 720 + 20 - ((t * vel + k * 22) % (36 * 22))
             x = 30 + col * 320
-            texto(L, CODIGO[idx][:42], x, y, 13, NARANJA if (k + col) % 9 == 0 else GRIS, a=0.16, fuente="mono",
+            texto(L, CODIGO[idx][:42], x, y, 13, NARANJA if (k + col) % 9 == 0 else GRIS, a=0.22, fuente="mono",
                   anchor="lm")
     q = prog(t, 0.2, 0.6)
     texto(L, "Este vídeo", 640, 205 - 20 * (1 - eo3(q)), 64, CREMA, a=q, fuente="black")
     q2 = prog(t, wt(e, "hecho") - 0.25, 0.4)
     s = 1 + 0.6 * (1 - eo3(q2))
-    texto(L, "lo he hecho yo", 640, 285, 64 * s, NARANJA, a=q2 * 0.5, fuente="black", glow=True)
-    texto(L, "lo he hecho yo", 640, 285, 64 * s, NARANJA2, a=q2, fuente="black")
+    texto(L, "lo he hecho yo", 640, 285, 70 * s, NARANJA, a=q2, fuente="black")
     badges = [("voz", "Voz"), ("animaciones", "Animación"), ("música", "Música")]
     for j, (pal, et) in enumerate(badges):
         qb = prog(t, wt(e, pal) - 0.2, 0.5)
@@ -688,7 +695,8 @@ def esc_meta(L, e, t, D, T, fr):
         cx = 380 + j * 260
         cy = 445
         sc = eob(qb)
-        circulo(L, cx, cy, 62 * sc, fill=(36, 35, 33), outline=NARANJA, w=3, a=qb)
+        circulo(L, cx, cy + 5, 62 * sc, fill=CREMA, a=qb * 0.25, glow=True)
+        circulo(L, cx, cy, 62 * sc, fill=BLANCO, outline=NARANJA, w=2, a=qb)
         if j == 0:   # onda de voz
             for b in range(7):
                 h = 8 + 20 * abs(math.sin(t * 9 + b * 1.3))
@@ -708,20 +716,20 @@ def esc_meta(L, e, t, D, T, fr):
     if qc > 0:
         s = 1 + 1.3 * (1 - eo3(qc))
         w = 330 * s
-        rrect(L, 640 - w / 2, 598 - 34 * s, 640 + w / 2, 598 + 34 * s, 16 * s, outline=NARANJA, w=4, a=qc, glow=True)
-        texto(L, "100 % CÓDIGO", 640, 600, 38 * s, CREMA, a=qc, fuente="black")
+        rrect(L, 640 - w / 2, 598 - 34 * s, 640 + w / 2, 598 + 34 * s, 16 * s, fill=NARANJA, a=qc)
+        texto(L, "100 % código", 640, 596, 40 * s, FONDO, a=qc, fuente="black")
     texto(L, f"fotograma {fr:05d} / {NFRAMES:05d}", 1250, 30, 15, GRIS, a=0.8 * q, fuente="mono", anchor="rm")
 
 
 def esc_outro(L, e, t, D, T, fr):
     k = prog(t, 0.1, 0.9)
-    logo(L, 640, 230, 85 * eob(k), 25 * t)
+    logo(L, 640, 230, 85 * eob(k), 25 * t, glow=False)
     q = prog(t, wt(e, "Pregúntame") - 0.2, 0.6)
     texto(L, "Pregúntame lo que quieras", 640, 385 + 20 * (1 - eo3(q)), 56, CREMA, a=q, fuente="black")
     q2 = prog(t, wt(e, "Soy") - 0.2, 0.6)
     pul = 1 + 0.035 * math.sin(t * 5)
     w = 290 * pul
-    rrect(L, 640 - w / 2, 470, 640 + w / 2, 540, 35, fill=NARANJA, a=q2 * 0.6, glow=True)
+    rrect(L, 640 - w / 2, 476, 640 + w / 2, 546, 35, fill=CREMA, a=q2 * 0.35, glow=True)
     rrect(L, 640 - w / 2, 470, 640 + w / 2, 540, 35, fill=NARANJA, a=q2)
     texto(L, "claude.ai", 640, 505, 34, FONDO, a=q2, fuente="black")
     q3 = prog(t, wt(e, "Soy") + 0.9, 0.8)
@@ -749,13 +757,13 @@ def subtitulos(img, T):
             x = IW / 2 - total / 2
             y = (H - 62) * K
             d.rounded_rectangle((x - 22 * K, y - 28 * K, x + total + 22 * K, y + 26 * K), radius=16 * K,
-                                fill=(0, 0, 0, int(150 * a)))
+                                fill=(255, 255, 252, int(225 * a)), outline=LINEA + (int(255 * a),), width=K)
             for (w, t0, t1), ww in zip(bloque, ws):
                 if T >= t0:
                     col = NARANJA2 if T < t1 + 0.05 else CREMA
                     al = 1.0
                 else:
-                    col, al = CREMA, 0.55
+                    col, al = CREMA, 0.4
                 d.text((x, y), w, font=f, fill=col + (int(255 * a * al),), anchor="lm")
                 x += ww + espacio
             break
@@ -775,34 +783,34 @@ def render_frame(fr):
     if esc is ESCENAS[0]:
         L.A = 1
     FUNCS[esc["nombre"]](L, esc, t, D, T, fr)
-    # destello de transición
-    if esc is not ESCENAS[0] and t < 0.45:
-        u = t / 0.45
-        x = -200 + 1700 * eio(u)
-        L.dfx.polygon([((x - 60) * K, 0), ((x + 20) * K, 0), ((x - 120) * K, IH), ((x - 200) * K, IH)],
-                      fill=(255, 200, 170, int(120 * math.sin(u * math.pi))))
-    # brillo: desenfoque de la capa fx (a baja resolución) sumado al fondo
-    small = L.fx.resize((IW // 8, IH // 8), Image.BILINEAR).filter(ImageFilter.GaussianBlur(5))
-    s = np.asarray(small).astype(np.float32)
-    g = s[..., :3] * (s[..., 3:] / 255.0) * 1.6
-    small2 = L.fx.resize((IW // 4, IH // 4), Image.BILINEAR).filter(ImageFilter.GaussianBlur(3))
-    s2 = np.asarray(small2).astype(np.float32)
-    g2 = s2[..., :3] * (s2[..., 3:] / 255.0) * 0.9
-    glow = Image.fromarray(np.clip(g, 0, 255).astype(np.uint8)).resize((IW, IH), Image.BILINEAR)
-    glow2 = Image.fromarray(np.clip(g2, 0, 255).astype(np.uint8)).resize((IW, IH), Image.BILINEAR)
-    img = ImageChops.add(ImageChops.add(L.bg, glow), glow2).convert("RGBA")
-    fx, top = L.fx, L.top
+    # sombra suave: desenfoque del alfa de la capa fx, desplazado hacia abajo
+    small = L.fx.resize((IW // 8, IH // 8), Image.BILINEAR).filter(ImageFilter.GaussianBlur(3))
+    al = np.asarray(small).astype(np.float32)[..., 3] / 255.0
+    sombra = Image.fromarray(np.clip(al * 70, 0, 255).astype(np.uint8)).resize((IW, IH), Image.BILINEAR)
+    sombra = ImageChops.offset(sombra, 0, 10 * K)
+    img = ImageChops.subtract(L.bg, Image.merge("RGB", (sombra, sombra, sombra))).convert("RGBA")
+    fx, top = Image.new("RGBA", (IW, IH), (0, 0, 0, 0)), L.top   # fx solo proyecta sombra
     if L.shake != (0, 0):
         fx = ImageChops.offset(fx, *L.shake)
         top = ImageChops.offset(top, *L.shake)
     img.alpha_composite(fx)
     img.alpha_composite(top)
     if esc is ESCENAS[0] and t < 0.5:
-        negro = Image.new("RGBA", (IW, IH), (0, 0, 0, int(255 * (1 - t / 0.5))))
-        img.alpha_composite(negro)
+        img.alpha_composite(Image.new("RGBA", (IW, IH), PAPEL + (int(255 * (1 - t / 0.5)),)))
     if T > TOTAL - 1.0:
-        negro = Image.new("RGBA", (IW, IH), (0, 0, 0, int(255 * cl((T - (TOTAL - 1.0)) / 0.9))))
-        img.alpha_composite(negro)
+        img.alpha_composite(Image.new("RGBA", (IW, IH), PAPEL + (int(255 * cl((T - (TOTAL - 1.0)) / 0.9)),)))
+    # transición: paneles de color que barren la pantalla en cada corte
+    for e2 in ESCENAS[1:]:
+        u = (T - (e2["t0"] - 0.38)) / 0.76
+        if 0 < u < 1:
+            dpan = ImageDraw.Draw(img, "RGBA")
+            for col, retraso in [(NARANJA, 0.0), (CREMA, 0.08)]:
+                v = eio(cl((u - retraso) / 0.92))
+                x = -1.45 * W + 2.75 * W * v
+                ap = 1.3 * W
+                dpan.polygon([((x + 180) * K, 0), ((x + ap + 180) * K, 0), ((x + ap) * K, IH), (x * K, IH)],
+                             fill=col + (255,))
+            break
     subtitulos(img, T)
     # barra de progreso
     d = ImageDraw.Draw(img, "RGBA")
@@ -964,8 +972,10 @@ def main():
                 print(f"  {k}/{NFRAMES}", flush=True)
     ff.stdin.close()
     ff.wait()
-    subprocess.check_call(["ffmpeg", "-y", "-v", "error", "-i", vid, "-i", audio, "-c:v", "copy", "-c:a", "aac",
-                           "-b:a", "192k", "-shortest", "-movflags", "+faststart", SALIDA])
+    subprocess.check_call(["ffmpeg", "-y", "-v", "error", "-i", vid, "-i", audio, "-map", "0:v", "-map", "1:a",
+                           "-c:v", "copy", "-af", "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000",
+                           "-c:a", "aac", "-b:a", "192k", "-ac", "2", "-ar", "48000",
+                           "-shortest", "-movflags", "+faststart", SALIDA])
     print("listo:", SALIDA)
 
 
