@@ -4,7 +4,7 @@ CUENTA = "mente404_0"
 TOTAL_SEGUIDORES = 200
 META = 1000
 
-PRIMERO = "PENDIENTE"          # primera cuenta que nos siguió (portero)
+PRIMERO = "santi_ago940"        # primera cuenta que nos siguió (portero)
 ULTIMO = "13iivaann_"          # última cuenta en seguirnos
 
 # Resto de la alineación (8 nombres)
