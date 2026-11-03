@@ -1,2 +1,8 @@
 video_claude_gratis/build/
 __pycache__/
+# intermedios pesados de render (los vídeos finales sí se suben)
+*/build/*.wav
+*/build/video.mp4
+*/build/prev_*.png
+*/build/grid2.png
+*/build/render.log
