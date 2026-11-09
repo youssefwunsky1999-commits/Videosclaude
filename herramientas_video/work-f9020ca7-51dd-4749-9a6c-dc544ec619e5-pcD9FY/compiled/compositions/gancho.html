@@ -1,0 +1,95 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #1a1033; }
+    #g-fondo { position: absolute; inset: 0; }
+    #g-velo { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(10,6,20,0) 30%, rgba(10,6,20,.55) 100%); }
+    .g-bloque { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
+    #g-frase { top: 330px; }
+    .g-l { display: block; font-family: "Archivo Black"; color: #fff; text-align: center; line-height: 1.02; letter-spacing: -2px;
+           text-shadow: 0 8px 40px rgba(0,0,0,.35); }
+    #g-l1 { font-size: 120px; }
+    #g-l2 { font-size: 92px; color: #ffd9c7; }
+    #g-l3 { font-size: 210px; color: #ffb38a; margin-top: 10px; }
+    #g-codigo { top: 360px; }
+    #g-card { width: 900px; background: rgba(14, 10, 26, .82); border: 2px solid rgba(255,255,255,.14); border-radius: 34px;
+              padding: 44px 50px; box-shadow: 0 30px 90px rgba(0,0,0,.45); }
+    .g-puntos { display: flex; gap: 14px; margin-bottom: 30px; }
+    .g-puntos i { width: 22px; height: 22px; border-radius: 50%; display: block; }
+    .g-cod { display: block; font-family: "JetBrains Mono"; font-size: 46px; line-height: 1.55; color: #e9e4ff; white-space: pre; }
+    .g-tag { color: #ff8f70; } .g-str { color: #9fe6a0; } .g-att { color: #8fc7ff; }
+    #g-ia { display: block; margin-top: 46px; font-family: "Archivo Black"; font-size: 76px; color: #fff; text-align: center; }
+    #g-ia b { color: #ffb38a; font-weight: 400; }
+    #g-cuatro { top: 250px; }
+    #g-4 { display: block; font-family: "Archivo Black"; font-size: 420px; line-height: .9; color: #fff; text-shadow: 0 20px 70px rgba(0,0,0,.4); }
+    #g-hg { display: block; font-family: "Archivo Black"; font-size: 84px; color: #fff; text-align: center; line-height: 1.05; }
+    #g-hg b { color: #ffb38a; font-weight: 400; }
+    .g-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; width: 940px; margin-top: 48px; }
+    .g-chip { display: block; font-family: Inter; font-weight: 700; font-size: 40px; color: #1a1033; background: #fff;
+              padding: 16px 30px; border-radius: 60px; }
+  </style>
+  <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920">
+    <div id="g-fondo"></div>
+    <div id="g-velo"></div>
+
+    <div id="g-frase" class="g-bloque clip" data-start="0" data-duration="2.001">
+      <span id="g-l1" class="g-l">ESTE VÍDEO</span>
+      <span id="g-l2" class="g-l">NO LO HA GRABADO</span>
+      <span id="g-l3" class="g-l">NADIE</span>
+    </div>
+
+    <div id="g-codigo" class="g-bloque clip" data-start="2.001" data-duration="2.284">
+      <div id="g-card">
+        <div class="g-puntos"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+        <span id="g-c1" class="g-cod"><span class="g-tag">&lt;video</span> <span class="g-att">autor</span>=<span class="g-str">"IA"</span><span class="g-tag">&gt;</span></span>
+        <span id="g-c2" class="g-cod">  <span class="g-tag">&lt;voz&gt;</span>Este vídeo…<span class="g-tag">&lt;/voz&gt;</span></span>
+        <span id="g-c3" class="g-cod">  <span class="g-tag">&lt;fondo</span> <span class="g-att">shader</span>=<span class="g-str">"mesh"</span><span class="g-tag">/&gt;</span></span>
+        <span id="g-c4" class="g-cod"><span class="g-tag">&lt;/video&gt;</span></span>
+      </div>
+      <span id="g-ia">escrito con <b>CÓDIGO</b></span>
+    </div>
+
+    <div id="g-cuatro" class="g-bloque clip" data-start="4.285" data-duration="2.786">
+      <span id="g-4">4</span>
+      <span id="g-hg">HERRAMIENTAS<br><b>GRATIS</b></span>
+      <div class="g-chips">
+        <span id="g-k1" class="g-chip">HyperFrames</span>
+        <span id="g-k2" class="g-chip">Lemo-Opuscar</span>
+        <span id="g-k3" class="g-chip">Claude Animation Base</span>
+        <span id="g-k4" class="g-chip">Paper Shaders</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const D = 7.121, LO = 2.051, COD = 3.654, Y = 4.335, CU = 5.085;
+      const C = hfPaperColor;
+      const fondo = hfPaper("gancho", document.getElementById("g-fondo"), PaperShaders.meshGradientFragmentShader, hfPaperSizing("cover", {
+        u_colors: ["#1a1033", "#d97757", "#5a3cff", "#ffb38a"].map(C), u_colorsCount: 4,
+        u_distortion: 0.85, u_swirl: 0.35, u_grainMixer: 0, u_grainOverlay: 0.08,
+      }), { speed: 0.7, offset: 4 });
+
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: D }, 0);
+      // fotograma 0 = miniatura: el texto ya está; solo respira y «NADIE» golpea con la voz
+      tl.fromTo("#g-l1", { y: 0, scale: 1 }, { y: -8, scale: 1.02, duration: LO, ease: "none" }, 0);
+      tl.fromTo("#g-l3", { scale: 1 }, { scale: 1.12, duration: 0.12, ease: "power2.out" }, 1.42);
+      tl.to("#g-l3", { scale: 1, duration: 0.35, ease: "back.out(3)" }, 1.54);
+      // el código se escribe solo
+      tl.fromTo("#g-card", { y: 80, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, LO);
+      ["#g-c1", "#g-c2", "#g-c3", "#g-c4"].forEach((s, i) => {
+        tl.fromTo(s, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.32, ease: "steps(14)" }, LO + 0.15 + i * 0.33);
+      });
+      tl.fromTo("#g-ia", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "back.out(2)" }, COD - 0.15);
+      // 4 herramientas
+      tl.fromTo("#g-4", { scale: 0.3, opacity: 0, rotation: -12 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.45, ease: "back.out(2.2)" }, CU - 0.1);
+      tl.fromTo("#g-hg", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, Y);
+      ["#g-k1", "#g-k2", "#g-k3", "#g-k4"].forEach((s, i) => {
+        tl.fromTo(s, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)" }, CU + 0.55 + i * 0.16);
+      });
+      tl.fromTo("#g-cuatro", { scale: 1 }, { scale: 1.04, duration: D - Y, ease: "none" }, Y);
+      tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
+      fondo.draw(0);
+      window.__timelines["gancho"] = tl;
+    })();
+  </script>
+</template>
