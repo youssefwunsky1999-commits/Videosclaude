@@ -4,3 +4,5 @@ herramientas_video/build/mezcla.wav
 herramientas_video/clawd/frames/
 herramientas_video/hf/.hyperframes/
 herramientas_video/hf/renders/
+herramientas_video/work-*/
+herramientas_video/.herramientas_video.hf-transaction-*/
