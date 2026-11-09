@@ -1,0 +1,89 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0d0d12; }
+    .s-capa { position: absolute; inset: 0; }
+    .s-capa > div { position: absolute; inset: 0; }
+    #s-cab { position: absolute; top: 190px; left: 90px; right: 90px; padding: 22px 0 26px; border-radius: 40px; background: rgba(13,13,18,.62); display: flex; flex-direction: column; align-items: center; z-index: 5; }
+    #s-num { display: block; font-family: "Archivo Black"; font-size: 54px; color: #0d0d12; background: #fff; width: 92px; height: 92px;
+             border-radius: 50%; text-align: center; line-height: 92px; }
+    #s-nom { display: block; margin-top: 18px; font-family: "Archivo Black"; font-size: 112px; color: #fff; letter-spacing: -3px;
+             text-shadow: 0 6px 40px rgba(0,0,0,.45); }
+    #s-sub { display: block; font-family: Inter; font-weight: 700; font-size: 42px; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,.5); }
+    .s-et { position: absolute; left: 0; right: 0; top: 780px; text-align: center; z-index: 5; }
+    .s-et span { display: inline-block; font-family: "Archivo Black"; font-size: 96px; color: #0d0d12; background: #fff;
+                 padding: 10px 40px; border-radius: 26px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+    #s-todos { position: absolute; left: 60px; right: 60px; top: 760px; text-align: center; z-index: 6; }
+    #s-todos span { display: block; font-family: "Archivo Black"; font-size: 80px; line-height: 1.08; color: #fff; text-shadow: 0 8px 40px rgba(0,0,0,.6); }
+  </style>
+  <div id="root" data-composition-id="shaders" data-width="1080" data-height="1920">
+    <div id="s-c1" class="s-capa"><div id="s-f1"></div></div>
+    <div id="s-c2" class="s-capa"><div id="s-f2"></div></div>
+    <div id="s-c3" class="s-capa"><div id="s-f3"></div></div>
+    <div id="s-c4" class="s-capa"><div id="s-f4"></div></div>
+
+    <div id="s-cab">
+      <span id="s-num">4</span>
+      <span id="s-nom">Paper Shaders</span>
+      <span id="s-sub">fondos animados en tiempo real</span>
+    </div>
+
+    <div id="s-e1" class="s-et clip" data-start="{{w:degradados|-0.15}}" data-duration="{{w:grano|-w:degradados}}"><span>DEGRADADO</span></div>
+    <div id="s-e2" class="s-et clip" data-start="{{w:grano|-0.15}}" data-duration="{{w:semitono|-w:grano}}"><span>GRANO</span></div>
+    <div id="s-e3" class="s-et clip" data-start="{{w:semitono|-0.15}}" data-duration="{{w:metal|-w:semitono}}"><span>SEMITONO</span></div>
+    <div id="s-e4" class="s-et clip" data-start="{{w:metal|-0.15}}" data-duration="{{w:Todos|-w:metal}}"><span>METAL LÍQUIDO</span></div>
+
+    <div id="s-todos" class="clip" data-start="{{w:Todos|-0.15}}" data-duration="{{dur|-w:Todos|+0.15}}">
+      <span>Todos los fondos</span><span>de este vídeo</span><span>salen de aquí ↑</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const D = {{dur}}, DEG = {{w:degradados}}, GRA = {{w:grano}}, SEM = {{w:semitono}}, MET = {{w:metal}}, TOD = {{w:Todos}};
+      const C = hfPaperColor, S = PaperShaders;
+      const capas = [
+        hfPaper("s-mesh", document.getElementById("s-f1"), S.meshGradientFragmentShader, hfPaperSizing("cover", {
+          u_colors: ["#ff6a3d", "#ffd23f", "#3d5afe", "#ff3d9a", "#1de9b6"].map(C), u_colorsCount: 5,
+          u_distortion: 1, u_swirl: 0.6, u_grainMixer: 0, u_grainOverlay: 0,
+        }), { speed: 1.2, offset: 1 }),
+        hfPaper("s-grain", document.getElementById("s-f2"), S.grainGradientFragmentShader, hfPaperSizing("cover", {
+          u_colorBack: C("#0a0a0a"), u_colors: ["#ff4d00", "#ffb000", "#ff2a6d"].map(C), u_colorsCount: 3,
+          u_softness: 0.4, u_intensity: 0.6, u_noise: 0.9, u_shape: S.GrainGradientShapes.sphere, u_noiseTexture: hfNoise(),
+        }), { speed: 1.2, offset: 5 }),
+        hfPaper("s-halftone", document.getElementById("s-f3"), S.halftoneDotsFragmentShader, hfPaperSizing("cover", {
+          u_image: hfImg("assets/clawd_still.png"), u_colorFront: C("#1d1a2e"), u_colorBack: C("#f4ecd8"),
+          u_size: 0.5, u_grid: S.HalftoneDotsGrids.hex, u_radius: 1.25, u_contrast: 0.45, u_originalColors: true, u_inverted: false,
+          u_grainMixer: 0.15, u_grainOverlay: 0.15, u_grainSize: 0.5, u_type: S.HalftoneDotsTypes.gooey,
+        }), { speed: 0, mipmaps: ["u_image"] }),
+        hfPaper("s-metal", document.getElementById("s-f4"), S.liquidMetalFragmentShader, hfPaperSizing("cover", {
+          u_image: hfImg(S.emptyPixel), u_isImage: false, u_colorBack: C("#a9a9ad"), u_colorTint: C("#ffffff"),
+          u_repetition: 1.5, u_shiftRed: 0.3, u_shiftBlue: 0.3, u_contour: 0.4, u_softness: 0.05, u_distortion: 0.1,
+          u_angle: 90, u_shape: S.LiquidMetalShapes.none,
+        }), { speed: 1, offset: 2 }),
+      ];
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: D }, 0);
+      // capas: degradado desde el principio; cada palabra trae la siguiente con un barrido
+      const cortes = [0, GRA - 0.12, SEM - 0.12, MET - 0.12];
+      ["#s-c2", "#s-c3", "#s-c4"].forEach((s, i) => {
+        tl.fromTo(s, { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(80% at 50% 50%)", duration: 0.4, ease: "power3.inOut" }, cortes[i + 1]);
+      });
+      // con «Todos los fondos» vuelve el degradado, encima de todo
+      tl.to(["#s-c2", "#s-c3", "#s-c4"], { clipPath: "circle(0% at 50% 50%)", duration: 0.45, ease: "power3.inOut" }, TOD - 0.2);
+      tl.fromTo("#s-f1", { scale: 1.25 }, { scale: 1, duration: 0.6, ease: "power3.out" }, TOD - 0.2);
+      tl.fromTo("#s-num", { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.35, ease: "back.out(2.5)" }, 0.15);
+      tl.fromTo("#s-nom", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0.75);
+      tl.fromTo("#s-sub", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.85);
+      ["#s-e1", "#s-e2", "#s-e3", "#s-e4"].forEach((s, i) => {
+        tl.fromTo(s + " span", { scale: 0.3, rotation: i % 2 ? 6 : -6 }, { scale: 1, rotation: i % 2 ? 2 : -2, duration: 0.3, ease: "back.out(2.6)" }, [DEG, GRA, SEM, MET][i] - 0.15);
+      });
+      tl.fromTo("#s-todos span", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, stagger: 0.15, ease: "power3.out" }, TOD - 0.15);
+      const ventanas = [[0, GRA + 0.4], [GRA - 0.2, SEM + 0.4], [SEM - 0.2, MET + 0.4], [MET - 0.2, TOD + 0.2]];
+      tl.eventCallback("onUpdate", () => {
+        const t = tl.time();
+        capas.forEach((c, i) => { if (i === 0 || (t >= ventanas[i][0] && t <= ventanas[i][1])) c.draw(t); });
+      });
+      capas.forEach((c) => c.draw(0));
+      window.__timelines["shaders"] = tl;
+    })();
+  </script>
+</template>

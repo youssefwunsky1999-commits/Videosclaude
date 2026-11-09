@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>4 herramientas gratis para hacer vídeos con código</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/paper-shaders.js"></script>
+    <script src="assets/lib/hf-paper.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #0d0d12; }
+      #root { position: relative; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="49.91" data-width="1080" data-height="1920">
+      <div id="gancho" data-composition-id="gancho" data-composition-src="compositions/gancho.html"
+        data-start="0.000" data-duration="7.121" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="hyperframes" data-composition-id="hyperframes" data-composition-src="compositions/hyperframes.html"
+        data-start="7.121" data-duration="7.171" data-track-index="2" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="lemo" data-composition-id="lemo" data-composition-src="compositions/lemo.html"
+        data-start="14.292" data-duration="10.550" data-track-index="3" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="clawd" data-composition-id="clawd" data-composition-src="compositions/clawd.html"
+        data-start="24.842" data-duration="8.115" data-track-index="4" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="shaders" data-composition-id="shaders" data-composition-src="compositions/shaders.html"
+        data-start="32.957" data-duration="8.854" data-track-index="5" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="final" data-composition-id="final" data-composition-src="compositions/final.html"
+        data-start="41.811" data-duration="8.099" data-track-index="6" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="subtitulos" data-composition-id="subtitulos" data-composition-src="compositions/subtitulos.html"
+        data-start="0" data-duration="49.91" data-track-index="10" data-track-kind="captions"
+        data-width="1080" data-height="1920" style="z-index: 20"></div>
+      <audio id="mezcla" class="clip" src="assets/mezcla.wav" data-start="0" data-duration="49.91" data-track-index="20" data-volume="1"></audio>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

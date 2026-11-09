@@ -1,2 +1,6 @@
 video_claude_gratis/build/
 __pycache__/
+herramientas_video/build/mezcla.wav
+herramientas_video/clawd/frames/
+herramientas_video/hf/.hyperframes/
+herramientas_video/hf/renders/
