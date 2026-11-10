@@ -20,10 +20,14 @@
     .tj-x { display: block; font-family: "Archivo Black"; font-size: 50px; line-height: 1.12; color: #fff; }
     .tj-g { text-align: center; }
     .tj-g span { display: inline-block; font-family: "Archivo Black"; font-size: 70px; line-height: 1.05; color: #fff; background: #e63946; padding: 12px 34px; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.5); max-width: 960px; }
+    .foto { position: absolute; left: -30px; right: -30px; top: 640px; height: 2100px; background-size: cover; background-position: 50% 8%; transform-origin: 50% 30%; }
+    .foto-velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,7,12,0) 0%, rgba(7,7,12,0) 30%, rgba(7,7,12,.85) 36%, rgba(7,7,12,.25) 46%, rgba(7,7,12,.05) 60%, rgba(7,7,12,.1) 85%, rgba(7,7,12,.6) 100%); }
+    .foto-cred { position: absolute; right: 24px; top: 1880px; font-family: Inter; font-weight: 700; font-size: 22px; color: rgba(255,255,255,.7); text-shadow: 0 2px 6px #000; }
     .fuente { position: absolute; left: 0; right: 0; top: 1168px; text-align: center; font-family: Inter; font-size: 22px; color: rgba(255,255,255,.55); }
   </style>
   <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920">
     <div id="gancho-fondo"></div>
+    <div id="gancho-foto" class="foto" style="background-image:url(assets/fotos/broncano.jpg)"></div><div class="foto-velo"></div><div class="foto-cred">Imagen: RTVE / La Revuelta</div>
     <div id="gancho-velo"></div>
     <div id="gancho-et" class="et-live"><i></i>LA REVUELTA · 9 NOV</div>
     <div id="gancho-vs" class="vs"><span class="vs-b">LA PEOR</span><span class="vs-v">NOCHE DE</span><span class="vs-a">BRONCANO</span></div>
@@ -51,6 +55,7 @@
       tl.fromTo("#gancho-t2 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 5.737);
       tl.to("#gancho-t1", { opacity: 0.45, duration: 0.2 }, 5.737);
       tl.fromTo("#gancho-fondo", { scale: 1.08 }, { scale: 1, duration: 9.29, ease: "none" }, 0);
+      if (document.getElementById("gancho-foto")) tl.fromTo("#gancho-foto", { scale: 1.0, x: -15 }, { scale: 1.12, x: 15, duration: 9.29, ease: "none" }, 0);
       tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
       fondo.draw(0);
       window.__timelines["gancho"] = tl;

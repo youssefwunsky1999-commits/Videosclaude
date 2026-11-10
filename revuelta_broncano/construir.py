@@ -83,10 +83,14 @@ def escena_html(e, seg):
     .tj-x {{ display: block; font-family: "Archivo Black"; font-size: 50px; line-height: 1.12; color: #fff; }}
     .tj-g {{ text-align: center; }}
     .tj-g span {{ display: inline-block; font-family: "Archivo Black"; font-size: 70px; line-height: 1.05; color: #fff; background: #e63946; padding: 12px 34px; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.5); max-width: 960px; }}
+    .foto {{ position: absolute; left: -30px; right: -30px; top: 640px; height: 2100px; background-size: cover; background-position: 50% 8%; transform-origin: 50% 30%; }}
+    .foto-velo {{ position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,7,12,0) 0%, rgba(7,7,12,0) 30%, rgba(7,7,12,.85) 36%, rgba(7,7,12,.25) 46%, rgba(7,7,12,.05) 60%, rgba(7,7,12,.1) 85%, rgba(7,7,12,.6) 100%); }}
+    .foto-cred {{ position: absolute; right: 24px; top: 1880px; font-family: Inter; font-weight: 700; font-size: 22px; color: rgba(255,255,255,.7); text-shadow: 0 2px 6px #000; }}
     .fuente {{ position: absolute; left: 0; right: 0; top: 1168px; text-align: center; font-family: Inter; font-size: 22px; color: rgba(255,255,255,.55); }}
   </style>
   <div id="root" data-composition-id="{eid}" data-width="1080" data-height="1920">
     <div id="{eid}-fondo"></div>
+    {f'<div id="{eid}-foto" class="foto" style="background-image:url(assets/fotos/{seg["foto"]}.jpg)"></div><div class="foto-velo"></div><div class="foto-cred">Imagen: RTVE / La Revuelta</div>' if seg.get("foto") else ""}
     <div id="{eid}-velo"></div>
     {et}
     {cab}
@@ -106,6 +110,7 @@ def escena_html(e, seg):
       tl.to({{}}, {{ duration: {D} }}, 0);
       {(chr(10) + "      ").join(tws)}
       tl.fromTo("#{eid}-fondo", {{ scale: 1.08 }}, {{ scale: 1, duration: {D}, ease: "none" }}, 0);
+      if (document.getElementById("{eid}-foto")) tl.fromTo("#{eid}-foto", {{ scale: 1.0, x: -15 }}, {{ scale: 1.12, x: 15, duration: {D}, ease: "none" }}, 0);
       tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
       fondo.draw(0);
       window.__timelines["{eid}"] = tl;
