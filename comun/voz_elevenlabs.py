@@ -18,7 +18,7 @@ import urllib.parse
 import urllib.request
 
 API = "https://api.elevenlabs.io/v1"
-NOMBRE_VOZ = os.environ.get("ELEVENLABS_VOZ", "wfwG5A1z7UhZfYQ68gAv")   # MARCOS PROFESIONAL
+NOMBRE_VOZ = os.environ.get("ELEVENLABS_VOZ", "Rie0luvrYhyKLba1lK3c")   # Mateo – News & Digital Stories
 MODELO = os.environ.get("ELEVENLABS_MODELO", "eleven_multilingual_v2")
 CLAVE = os.environ.get("ELEVENLABS_API_KEY", "proxy")
 SR = 44100

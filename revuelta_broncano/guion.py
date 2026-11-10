@@ -11,7 +11,7 @@ Es opinión («la peor noche»), pero cada hecho es real y sale de la prensa:
   - Al final del programa lamentó haber aceptado la petición sobre el público (Público).
 Huecos «clip»: momentos del programa que pondrá el autor (Imágenes: RTVE / La Revuelta)."""
 
-VOZ_ELEVENLABS = "wfwG5A1z7UhZfYQ68gAv"   # MARCOS PROFESIONAL
+VOZ_ELEVENLABS = "Rie0luvrYhyKLba1lK3c"   # Mateo – News & Digital Stories
 
 B, A = "BRONCANO", "ABASCAL"
 
