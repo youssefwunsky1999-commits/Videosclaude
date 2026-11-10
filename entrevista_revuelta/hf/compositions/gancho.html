@@ -42,15 +42,15 @@
         u_softness: 0.6, u_intensity: 0.45, u_noise: 0.5, u_shape: PaperShaders.GrainGradientShapes.corners, u_noiseTexture: hfNoise(),
       }), { speed: 1.1, offset: 15 });
       const tl = gsap.timeline({ paused: true });
-      tl.to({}, { duration: 8.081 }, 0);
+      tl.to({}, { duration: 8.496 }, 0);
       tl.fromTo("#gancho-et", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 }, 0.0);
       tl.fromTo("#gancho-vs .vs-v", { scale: 1 }, { scale: 1.25, duration: 0.18, yoyo: true, repeat: 3, ease: "power2.out" }, 0.0);
-      tl.fromTo("#gancho-t0 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 1.111);
-      tl.fromTo("#gancho-t1", { x: 900, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 4.059);
-      tl.to("#gancho-t0", { opacity: 0.45, duration: 0.2 }, 4.059);
-      tl.fromTo("#gancho-t2 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 6.776);
-      tl.to("#gancho-t1", { opacity: 0.45, duration: 0.2 }, 6.776);
-      tl.fromTo("#gancho-fondo", { scale: 1.08 }, { scale: 1, duration: 8.081, ease: "none" }, 0);
+      tl.fromTo("#gancho-t0 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 1.181);
+      tl.fromTo("#gancho-t1", { x: 900, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 4.367);
+      tl.to("#gancho-t0", { opacity: 0.45, duration: 0.2 }, 4.367);
+      tl.fromTo("#gancho-t2 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 7.181);
+      tl.to("#gancho-t1", { opacity: 0.45, duration: 0.2 }, 7.181);
+      tl.fromTo("#gancho-fondo", { scale: 1.08 }, { scale: 1, duration: 8.496, ease: "none" }, 0);
       tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
       fondo.draw(0);
       window.__timelines["gancho"] = tl;

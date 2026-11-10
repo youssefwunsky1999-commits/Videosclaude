@@ -140,7 +140,8 @@ def main():
     voz = np.zeros(n, np.float32)
     for e, v in zip(escenas, voces):
         colocar(voz, v, e["t0"])
-    voz *= 0.92 / (np.abs(voz).max() + 1e-6)
+    voz *= 1.0 / (np.abs(voz).max() + 1e-6)
+    voz = np.tanh(voz * 2.4) / np.tanh(2.4) * 0.92   # compresión suave: voz más presente y directa
 
     # música tensa: Dm – B♭ – Gm – A a 96 BPM, bombo a negras, pulso de bajo en corcheas, pad oscuro
     mus = np.zeros(n, np.float32)
