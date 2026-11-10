@@ -13,7 +13,7 @@ SR = 44100
 INICIO = 0.25      # la voz arranca casi en el fotograma 0: el gancho no espera
 HUECO = 0.42       # respiro entre escenas (aquí suena el whoosh)
 COLA = 2.0         # el cierre se queda en pantalla tras la última palabra
-BPM = 84
+BPM = 140
 
 
 def leer(ruta):
@@ -205,33 +205,51 @@ def main():
     voz *= 1.0 / (np.abs(voz).max() + 1e-6)
     voz = np.tanh(voz * 2.4) / np.tanh(2.4) * 0.92   # compresión suave: voz más presente y directa
 
-    # música de intriga a 84 BPM: dron grave en Re menor, latido (doble bombo) cada compás, ostinato de pulsos
-    # tipo pizzicato (Re–Fa–La–Sol#) y un reloj suave; en Gaza (m3) el ostinato se para y queda el latido y el dron.
+    # música: beat oscuro tipo trap a 140 BPM (medio tiempo). 808 con glide siguiendo Dm–B♭–Gm–A, hi-hats con
+    # ráfagas de semicorcheas/tresillos, palmada en el 3, campana oscura en arpegio y pad grave. En el momento
+    # más tenso (m3) el beat se corta y queda un tic-tac de reloj con el 808; vuelve con fuerza en m4.
     from guion import SEGMENTOS
     mus = np.zeros(n, np.float32)
     beat = 60 / BPM
     sem = beat / 4
+    ac_raiz = [38, 34, 31, 33]
+    ac = [[50, 53, 57], [46, 50, 53], [43, 46, 50], [45, 49, 52]]
     rango = {e["escena"]: (e["ini"], e["ini"] + e["dur"]) for e in escenas}
     tenso = rango["m3"]
-    motivo = [62, 65, 69, 68, 62, 65, 70, 69]
-    graves = [38, 38, 34, 33]
+    patron_808 = [0, 10]            # semicorcheas del compás donde entra el 808
+    patron_kick = [0, 10]
     k = 0
     while k * sem < total:
         t0 = k * sem
         pos, compas = k % 16, int(k // 16)
+        i = compas % 4
         en_tension = tenso[0] <= t0 < tenso[1]
+        intro = t0 < 0.9
         if pos == 0:
-            raiz = graves[compas % 4]
-            colocar(mus, pad([nf(raiz), nf(raiz + 7), nf(raiz + 12)], 16 * sem + 0.4), t0, 0.14)
-            colocar(mus, bombo(), t0, 0.34)
-            colocar(mus, bombo(), t0 + beat * 0.42, 0.24)          # el latido: pum-pum
+            colocar(mus, pad([nf(m) for m in ac[i]], 16 * sem + 0.3), t0, 0.10)
+        if pos in patron_808:
+            colocar(mus, b808(nf(ac_raiz[i]), 1.4 if pos == 0 else 0.7, glide=nf(ac_raiz[(i + 1) % 4]) if pos == 10 else None), t0, 0.42)
+        if en_tension:
+            if pos % 4 == 0:
+                colocar(mus, tic(1800 if (pos // 4) % 2 == 0 else 1400), t0, 0.22)
+            k += 1
+            continue
+        if intro:
+            k += 1
+            continue
+        if pos in patron_kick:
+            colocar(mus, bombo(), t0, 0.40)
         if pos == 8:
-            colocar(mus, bombo(), t0, 0.26)
-            colocar(mus, bombo(), t0 + beat * 0.42, 0.18)
-        if not en_tension and t0 > 0.5 and pos % 2 == 0:
-            colocar(mus, pluck(nf(motivo[(pos // 2) % 8]), 0.3), t0, 0.07)
-        if pos % 4 == 0:
-            colocar(mus, tic(1700 if (pos // 4) % 2 == 0 else 1300), t0, 0.08 if not en_tension else 0.16)
+            colocar(mus, palmada(k), t0, 0.18)
+            colocar(mus, snare(k), t0, 0.2)
+        # hi-hats: corcheas, con una ráfaga al final de cada dos compases
+        if compas % 2 == 1 and pos >= 12:
+            for r in range(3):
+                colocar(mus, hat(k * 3 + r), t0 + r * sem / 3, 0.05)
+        elif pos % 2 == 0:
+            colocar(mus, hat(k), t0, 0.06 if pos % 4 == 2 else 0.04)
+        if pos in (0, 3, 6, 10, 13):
+            colocar(mus, campana(nf(ac[i][(pos // 3) % 3] + 24)), t0, 0.05)
         k += 1
     voz_env = np.convolve(np.abs(voz), np.ones(int(0.15 * SR)) / (0.15 * SR), mode="same")
     mus *= 1 - 0.5 * np.clip(voz_env / 0.05, 0, 1)

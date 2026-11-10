@@ -14,7 +14,7 @@ Todas las afirmaciones salen de la prensa del 9 y 10 de noviembre de 2026:
     (Broncano): subtítulos de las capturas de la emisión aportadas por el autor.
 Fotos: capturas de la entrevista aportadas por el autor (Imagen: RTVE / La Revuelta)."""
 
-VOZ_ELEVENLABS = "Rie0luvrYhyKLba1lK3c"   # Mateo – News & Digital Stories
+VOZ_ELEVENLABS = "Rie0luvrYhyKLba1lK3c"   # Mateo – News & Digital Stories (la voz de la cuenta)
 
 B, A = "BRONCANO", "ABASCAL"
 
