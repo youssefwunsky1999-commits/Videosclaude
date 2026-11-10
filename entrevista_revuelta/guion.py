@@ -8,9 +8,9 @@ No se atribuye a nadie nada que no conste en esas crónicas, y el vídeo no toma
 
 Cada tarjeta aparece cuando la voz dice la palabra «en» (primera vez dentro de su escena; «palabra#2» = segunda)."""
 
-VOZ = "es-ES-XimenaNeural"
+VOZ = "es-MX-JorgeNeural"
 VELOCIDAD = "+12%"
-TONO = "+0Hz"
+TONO = "-4Hz"
 PAUSA = 0.16
 
 B, A = "BRONCANO", "ABASCAL"
