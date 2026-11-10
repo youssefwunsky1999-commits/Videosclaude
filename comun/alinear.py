@@ -3,8 +3,8 @@ cada palabra, para que audio.py y construir.py funcionen igual que con voz.py.
 
     python3 ../comun/alinear.py build/narracion.mp3     -> build/voz_<i>.mp3 + build/palabras.json
 
-Método: los 5 (n-1) silencios más largos separan los segmentos; dentro de cada segmento, los silencios más largos separan
-sus frases; dentro de cada frase, las palabras se reparten según su longitud. Los subtítulos quedan a pocas décimas."""
+Método: cada frontera (entre segmentos y entre frases) es el silencio más cercano a donde caería según la longitud del
+texto; dentro de cada frase, las palabras se reparten según su longitud. Los subtítulos quedan a pocas décimas."""
 import json
 import os
 import re
@@ -40,6 +40,24 @@ def silencios(x, umbral=0.02, minimo=0.12):
     return out
 
 
+def elegir_cortes(sil, a, b, pesos):
+    """Para cada frontera esperada (repartiendo [a, b] según los pesos del texto) toma el silencio más cercano que no
+    se haya usado; así no se confunde una respiración larga con un cambio de párrafo."""
+    total = sum(pesos)
+    cortes, acum = [], 0.0
+    libres = [s for s in sil if a < s[0] and s[1] < b]
+    for w in pesos[:-1]:
+        acum += w
+        esperado = a + (b - a) * acum / total
+        cand = [s for s in libres if not cortes or s[0] > cortes[-1][1]]
+        if not cand:
+            cortes.append((esperado, esperado))
+            continue
+        mejor = min(cand, key=lambda s: abs((s[0] + s[1]) / 2 - esperado) - 0.6 * (s[1] - s[0]))
+        cortes.append(mejor)
+    return cortes
+
+
 def frases(texto):
     return [f for f in re.split(r"(?<=[.!?…:])\s+", texto) if f.strip()]
 
@@ -58,15 +76,14 @@ def main(ruta):
     voz_fin = sil[-1][0] if sil and sil[-1][1] >= dur - 0.02 else dur
     internos = [s for s in sil if s[0] > voz_ini and s[1] < voz_fin]
     n = len(SEGMENTOS)
-    cortes = sorted(sorted(internos, key=lambda s: s[1] - s[0], reverse=True)[:n - 1])
+    cortes = elegir_cortes(internos, voz_ini, voz_fin, [len(seg["texto"]) for seg in SEGMENTOS])
     limites = [voz_ini] + [c for s in cortes for c in s] + [voz_fin]
     tramos = [(limites[2 * i], limites[2 * i + 1]) for i in range(n)]
     out = os.path.dirname(os.path.abspath(ruta))
     datos = []
     for i, (seg, (a, b)) in enumerate(zip(SEGMENTOS, tramos)):
         fs = frases(seg["texto"])
-        dentro = [s for s in internos if s[0] > a and s[1] < b]
-        cs = sorted(sorted(dentro, key=lambda s: s[1] - s[0], reverse=True)[:len(fs) - 1])
+        cs = elegir_cortes(internos, a, b, [len(f) for f in fs])
         lim = [a] + [c for s in cs for c in s] + [b]
         ws = []
         for k, f in enumerate(fs):
