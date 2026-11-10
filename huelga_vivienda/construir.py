@@ -85,7 +85,7 @@ def escena_html(e, seg):
     .tj-g {{ text-align: center; }}
     .tj-g span {{ display: inline-block; font-family: "Archivo Black"; font-size: 70px; line-height: 1.05; color: #fff; background: #e63946; padding: 12px 34px; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.5); max-width: 960px; }}
     .foto {{ position: absolute; left: -30px; right: -30px; top: 640px; height: 2250px; background-size: cover; background-position: 50% 8%; transform-origin: 50% 30%; }}
-    .foto-velo {{ position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,7,12,0) 0%, rgba(7,7,12,0) 30%, rgba(7,7,12,.85) 36%, rgba(7,7,12,.25) 46%, rgba(7,7,12,.05) 60%, rgba(7,7,12,.1) 85%, rgba(7,7,12,.6) 100%); }}
+    .foto-velo {{ position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,7,12,0) 0%, rgba(7,7,12,0) 30%, rgba(7,7,12,.85) 36%, rgba(7,7,12,.8) 44%, rgba(7,7,12,.05) 50%, rgba(7,7,12,.05) 78%, rgba(7,7,12,.6) 100%); }}
     .foto-cred {{ position: absolute; right: 24px; top: 1880px; font-family: Inter; font-weight: 700; font-size: 22px; color: rgba(255,255,255,.7); text-shadow: 0 2px 6px #000; }}
     .fuente {{ position: absolute; left: 0; right: 0; top: 1168px; text-align: center; font-family: Inter; font-size: 22px; color: rgba(255,255,255,.55); }}
   </style>

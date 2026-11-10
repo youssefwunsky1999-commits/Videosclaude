@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #07070c; }
+    #m2-fondo { position: absolute; inset: 0; }
+    #m2-velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.05) 40%, rgba(0,0,0,.45)); }
+    .vs { position: absolute; left: 0; right: 0; top: 250px; display: flex; flex-direction: column; align-items: center; }
+    .vs span { display: block; font-family: "Archivo Black"; line-height: .95; text-shadow: 0 10px 40px rgba(0,0,0,.6); }
+    .vs-b { font-size: 138px; color: #ffd23f; }
+    .vs-v { font-size: 96px; color: #fff; background: #e63946; padding: 0 26px; border-radius: 16px; margin: 10px 0; }
+    .vs-a { font-size: 138px; color: #7fd4ff; }
+    .et-live { position: absolute; left: 0; right: 0; top: 190px; text-align: center; font-family: Inter; font-weight: 900; font-size: 34px; color: #fff; letter-spacing: 3px; }
+    .et-live i { display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: #e63946; margin-right: 14px; vertical-align: 1px; }
+    .cab { position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+    .cab-mini { display: block; font-family: "Archivo Black"; font-size: 44px; color: #fff; letter-spacing: 1px; }
+    .cab-mini b { color: #e63946; font-weight: 400; }
+    .cab-et { display: block; font-family: "Archivo Black"; font-size: 66px; color: #fff; background: #e63946; padding: 10px 34px; border-radius: 18px; text-align: center; max-width: 960px; }
+    .pila { position: absolute; left: 60px; right: 60px; top: 470px; display: flex; flex-direction: column; gap: 26px; }
+    .tj { background: rgba(8,8,14,.86); border-left: 14px solid #fff; border-radius: 22px; padding: 22px 30px 26px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+    .tj-q { display: inline-block; font-family: "Archivo Black"; font-size: 30px; color: #07070c; padding: 4px 16px; border-radius: 10px; margin-bottom: 12px; }
+    .tj-x { display: block; font-family: "Archivo Black"; font-size: 50px; line-height: 1.12; color: #fff; }
+    .tj-g { text-align: center; }
+    .tj-g span { display: inline-block; font-family: "Archivo Black"; font-size: 70px; line-height: 1.05; color: #fff; background: #e63946; padding: 12px 34px; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.5); max-width: 960px; }
+    .foto { position: absolute; left: -30px; right: -30px; top: 640px; height: 2250px; background-size: cover; background-position: 50% 8%; transform-origin: 50% 30%; }
+    .foto-velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,7,12,0) 0%, rgba(7,7,12,0) 30%, rgba(7,7,12,.85) 36%, rgba(7,7,12,.8) 44%, rgba(7,7,12,.05) 50%, rgba(7,7,12,.05) 78%, rgba(7,7,12,.6) 100%); }
+    .foto-cred { position: absolute; right: 24px; top: 1880px; font-family: Inter; font-weight: 700; font-size: 22px; color: rgba(255,255,255,.7); text-shadow: 0 2px 6px #000; }
+    .fuente { position: absolute; left: 0; right: 0; top: 1168px; text-align: center; font-family: Inter; font-size: 22px; color: rgba(255,255,255,.55); }
+  </style>
+  <div id="root" data-composition-id="m2" data-width="1080" data-height="1920">
+    <div id="m2-fondo"></div>
+    <div id="m2-foto" class="foto" style="background-image:url(assets/fotos/estudiantes.jpg)"></div><div class="foto-velo"></div><div class="foto-cred">Imagen: manifestación por la vivienda, Madrid</div>
+    <div id="m2-velo"></div>
+    
+    <div id="m2-cab" class="cab"><span class="cab-mini">HUELGA <b>11N</b></span><span class="cab-et">2 · EL DETONANTE</span></div>
+    <div class="pila">
+      <div id="m2-t0" class="tj-g"><span>DECRETOS TUMBADOS</span></div>
+      <div id="m2-t1" class="tj-g"><span>PP + VOX + JUNTS</span></div>
+    </div>
+    <div class="fuente">Fuentes: El Español · Infobae · Moncloa.com · El Constitucional (oct-nov 2026)</div>
+  </div>
+  <script>
+    (function () {
+      const C = hfPaperColor;
+      const fondo = hfPaper("m2", document.getElementById("m2-fondo"), PaperShaders.grainGradientFragmentShader, hfPaperSizing("cover", {
+        u_colorBack: C("#07070c"), u_colors: ["#3a2a12", "#b8651f", "#10131f"].map(C), u_colorsCount: 3,
+        u_softness: 0.6, u_intensity: 0.45, u_noise: 0.5, u_shape: PaperShaders.GrainGradientShapes.blob, u_noiseTexture: hfNoise(),
+      }), { speed: 1.1, offset: 7 });
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 7.34 }, 0);
+      tl.fromTo("#m2-cab .cab-et", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.4)" }, 0.0);
+      tl.fromTo("#m2-t0 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 2.205);
+      tl.fromTo("#m2-t1 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: -2, duration: 0.22, ease: "power4.in" }, 6.562);
+      tl.to("#m2-t0", { opacity: 0.45, duration: 0.2 }, 6.562);
+      tl.fromTo("#m2-fondo", { scale: 1.08 }, { scale: 1, duration: 7.34, ease: "none" }, 0);
+      if (document.getElementById("m2-foto")) tl.fromTo("#m2-foto", { scale: 1.0, x: -15 }, { scale: 1.12, x: 15, duration: 7.34, ease: "none" }, 0);
+      tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
+      fondo.draw(0);
+      window.__timelines["m2"] = tl;
+    })();
+  </script>
+</template>
