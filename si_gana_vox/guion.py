@@ -20,7 +20,6 @@ SEGMENTOS = [
     {"escena": "gancho", "foto": "abascal_marruecos", "etiqueta": "ELECCIONES 29N",
      "texto": "¿Qué pasaría en España si gana Abascal? Esto es lo que él mismo prometió en La Revuelta, delante de casi cinco millones de personas.",
      "tarjetas": [
-         {"quien": "", "texto": "¿Y SI GANA VOX?", "en": "gana", "grande": True},
          {"quien": "", "texto": "4,8 MILLONES LO VIERON", "en": "millones", "grande": True},
      ]},
     {"escena": "m1", "foto": "abascal", "etiqueta": "1 · INMIGRACIÓN",

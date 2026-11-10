@@ -51,9 +51,9 @@ def escena_html(e, seg):
                             f'<span class="tj-x">{html.escape(tj["texto"])}</span></div>')
             tws.append(f'tl.fromTo("#{i}", {{ x: {-900 if tj["quien"] == "BRONCANO" else 900}, opacity: 0 }}, {{ x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }}, {t:.3f});')
         # la tarjeta anterior se apaga un poco cuando llega la siguiente
-        if k:
+        if k and eid != "final":
             tws.append(f'tl.to("#{eid}-t{k - 1}", {{ opacity: 0.45, duration: 0.2 }}, {t:.3f});')
-    cab = ('<div id="{0}-vs" class="vs"><span class="vs-b">¿Y SI GANA</span><span class="vs-v">ABASCAL?</span><span class="vs-a">ESPAÑA CON VOX</span></div>'.format(eid)
+    cab = ('<div id="{0}-vs" class="vs"><span class="vs-b">¿Y SI GANA</span><span class="vs-v">ABASCAL?</span><span class="vs-a">EL 29N</span></div>'.format(eid)
            if gancho else f'<div id="{eid}-cab" class="cab"><span class="cab-mini">SI GANA <b>VOX</b></span><span class="cab-et">{html.escape(seg["etiqueta"])}</span></div>')
     if gancho:
         tws.insert(0, f'tl.fromTo("#{eid}-vs .vs-v", {{ scale: 1 }}, {{ scale: 1.25, duration: 0.18, yoyo: true, repeat: 3, ease: "power2.out" }}, 0.0);')
@@ -98,7 +98,7 @@ def escena_html(e, seg):
     <div class="pila">
       {chr(10).join("      " + x for x in tarjetas).strip()}
     </div>
-    <div class="fuente">Promesas de Abascal en La Revuelta: Europa Press · Última Hora · Audiencia: Libertad Digital (9-10 nov 2026)</div>
+    <div class="fuente">Fuentes: Europa Press · Última Hora · Libertad Digital (9-10 nov 2026)</div>
   </div>
   <script>
     (function () {{
