@@ -44,11 +44,11 @@
         u_softness: 0.6, u_intensity: 0.45, u_noise: 0.5, u_shape: PaperShaders.GrainGradientShapes.corners, u_noiseTexture: hfNoise(),
       }), { speed: 1.1, offset: 13 });
       const tl = gsap.timeline({ paused: true });
-      tl.to({}, { duration: 10.31 }, 0);
+      tl.to({}, { duration: 15.08 }, 0);
       tl.fromTo("#final-cab .cab-et", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.4)" }, 0.0);
-      tl.fromTo("#final-t0 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 6.017);
-      tl.fromTo("#final-fondo", { scale: 1.08 }, { scale: 1, duration: 10.31, ease: "none" }, 0);
-      if (document.getElementById("final-foto")) tl.fromTo("#final-foto", { scale: 1.0, x: -15 }, { scale: 1.12, x: 15, duration: 10.31, ease: "none" }, 0);
+      tl.fromTo("#final-t0 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 5.308);
+      tl.fromTo("#final-fondo", { scale: 1.08 }, { scale: 1, duration: 15.08, ease: "none" }, 0);
+      if (document.getElementById("final-foto")) tl.fromTo("#final-foto", { scale: 1.0, x: -15 }, { scale: 1.12, x: 15, duration: 15.08, ease: "none" }, 0);
       tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
       fondo.draw(0);
       window.__timelines["final"] = tl;

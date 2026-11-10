@@ -45,13 +45,13 @@
         u_softness: 0.6, u_intensity: 0.45, u_noise: 0.5, u_shape: PaperShaders.GrainGradientShapes.wave, u_noiseTexture: hfNoise(),
       }), { speed: 1.1, offset: 7 });
       const tl = gsap.timeline({ paused: true });
-      tl.to({}, { duration: 10.74 }, 0);
+      tl.to({}, { duration: 9.6 }, 0);
       tl.fromTo("#m1-cab .cab-et", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.4)" }, 0.0);
-      tl.fromTo("#m1-t0", { x: 900, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 2.730);
-      tl.fromTo("#m1-t1", { x: 900, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 8.830);
-      tl.to("#m1-t0", { opacity: 0.45, duration: 0.2 }, 8.830);
-      tl.fromTo("#m1-fondo", { scale: 1.08 }, { scale: 1, duration: 10.74, ease: "none" }, 0);
-      if (document.getElementById("m1-foto")) tl.fromTo("#m1-foto", { scale: 1.0, x: -15 }, { scale: 1.12, x: 15, duration: 10.74, ease: "none" }, 0);
+      tl.fromTo("#m1-t0", { x: 900, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 2.410);
+      tl.fromTo("#m1-t1", { x: 900, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 8.033);
+      tl.to("#m1-t0", { opacity: 0.45, duration: 0.2 }, 8.033);
+      tl.fromTo("#m1-fondo", { scale: 1.08 }, { scale: 1, duration: 9.6, ease: "none" }, 0);
+      if (document.getElementById("m1-foto")) tl.fromTo("#m1-foto", { scale: 1.0, x: -15 }, { scale: 1.12, x: 15, duration: 9.6, ease: "none" }, 0);
       tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
       fondo.draw(0);
       window.__timelines["m1"] = tl;

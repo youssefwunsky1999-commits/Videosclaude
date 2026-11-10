@@ -191,7 +191,8 @@ def main():
         escenas.append({"escena": d["escena"], "t0": round(t, 3), "dur_voz": round(dur, 3), "texto": d["texto"],
                         "palabras": [{"t": round(max(0.0, w["t"]) + t, 3), "d": round(w["d"], 3), "w": w["w"]} for w in d["palabras"]]})
         t += dur + HUECO
-    total = round(t - HUECO + COLA, 2)
+    # TikTok solo paga vídeos de más de 1 minuto: el cierre se alarga hasta 61,5 s si hace falta
+    total = max(round(t - HUECO + COLA, 2), 61.5)
     # cada escena ocupa desde un poco antes de su voz hasta un poco antes de la siguiente
     for i, e in enumerate(escenas):
         ini = 0.0 if i == 0 else round(e["t0"] - HUECO / 2, 3)
