@@ -20,7 +20,7 @@ FONDOS = {  # grain gradient de Paper Shaders por escena: (fondo, colores, forma
     "m2": ("#07070c", ["#3a2a12", "#b8651f", "#10131f"], "blob"),
     "m3": ("#0a0205", ["#e63946", "#7a1020", "#2b0a10"], "sphere"),
     "m4": ("#07070c", ["#123a8a", "#2a7fff", "#10131f"], "ripple"),
-    "m5": ("#07070c", ["#5a3cff", "#e63946", "#10131f"], "corners"),
+    "final": ("#07070c", ["#5a3cff", "#e63946", "#10131f"], "corners"),
 }
 
 
@@ -44,14 +44,15 @@ def escena_html(e, seg):
             tarjetas.append(f'<div id="{i}" class="tj-g"><span>{html.escape(tj["texto"])}</span></div>')
             tws.append(f'tl.fromTo("#{i} span", {{ scale: 2.4, opacity: 0, rotation: -10 }}, {{ scale: 1, opacity: 1, rotation: {-2 if k % 2 else 2}, duration: 0.22, ease: "power4.in" }}, {t:.3f});')
         else:
-            col = COLORES[tj["quien"]]
-            tarjetas.append(f'<div id="{i}" class="tj" style="border-left-color:{col}"><span class="tj-q" style="background:{col}">{tj["quien"]}</span>'
+            col = COLORES.get(tj["quien"], "#ffffff")
+            chip = f'<span class="tj-q" style="background:{col}">{tj["quien"]}</span>' if tj["quien"] else ""
+            tarjetas.append(f'<div id="{i}" class="tj" style="border-left-color:{col}">{chip}'
                             f'<span class="tj-x">{html.escape(tj["texto"])}</span></div>')
             tws.append(f'tl.fromTo("#{i}", {{ x: {-900 if tj["quien"] == "BRONCANO" else 900}, opacity: 0 }}, {{ x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }}, {t:.3f});')
         # la tarjeta anterior se apaga un poco cuando llega la siguiente
         if k:
             tws.append(f'tl.to("#{eid}-t{k - 1}", {{ opacity: 0.45, duration: 0.2 }}, {t:.3f});')
-    cab = ('<div id="{0}-vs" class="vs"><span class="vs-b">BRONCANO</span><span class="vs-v">VS</span><span class="vs-a">ABASCAL</span></div>'.format(eid)
+    cab = ('<div id="{0}-vs" class="vs"><span class="vs-b">LA PEOR</span><span class="vs-v">NOCHE DE</span><span class="vs-a">BRONCANO</span></div>'.format(eid)
            if gancho else f'<div id="{eid}-cab" class="cab"><span class="cab-mini">BRONCANO <b>vs</b> ABASCAL</span><span class="cab-et">{html.escape(seg["etiqueta"])}</span></div>')
     if gancho:
         tws.insert(0, f'tl.fromTo("#{eid}-vs .vs-v", {{ scale: 1 }}, {{ scale: 1.25, duration: 0.18, yoyo: true, repeat: 3, ease: "power2.out" }}, 0.0);')
@@ -92,7 +93,7 @@ def escena_html(e, seg):
     <div class="pila">
       {chr(10).join("      " + x for x in tarjetas).strip()}
     </div>
-    <div class="fuente">Citas: Infobae · Europa Press · Última Hora (9-10 nov 2026)</div>
+    <div class="fuente">Opinión · Hechos: Infobae · Europa Press · Última Hora · Público (9-10 nov 2026)</div>
   </div>
   <script>
     (function () {{
@@ -185,7 +186,7 @@ def index(datos):
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
-    <title>Broncano vs Abascal en La Revuelta</title>
+    <title>La peor noche de Broncano</title>
     <script src="assets/lib/gsap.min.js"></script>
     <script src="assets/lib/paper-shaders.js"></script>
     <script src="assets/lib/hf-paper.js"></script>

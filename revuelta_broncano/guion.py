@@ -16,7 +16,7 @@ VOZ_ELEVENLABS = "Rie0luvrYhyKLba1lK3c"   # Mateo – News & Digital Stories
 B, A = "BRONCANO", "ABASCAL"
 
 SEGMENTOS = [
-    {"escena": "gancho", "etiqueta": "LA PEOR NOCHE DE BRONCANO",
+    {"escena": "gancho", "etiqueta": "LA REVUELTA · 9 NOV",
      "texto": "Un humorista. En su propio programa. Sin chistes, sin su público… y pidiendo perdón. Así fue la peor noche de Broncano.",
      "clip": "despedida (Abascal: «me sale el punto cómico que tú has perdido»)",
      "tarjetas": [
@@ -52,7 +52,7 @@ SEGMENTOS = [
      "tarjetas": [
          {"quien": A, "texto": "«Me sale el punto cómico que tú has perdido en esta entrevista»", "en": "cómico"},
      ]},
-    {"escena": "final", "etiqueta": "¿LA PEOR DE SU CARRERA?",
+    {"escena": "final", "etiqueta": "EL FINAL",
      "texto": "Al final del programa, el propio Broncano lamentó haber cedido con el público. ¿Fue la peor entrevista de su carrera? Te leo en comentarios.",
      "clip": None,
      "tarjetas": [
