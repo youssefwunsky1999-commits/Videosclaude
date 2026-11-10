@@ -21,3 +21,5 @@ revuelta_broncano/hf/.hyperframes/
 revuelta_broncano/work-*/
 revuelta_broncano/.revuelta_broncano*.hf-transaction-*/
 revuelta_broncano/bruto.mp4
+**/.*.hf-transaction-*/
+**/work-*/
