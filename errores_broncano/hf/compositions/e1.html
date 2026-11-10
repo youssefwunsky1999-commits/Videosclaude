@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #07070c; }
+    #e1-fondo { position: absolute; inset: 0; }
+    #e1-velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.05) 40%, rgba(0,0,0,.45)); }
+    .vs { position: absolute; left: 0; right: 0; top: 250px; display: flex; flex-direction: column; align-items: center; }
+    .vs span { display: block; font-family: "Archivo Black"; line-height: .95; text-shadow: 0 10px 40px rgba(0,0,0,.6); }
+    .vs-b { font-size: 138px; color: #ffd23f; }
+    .vs-v { font-size: 96px; color: #fff; background: #e63946; padding: 0 26px; border-radius: 16px; margin: 10px 0; }
+    .vs-a { font-size: 138px; color: #7fd4ff; }
+    .et-live { position: absolute; left: 0; right: 0; top: 190px; text-align: center; font-family: Inter; font-weight: 900; font-size: 34px; color: #fff; letter-spacing: 3px; }
+    .et-live i { display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: #e63946; margin-right: 14px; vertical-align: 1px; }
+    .cab { position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+    .cab-mini { display: block; font-family: "Archivo Black"; font-size: 44px; color: #fff; letter-spacing: 1px; }
+    .cab-mini b { color: #e63946; font-weight: 400; }
+    .cab-et { display: block; font-family: "Archivo Black"; font-size: 66px; color: #fff; background: #e63946; padding: 10px 34px; border-radius: 18px; text-align: center; max-width: 960px; }
+    .pila { position: absolute; left: 60px; right: 60px; top: 470px; display: flex; flex-direction: column; gap: 26px; }
+    .tj { background: rgba(8,8,14,.86); border-left: 14px solid #fff; border-radius: 22px; padding: 22px 30px 26px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+    .tj-q { display: inline-block; font-family: "Archivo Black"; font-size: 30px; color: #07070c; padding: 4px 16px; border-radius: 10px; margin-bottom: 12px; }
+    .tj-x { display: block; font-family: "Archivo Black"; font-size: 50px; line-height: 1.12; color: #fff; }
+    .tj-g { text-align: center; }
+    .tj-g span { display: inline-block; font-family: "Archivo Black"; font-size: 70px; line-height: 1.05; color: #fff; background: #e63946; padding: 12px 34px; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.5); max-width: 960px; }
+    .foto { position: absolute; left: -30px; right: -30px; top: 640px; height: 2250px; background-size: cover; background-position: 50% 8%; transform-origin: 50% 30%; }
+    .foto-velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,7,12,0) 0%, rgba(7,7,12,0) 30%, rgba(7,7,12,.85) 36%, rgba(7,7,12,.25) 46%, rgba(7,7,12,.05) 60%, rgba(7,7,12,.1) 85%, rgba(7,7,12,.6) 100%); }
+    .foto-cred { position: absolute; right: 24px; top: 1880px; font-family: Inter; font-weight: 700; font-size: 22px; color: rgba(255,255,255,.7); text-shadow: 0 2px 6px #000; }
+    .fuente { position: absolute; left: 0; right: 0; top: 1168px; text-align: center; font-family: Inter; font-size: 22px; color: rgba(255,255,255,.55); }
+  </style>
+  <div id="root" data-composition-id="e1" data-width="1080" data-height="1920">
+    <div id="e1-fondo"></div>
+    <div id="e1-foto" class="foto" style="background-image:url(assets/fotos/abascal_escucha.jpg)"></div><div class="foto-velo"></div><div class="foto-cred">Imagen: RTVE / La Revuelta</div>
+    <div id="e1-velo"></div>
+    
+    <div id="e1-cab" class="cab"><span class="cab-mini">BRONCANO <b>vs</b> ABASCAL</span><span class="cab-et">ERROR 1 · EL PÚBLICO</span></div>
+    <div class="pila">
+      <div id="e1-t0" class="tj-g"><span>EL PÚBLICO LO GESTIONÓ VOX</span></div>
+      <div id="e1-t1" class="tj" style="border-left-color:#ffd23f"><span class="tj-q" style="background:#ffd23f">BRONCANO</span><span class="tj-x">Acabó lamentando haber aceptado</span></div>
+    </div>
+    <div class="fuente">Opinión · Hechos: Infobae · Europa Press · Última Hora · Público · RTVE (9-10 nov 2026)</div>
+  </div>
+  <script>
+    (function () {
+      const C = hfPaperColor;
+      const fondo = hfPaper("e1", document.getElementById("e1-fondo"), PaperShaders.grainGradientFragmentShader, hfPaperSizing("cover", {
+        u_colorBack: C("#07070c"), u_colors: ["#e63946", "#2b2d42", "#7a1020"].map(C), u_colorsCount: 3,
+        u_softness: 0.6, u_intensity: 0.45, u_noise: 0.5, u_shape: PaperShaders.GrainGradientShapes.corners, u_noiseTexture: hfNoise(),
+      }), { speed: 1.1, offset: 7 });
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 11.9 }, 0);
+      tl.fromTo("#e1-cab .cab-et", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.4)" }, 0.0);
+      tl.fromTo("#e1-t0 span", { scale: 2.4, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 2, duration: 0.22, ease: "power4.in" }, 3.638);
+      tl.fromTo("#e1-t1", { x: -900, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 9.578);
+      tl.to("#e1-t0", { opacity: 0.45, duration: 0.2 }, 9.578);
+      tl.fromTo("#e1-fondo", { scale: 1.08 }, { scale: 1, duration: 11.9, ease: "none" }, 0);
+      if (document.getElementById("e1-foto")) tl.fromTo("#e1-foto", { scale: 1.0, x: -15 }, { scale: 1.12, x: 15, duration: 11.9, ease: "none" }, 0);
+      tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
+      fondo.draw(0);
+      window.__timelines["e1"] = tl;
+    })();
+  </script>
+</template>

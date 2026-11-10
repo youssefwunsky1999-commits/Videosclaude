@@ -50,7 +50,7 @@ def escena_html(e, seg):
                             f'<span class="tj-x">{html.escape(tj["texto"])}</span></div>')
             tws.append(f'tl.fromTo("#{i}", {{ x: {-900 if tj["quien"] == "BRONCANO" else 900}, opacity: 0 }}, {{ x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }}, {t:.3f});')
         # la tarjeta anterior se apaga un poco cuando llega la siguiente
-        if k:
+        if k and eid != "final":
             tws.append(f'tl.to("#{eid}-t{k - 1}", {{ opacity: 0.45, duration: 0.2 }}, {t:.3f});')
     cab = ('<div id="{0}-vs" class="vs"><span class="vs-b">5 ERRORES</span><span class="vs-v">DE</span><span class="vs-a">BRONCANO</span></div>'.format(eid)
            if gancho else f'<div id="{eid}-cab" class="cab"><span class="cab-mini">BRONCANO <b>vs</b> ABASCAL</span><span class="cab-et">{html.escape(seg["etiqueta"])}</span></div>')
