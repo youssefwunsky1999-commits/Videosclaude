@@ -25,7 +25,7 @@ SEGMENTOS = [
          {"quien": "", "texto": "«CAZAR INMIGRANTES»", "en": "cazar", "grande": True},
          {"quien": "", "texto": "Y NO FUE LO MÁS FUERTE", "en": "fuerte", "grande": True},
      ]},
-    {"escena": "m1", "foto": "abascal_marruecos", "etiqueta": "1 · CEUTA Y MARRUECOS",
+    {"escena": "m1", "foto": "broncano_marruecos", "etiqueta": "1 · CEUTA Y MARRUECOS",
      "texto": "Sobre Ceuta, habló de invasión: entraron cien mil personas en una ciudad de ochenta mil. Y soltó: Marruecos ha sido más inteligente que España.",
      "tarjetas": [
          {"quien": A, "texto": "«Entraron 100.000 personas en una ciudad de 80.000»", "en": "entraron"},
