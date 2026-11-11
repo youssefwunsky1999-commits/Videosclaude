@@ -16,7 +16,6 @@ SEGMENTOS = [
     {"escena": "gancho", "foto": "abascal_tapa", "etiqueta": "ÚLTIMA HORA · 11 NOV",
      "texto": "Abascal acaba de plantar a Jordi Wild. Y según Vox, la culpa es de La Revuelta.",
      "tarjetas": [
-         {"quien": "", "texto": "PLANTA A JORDI WILD", "en": "plantar", "grande": True},
          {"quien": "", "texto": "¿LA CULPA? LA REVUELTA", "en": "culpa", "grande": True},
      ]},
     {"escena": "m1", "foto": "comunicado", "etiqueta": "1 · EL COMUNICADO",
