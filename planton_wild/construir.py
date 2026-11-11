@@ -33,6 +33,11 @@ def t_palabra(escena, clave):
     return hits[int(n) - 1]["t"] - escena["ini"]
 
 
+TELETIPO = ("VOX SUSPENDE LA ENTREVISTA CON JORDI WILD · ACUSA A LA REVUELTA DE «GRAVES INCUMPLIMIENTOS» · "
+            "DENUNCIA 40 MINUTOS SIN EMITIR · ABASCAL SOLO IRÁ A PROGRAMAS DONDE CONTROLE SUS RESPUESTAS")
+TK_PX = 2600
+
+
 def escena_html(e, seg):
     eid, D = e["escena"], e["dur"]
     back, cols, forma = FONDOS.get(eid, ("#07070c", ["#e63946", "#2b2d42", "#7a1020"], "corners"))
@@ -43,13 +48,14 @@ def escena_html(e, seg):
         i = f"{eid}-t{k}"
         if tj.get("grande"):
             tarjetas.append(f'<div id="{i}" class="tj-g"><span>{html.escape(tj["texto"])}</span></div>')
-            tws.append(f'tl.fromTo("#{i} span", {{ scale: 2.4, opacity: 0, rotation: -10 }}, {{ scale: 1, opacity: 1, rotation: {-2 if k % 2 else 2}, duration: 0.22, ease: "power4.in" }}, {t:.3f});')
+            tws.append(f'tl.fromTo("#{i} span", {{ scale: 3, opacity: 0, rotation: -14 }}, {{ scale: 1, opacity: 1, rotation: {-5 if k % 2 else 4}, duration: 0.18, ease: "power4.in" }}, {t:.3f});')
         else:
             col = COLORES.get(tj["quien"], "#ffffff")
             chip = f'<span class="tj-q" style="background:{col}">{tj["quien"]}</span>' if tj["quien"] else ""
-            tarjetas.append(f'<div id="{i}" class="tj" style="border-left-color:{col}">{chip}'
-                            f'<span class="tj-x">{html.escape(tj["texto"])}</span></div>')
-            tws.append(f'tl.fromTo("#{i}", {{ x: {-900 if tj["quien"] == "BRONCANO" else 900}, opacity: 0 }}, {{ x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }}, {t:.3f});')
+            tarjetas.append(f'<div id="{i}" class="tj" style="--rot:{-1.2 if k % 2 else 1.2}deg">{chip}'
+                            f'<span class="tj-x"><span class="tj-m" id="{i}-m">{html.escape(tj["texto"])}</span></span></div>')
+            tws.append(f'tl.fromTo("#{i}-m", {{ backgroundSize: "0% 100%" }}, {{ backgroundSize: "100% 100%", duration: 0.6, ease: "power2.inOut" }}, {t + 0.3:.3f});')
+            tws.append(f'tl.fromTo("#{i}", {{ y: 60, rotation: {-6 if k % 2 else 6}, opacity: 0 }}, {{ y: 0, rotation: {-1.2 if k % 2 else 1.2}, opacity: 1, duration: 0.28, ease: "back.out(1.8)" }}, {t:.3f});')
         # la tarjeta anterior se apaga un poco cuando llega la siguiente
         if k and eid != "final":
             tws.append(f'tl.to("#{eid}-t{k - 1}", {{ opacity: 0.45, duration: 0.2 }}, {t:.3f});')
@@ -67,38 +73,51 @@ def escena_html(e, seg):
     #root {{ position: absolute; inset: 0; overflow: hidden; background: {back}; }}
     #{eid}-fondo {{ position: absolute; inset: 0; }}
     #{eid}-velo {{ position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.05) 40%, rgba(0,0,0,.45)); }}
-    .vs {{ position: absolute; left: 0; right: 0; top: 250px; display: flex; flex-direction: column; align-items: center; }}
+    .vs {{ position: absolute; left: 0; right: 0; top: 280px; display: flex; flex-direction: column; align-items: center; }}
     .vs span {{ display: block; font-family: "Archivo Black"; line-height: .95; text-shadow: 0 10px 40px rgba(0,0,0,.6); }}
     .vs-b {{ font-size: 138px; color: #ffd23f; }}
     .vs-v {{ font-size: 96px; color: #fff; background: #e63946; padding: 0 26px; border-radius: 16px; margin: 10px 0; }}
     .vs-a {{ font-size: 138px; color: #7fd4ff; }}
-    .et-live {{ position: absolute; left: 0; right: 0; top: 190px; text-align: center; font-family: Inter; font-weight: 900; font-size: 34px; color: #fff; letter-spacing: 3px; }}
+    .et-live {{ display: none; position: absolute; left: 0; right: 0; top: 190px; text-align: center; font-family: Inter; font-weight: 900; font-size: 34px; color: #fff; letter-spacing: 3px; }}
     .et-live i {{ display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: #e63946; margin-right: 14px; vertical-align: 1px; }}
-    .cab {{ position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; gap: 22px; }}
+    .cab {{ position: absolute; left: 0; right: 0; top: 262px; display: flex; flex-direction: column; align-items: center; gap: 22px; }}
     .cab-mini {{ display: block; font-family: "Archivo Black"; font-size: 44px; color: #fff; letter-spacing: 1px; }}
     .cab-mini b {{ color: #e63946; font-weight: 400; }}
-    .cab-et {{ display: block; font-family: "Archivo Black"; font-size: 66px; color: #fff; background: #e63946; padding: 10px 34px; border-radius: 18px; text-align: center; max-width: 960px; }}
+    .cab-et {{ display: block; font-family: "Archivo Black"; font-size: 62px; color: #fff; background: #111; border-left: 22px solid #e63946; padding: 8px 32px; border-radius: 0; text-align: left; max-width: 980px; }}
     .pila {{ position: absolute; left: 60px; right: 60px; top: {top}px; display: flex; flex-direction: column; gap: 26px; }}
-    .tj {{ background: rgba(8,8,14,.86); border-left: 14px solid #fff; border-radius: 22px; padding: 22px 30px 26px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }}
-    .tj-q {{ display: inline-block; font-family: "Archivo Black"; font-size: 30px; color: #07070c; padding: 4px 16px; border-radius: 10px; margin-bottom: 12px; }}
-    .tj-x {{ display: block; font-family: "Archivo Black"; font-size: 50px; line-height: 1.12; color: #fff; }}
+    .tj {{ background: #f3efe6; border-radius: 3px; padding: 20px 30px 24px; box-shadow: 0 18px 50px rgba(0,0,0,.6); }}
+    .tj-q {{ display: inline-block; font-family: "Archivo Black"; font-size: 28px; color: #fff !important; background: #111 !important; padding: 4px 16px; border-radius: 2px; margin-bottom: 12px; letter-spacing: 2px; }}
+    .tj-x {{ display: block; font-family: "Archivo Black"; font-size: 50px; line-height: 1.18; color: #121212; }}
+    .tj-m {{ background-image: linear-gradient(transparent 55%, #ffe14d 55%, #ffe14d 92%, transparent 92%); background-repeat: no-repeat; background-size: 0% 100%; -webkit-box-decoration-break: clone; box-decoration-break: clone; }}
     .tj-g {{ text-align: center; }}
-    .tj-g span {{ display: inline-block; font-family: "Archivo Black"; font-size: 70px; line-height: 1.05; color: #fff; background: #e63946; padding: 12px 34px; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.5); max-width: 960px; }}
+    .tj-g span {{ display: inline-block; font-family: "Archivo Black"; font-size: 68px; line-height: 1.05; letter-spacing: 2px; color: #ff3b47; background: rgba(10,10,14,.88); border: 9px solid #ff3b47; padding: 10px 32px; border-radius: 6px; box-shadow: 0 0 0 4px rgba(10,10,14,.88), 0 20px 60px rgba(0,0,0,.5); max-width: 960px; }}
     .foto {{ position: absolute; left: -30px; right: -30px; top: 640px; height: 2250px; background-size: cover; background-position: 50% 8%; transform-origin: 50% 30%; }}
     .foto-velo {{ position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,7,12,0) 0%, rgba(7,7,12,0) 30%, rgba(7,7,12,.85) 36%, rgba(7,7,12,.8) 44%, rgba(7,7,12,.05) 50%, rgba(7,7,12,.05) 78%, rgba(7,7,12,.6) 100%); }}
     .foto-cred {{ position: absolute; right: 24px; top: 1880px; font-family: Inter; font-weight: 700; font-size: 22px; color: rgba(255,255,255,.7); text-shadow: 0 2px 6px #000; }}
-    .fuente {{ position: absolute; left: 0; right: 0; top: 1168px; text-align: center; font-family: Inter; font-size: 22px; color: rgba(255,255,255,.55); }}
+    .bh {{ position: absolute; left: 0; right: 0; top: 176px; height: 62px; display: flex; align-items: stretch; z-index: 30; box-shadow: 0 8px 30px rgba(0,0,0,.45); }}
+    .bh-r {{ display: flex; align-items: center; gap: 14px; background: #e63946; color: #fff; font-family: "Archivo Black"; font-size: 32px; letter-spacing: 2px; padding: 0 26px; }}
+    .bh-r i {{ display: block; width: 18px; height: 18px; border-radius: 50%; background: #fff; }}
+    .bh-t {{ flex: 1; display: flex; align-items: center; background: #111; color: #fff; font-family: Inter; font-weight: 800; font-size: 26px; letter-spacing: 1px; padding: 0 22px; }}
+    .tk {{ position: absolute; left: 0; right: 0; top: 1136px; height: 58px; display: flex; z-index: 25; }}
+    .tk-l {{ display: flex; align-items: center; background: #ffe14d; color: #111; font-family: "Archivo Black"; font-size: 26px; padding: 0 20px; white-space: nowrap; }}
+    .tk-v {{ position: relative; flex: 1; overflow: hidden; background: rgba(10,10,14,.92); }}
+    .tk-s {{ position: absolute; left: 0; top: 0; line-height: 58px; white-space: nowrap; font-family: Inter; font-weight: 800; font-size: 28px; color: #fff; }}
+    .flash {{ position: absolute; inset: 0; background: #fff; z-index: 40; pointer-events: none; }}
+    .fuente {{ position: absolute; left: 0; right: 0; top: 1400px; text-align: center; font-family: Inter; font-size: 22px; color: rgba(255,255,255,.55); }}
   </style>
   <div id="root" data-composition-id="{eid}" data-width="1080" data-height="1920">
     <div id="{eid}-fondo"></div>
     {f'<div id="{eid}-foto" class="foto" style="background-image:url(assets/fotos/{seg["foto"]}.jpg)"></div><div class="foto-velo"></div><div class="foto-cred">Imágenes: RTVE / La Revuelta · EFE · Cadena SER · VOX</div>' if seg.get("foto") else ""}
     <div id="{eid}-velo"></div>
+    <div class="bh"><span class="bh-r"><i id="{eid}-dot"></i>ÚLTIMA HORA</span><span class="bh-t">VOX · LA REVUELTA · THE WILD PROJECT</span></div>
     {et}
     {cab}
     <div class="pila">
       {chr(10).join("      " + x for x in tarjetas).strip()}
     </div>
+    <div class="tk"><span class="tk-l">EN DIRECTO</span><div class="tk-v"><span class="tk-s" id="{eid}-tk">{TELETIPO} &nbsp;·&nbsp; {TELETIPO}</span></div></div>
     <div class="fuente">Fuentes: comunicado de VOX · Cadena SER (11 nov 2026)</div>
+    <div class="flash" id="{eid}-flash"></div>
   </div>
   <script>
     (function () {{
@@ -110,6 +129,10 @@ def escena_html(e, seg):
       const tl = gsap.timeline({{ paused: true }});
       tl.to({{}}, {{ duration: {D} }}, 0);
       {(chr(10) + "      ").join(tws)}
+      tl.fromTo("#{eid}-flash", {{ opacity: {0 if eid == "gancho" else 0.85} }}, {{ opacity: 0, duration: 0.3, ease: "power2.out" }}, 0);
+      tl.fromTo("#{eid}-tk", {{ x: 0 }}, {{ x: -{TK_PX}, duration: {D}, ease: "none" }}, 0);
+      tl.fromTo("#{eid}-dot", {{ opacity: 1 }}, {{ opacity: 0.2, duration: 0.5, yoyo: true, repeat: Math.max(1, Math.floor({D} / 0.5) - 1), ease: "none" }}, 0);
+      if (document.getElementById("{eid}-foto") && "{eid}" !== "gancho") tl.fromTo("#{eid}-foto", {{ x: -24 }}, {{ x: 0, duration: 0.18, ease: "steps(3)" }}, 0);
       tl.fromTo("#{eid}-fondo", {{ scale: 1.08 }}, {{ scale: 1, duration: {D}, ease: "none" }}, 0);
       if (document.getElementById("{eid}-foto")) tl.fromTo("#{eid}-foto", {{ scale: 1.0, x: -15 }}, {{ scale: 1.12, x: 15, duration: {D}, ease: "none" }}, 0);
       tl.eventCallback("onUpdate", () => fondo.draw(tl.time()));
