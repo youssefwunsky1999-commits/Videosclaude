@@ -1,0 +1,51 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; overflow: hidden; background: var(--a); font-family: Inter; }
+.rays { position: absolute; left: -50%; top: -30%; width: 200%; height: 160%;
+        background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.07) 0deg 7deg, transparent 7deg 18deg); }
+.vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%); }
+.pill { position: absolute; left: 0; right: 0; text-align: center; }
+.pill span { display: inline-block; font-weight: 900; font-size: 48px; padding: 14px 36px; border-radius: 60px; box-shadow: 0 10px 0 rgba(0,0,0,.25); }
+.am span { background: #ffd43b; color: #1a1d33; } .ro span { background: #ff3b47; color: #fff; } .bl span { background: #fff; color: #1a1d33; }
+.big { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; color: #ffd43b; text-shadow: 0 10px 0 rgba(0,0,0,.3); line-height: 1; }
+.big small { display: block; font-size: 40px; color: #fff; margin-top: 10px; text-shadow: none; }
+.card { position: absolute; left: 70px; right: 70px; background: #fbf7ee; border-radius: 24px; box-shadow: 0 14px 0 rgba(0,0,0,.25);
+        color: #1a1d33; padding: 22px 30px; display: flex; align-items: center; gap: 24px; font-weight: 800; font-size: 40px; line-height: 1.15; }
+.tag { flex: none; font-weight: 900; font-size: 34px; color: #fff; border-radius: 14px; padding: 8px 18px; }
+.nombre { position: absolute; text-align: center; }
+.nombre span { display: inline-block; font-weight: 900; font-size: 36px; padding: 8px 26px; border-radius: 40px; color: #fff; box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+.pj { position: absolute; }
+.sello { position: absolute; font-weight: 900; color: #e5323e; border: 10px solid #e5323e; border-radius: 16px; padding: 6px 26px; text-align: center;
+         background: rgba(251,247,238,.9); line-height: 1.05; }
+.titulo { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; line-height: 1; }
+</style>
+  <div id="root" data-composition-id="bueno" data-width="1080" data-height="1920" style="--a:#0d3a22">
+    <div id="bueno-rays" class="rays" style="background-color:#16703f"></div>
+    <div class="vig"></div>
+<div id="bueno-tit" class="pill" style="top:455px"><span style="background:#22a85a;color:#fff;font-size:64px">LO BUENO</span></div>
+<div id="bueno-f0" class="card" style="top:615px;padding:18px 26px"><span class="tag" style="background:#22a85a;font-size:30px">EMPLEO</span><span style="flex:1;font-size:36px">Ocupados más que en 2018 (2.º trim.)</span><span style="font-weight:900;font-size:58px;color:#22a85a;white-space:nowrap">+3,4 M</span></div>
+<div id="bueno-f1" class="card" style="top:775px;padding:18px 26px"><span class="tag" style="background:#22a85a;font-size:30px">PARO</span><span style="flex:1;font-size:36px">Del 15,3 % al 9,9 % (2.º trim.)</span><span style="font-weight:900;font-size:58px;color:#22a85a;white-space:nowrap">−5,4 pts</span></div>
+<div id="bueno-f2" class="card" style="top:935px;padding:18px 26px"><span class="tag" style="background:#22a85a;font-size:30px">SMI</span><span style="flex:1;font-size:36px">De 731 € a 1.221 € (14 pagas)</span><span style="font-weight:900;font-size:58px;color:#22a85a;white-space:nowrap">+66 %</span></div>
+<div id="bueno-f3" class="card" style="top:1095px;padding:18px 26px"><span class="tag" style="background:#22a85a;font-size:30px">PENSIÓN</span><span style="flex:1;font-size:36px">Pensión media: 1.084 € → 1.573 €</span><span style="font-weight:900;font-size:58px;color:#22a85a;white-space:nowrap">+489 €</span></div>
+<svg id="bueno-ps" class="pj" style="left:280px;top:1210px;width:520px" viewBox="0 0 400 480"><path d="M10 480 C25 385 110 352 200 348 C290 352 375 385 390 480 Z" fill="#1b2340"/><path d="M156 350 L200 418 L244 350 Z" fill="#fff"/><path d="M178 352 L200 386 L222 352" stroke="#d9dbe3" stroke-width="5" fill="none"/><ellipse cx="112" cy="205" rx="18" ry="28" fill="#dba783"/><ellipse cx="288" cy="205" rx="18" ry="28" fill="#dba783"/><rect x="168" y="290" width="64" height="72" rx="20" fill="#dba783"/><ellipse cx="200" cy="192" rx="88" ry="108" fill="#e9b994"/><path d="M108 186 C102 96 150 62 206 64 C266 66 302 100 294 186 C288 140 270 112 246 104 C214 94 170 98 148 112 C124 128 114 156 108 186 Z" fill="#2b2522"/><path d="M108 186 C106 168 108 150 114 138 L122 196 Z" fill="#8c8580"/><path d="M294 186 C296 168 294 150 288 138 L280 196 Z" fill="#8c8580"/><path d="M178 262 Q200 276 222 262" stroke="#7a3a2a" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="158" width="42" height="9" rx="4" fill="#2b2522"/><rect x="210" y="158" width="42" height="9" rx="4" fill="#2b2522"/><g id="bueno-ps-ojos" style="transform-origin:200px 188px"><circle cx="170" cy="188" r="8" fill="#1b1b1b"/><circle cx="230" cy="188" r="8" fill="#1b1b1b"/></g><path d="M200 192 L189 228 Q200 235 211 228 Z" fill="#e0a986"/></svg><div class="nombre" style="left:0;right:0;top:1700px"><span style="background:#fff;color:#e3262a">SÁNCHEZ · PSOE</span></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 16.98 }, 0);
+      tl.fromTo("#bueno-rays", { rotation: 0 }, { rotation: 67.9, duration: 16.98, ease: "none" }, 0);
+      document.querySelectorAll("#root .pj").forEach((el, i) => {
+        tl.fromTo(el, { y: 0 }, { y: -10, duration: 0.9, yoyo: true, repeat: Math.max(1, Math.floor(16.98 / 0.9) - 1), ease: "sine.inOut" }, i * 0.3);
+      });
+      document.querySelectorAll("#root [id$='-ojos']").forEach((el, i) => {
+        for (let s = 1.2 + i * 0.7; s < 16.98 - 0.3; s += 2.6) tl.fromTo(el, { scaleY: 1 }, { scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1 }, s);
+      });
+      tl.fromTo("#bueno-tit", { scale: 0.4, opacity: 0, rotation: -15 }, { scale: 1, opacity: 1, rotation: -3, duration: 0.35, ease: "back.out(2.2)" }, 0.05);
+      tl.fromTo("#bueno-f0", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 1.544);
+      tl.fromTo("#bueno-f1", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 6.756);
+      tl.fromTo("#bueno-f2", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 9.577);
+      tl.fromTo("#bueno-f3", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 14.476);
+      window.__timelines["bueno"] = tl;
+    })();
+  </script>
+</template>
