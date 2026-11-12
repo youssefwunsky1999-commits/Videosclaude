@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>¿Y si vuelve a ganar Sánchez?</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <script src="assets/lib/paper-shaders.js"></script>
+    <script src="assets/lib/hf-paper.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #0d0d12; }
+      #root { position: relative; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="83.35" data-width="1080" data-height="1920">
+      <div id="gancho" data-composition-id="gancho" data-composition-src="compositions/gancho.html"
+        data-start="0.000" data-duration="10.040" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="compra" data-composition-id="compra" data-composition-src="compositions/compra.html"
+        data-start="10.040" data-duration="12.900" data-track-index="2" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="alquiler" data-composition-id="alquiler" data-composition-src="compositions/alquiler.html"
+        data-start="22.940" data-duration="14.500" data-track-index="3" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="propietario" data-composition-id="propietario" data-composition-src="compositions/propietario.html"
+        data-start="37.440" data-duration="15.311" data-track-index="4" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="pension" data-composition-id="pension" data-composition-src="compositions/pension.html"
+        data-start="52.751" data-duration="7.540" data-track-index="5" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="decretos" data-composition-id="decretos" data-composition-src="compositions/decretos.html"
+        data-start="60.291" data-duration="10.830" data-track-index="6" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="final" data-composition-id="final" data-composition-src="compositions/final.html"
+        data-start="71.121" data-duration="12.229" data-track-index="7" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index: 1"></div>
+      <div id="subtitulos" data-composition-id="subtitulos" data-composition-src="compositions/subtitulos.html"
+        data-start="0" data-duration="83.35" data-track-index="10" data-track-kind="captions"
+        data-width="1080" data-height="1920" style="z-index: 20"></div>
+      <audio id="mezcla" class="clip" src="assets/mezcla.wav" data-start="0" data-duration="83.35" data-track-index="20" data-volume="1"></audio>
+    </div>
+    <script>
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

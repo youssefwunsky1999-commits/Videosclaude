@@ -1,0 +1,57 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; overflow: hidden; background: var(--a); font-family: Inter; }
+.rays { position: absolute; left: -50%; top: -30%; width: 200%; height: 160%;
+        background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.07) 0deg 7deg, transparent 7deg 18deg); }
+.vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%); }
+.pill { position: absolute; left: 0; right: 0; text-align: center; }
+.pill span { display: inline-block; font-weight: 900; font-size: 48px; padding: 14px 36px; border-radius: 60px; box-shadow: 0 10px 0 rgba(0,0,0,.25); }
+.am span { background: #ffd43b; color: #1a1d33; } .ro span { background: #ff3b47; color: #fff; } .bl span { background: #fff; color: #1a1d33; }
+.big { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; color: #ffd43b; text-shadow: 0 10px 0 rgba(0,0,0,.3); line-height: 1; }
+.big small { display: block; font-size: 40px; color: #fff; margin-top: 10px; text-shadow: none; }
+.card { position: absolute; left: 70px; right: 70px; background: #fbf7ee; border-radius: 24px; box-shadow: 0 14px 0 rgba(0,0,0,.25);
+        color: #1a1d33; padding: 22px 30px; display: flex; align-items: center; gap: 24px; font-weight: 800; font-size: 40px; line-height: 1.15; }
+.tag { flex: none; font-weight: 900; font-size: 34px; color: #fff; border-radius: 14px; padding: 8px 18px; }
+.nombre { position: absolute; text-align: center; }
+.nombre span { display: inline-block; font-weight: 900; font-size: 36px; padding: 8px 26px; border-radius: 40px; color: #fff; box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+.pj { position: absolute; }
+.sello { position: absolute; font-weight: 900; color: #e5323e; border: 10px solid #e5323e; border-radius: 16px; padding: 6px 26px; text-align: center;
+         background: rgba(251,247,238,.9); line-height: 1.05; }
+.titulo { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; line-height: 1; }
+</style>
+  <div id="root" data-composition-id="decretos" data-width="1080" data-height="1920" style="--a:#2a0508">
+    <div id="decretos-rays" class="rays" style="background-color:#6e0c14"></div>
+    <div class="vig"></div>
+
+    <div id="d-tit" class="pill am" style="top:420px"><span>EL PROBLEMA</span></div>
+    <div id="d-doc" class="card" style="top:560px;display:block;text-align:center;padding:40px 30px">
+      <div style="font-weight:900;font-size:60px">DECRETOS DE VIVIENDA</div>
+      <div style="display:flex;justify-content:center;gap:18px;margin-top:26px">
+        <span class="tag" style="background:#1d6fe0;font-size:38px">PP</span><span class="tag" style="background:#2fa84f;font-size:38px">VOX</span>
+        <span class="tag" style="background:#1fb6c9;font-size:38px">JUNTS</span></div></div>
+    <div id="d-sello" class="sello" style="left:250px;top:760px;font-size:80px">TUMBADOS</div>
+    <div id="d-otra" class="pill bl" style="top:960px"><span>EL GOBIERNO LOS VUELVE A APROBAR</span></div>
+    <div id="d-29" class="pill ro" style="top:1080px"><span>SU FUTURO: EL 29N</span></div>
+    <svg id="decretos-ps" class="pj" style="left:280px;top:1210px;width:520px" viewBox="0 0 400 480"><path d="M10 480 C25 385 110 352 200 348 C290 352 375 385 390 480 Z" fill="#1b2340"/><path d="M156 350 L200 418 L244 350 Z" fill="#fff"/><path d="M178 352 L200 386 L222 352" stroke="#d9dbe3" stroke-width="5" fill="none"/><ellipse cx="112" cy="205" rx="18" ry="28" fill="#dba783"/><ellipse cx="288" cy="205" rx="18" ry="28" fill="#dba783"/><rect x="168" y="290" width="64" height="72" rx="20" fill="#dba783"/><ellipse cx="200" cy="192" rx="88" ry="108" fill="#e9b994"/><path d="M108 186 C102 96 150 62 206 64 C266 66 302 100 294 186 C288 140 270 112 246 104 C214 94 170 98 148 112 C124 128 114 156 108 186 Z" fill="#2b2522"/><path d="M108 186 C106 168 108 150 114 138 L122 196 Z" fill="#8c8580"/><path d="M294 186 C296 168 294 150 288 138 L280 196 Z" fill="#8c8580"/><path d="M178 262 Q200 276 222 262" stroke="#7a3a2a" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="158" width="42" height="9" rx="4" fill="#2b2522"/><rect x="210" y="158" width="42" height="9" rx="4" fill="#2b2522"/><g id="decretos-ps-ojos" style="transform-origin:200px 188px"><circle cx="170" cy="188" r="8" fill="#1b1b1b"/><circle cx="230" cy="188" r="8" fill="#1b1b1b"/></g><path d="M200 192 L189 228 Q200 235 211 228 Z" fill="#e0a986"/></svg><div class="nombre" style="left:0;right:0;top:1700px"><span style="background:#fff;color:#e3262a">SÁNCHEZ · PSOE</span></div>
+
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 10.83 }, 0);
+      tl.fromTo("#decretos-rays", { rotation: 0 }, { rotation: 43.3, duration: 10.83, ease: "none" }, 0);
+      document.querySelectorAll("#root .pj").forEach((el, i) => {
+        tl.fromTo(el, { y: 0 }, { y: -10, duration: 0.9, yoyo: true, repeat: Math.max(1, Math.floor(10.83 / 0.9) - 1), ease: "sine.inOut" }, i * 0.3);
+      });
+      document.querySelectorAll("#root [id$='-ojos']").forEach((el, i) => {
+        for (let s = 1.2 + i * 0.7; s < 10.83 - 0.3; s += 2.6) tl.fromTo(el, { scaleY: 1 }, { scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1 }, s);
+      });
+      tl.fromTo("#d-tit", { scale: 0.5, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 0.05);
+      tl.fromTo("#d-doc", { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 1.2);
+      tl.fromTo("#d-sello", { scale: 2.6, opacity: 0, rotation: -16 }, { scale: 1, opacity: 1, rotation: -6, duration: 0.2, ease: "power4.in" }, 1.871);
+      tl.fromTo("#d-otra", { scale: 0.4, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 5.021);
+      tl.fromTo("#d-29", { scale: 0.4, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 9.103);
+      window.__timelines["decretos"] = tl;
+    })();
+  </script>
+</template>
