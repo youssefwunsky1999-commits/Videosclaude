@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "historyId": "ecf072c6-9070-4198-9749-c8948502fe91",
+  "currentRevision": null,
+  "pendingChanges": false,
+  "files": {
+    "assets/lib/gsap.min.js": {
+      "hash": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "content": "/root/.cache/hyperframes/history/ecf072c6-9070-4198-9749-c8948502fe91/blobs/92/92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "hyperframes.json": {
+      "hash": "35a6d4ea79ebe911f0d81705f7aace5d8ff0316b745b0311d56af50c9c237cb7",
+      "content": "/root/.cache/hyperframes/history/ecf072c6-9070-4198-9749-c8948502fe91/blobs/35/35a6d4ea79ebe911f0d81705f7aace5d8ff0316b745b0311d56af50c9c237cb7"
+    },
+    "index.html": {
+      "hash": "044401b0234ef0f3090ea30500c8d55cc3e92be83ea6bd8227c80cffffcbfa7b",
+      "content": "/root/.cache/hyperframes/history/ecf072c6-9070-4198-9749-c8948502fe91/blobs/04/044401b0234ef0f3090ea30500c8d55cc3e92be83ea6bd8227c80cffffcbfa7b"
+    },
+    "package.json": {
+      "hash": "f65ca0c01f9800bb38bd9b9040edd77f568fc916325bbcfdff2affd7d4e72558",
+      "content": "/root/.cache/hyperframes/history/ecf072c6-9070-4198-9749-c8948502fe91/blobs/f6/f65ca0c01f9800bb38bd9b9040edd77f568fc916325bbcfdff2affd7d4e72558"
+    }
+  },
+  "revisions": {},
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": {
+      "revision": null,
+      "id": "1b3c4add-ae26-416d-9887-be81d9538231-0"
+    },
+    "revisions": {},
+    "unversioned": [
+      {
+        "scope": "full",
+        "id": "1b3c4add-ae26-416d-9887-be81d9538231-0",
+        "image": "/home/user/Videosclaude/gta6_largo/hf_miniatura/.snap/frame-00-at-0.5s.png",
+        "time": 0.5,
+        "metadata": {
+          "width": 1280,
+          "height": 720,
+          "zoomScale": 1,
+          "browserGpuMode": "auto",
+          "warnings": [],
+          "partial": false
+        },
+        "createdAt": 1794456525466,
+        "contentHash": "edfb2fe9c9a9c870bbf93cb1f5da36a1fdbbb5f82e6b0f9527d44605dddaf8ed",
+        "revision": null,
+        "inputFingerprint": "e268c891f69c9e83a3e8089613120efc9a9fc0ce345b3a0b87c32bde99493bfc",
+        "inputScope": "local-project-files",
+        "attribution": "inputs-changed"
+      }
+    ]
+  }
+}

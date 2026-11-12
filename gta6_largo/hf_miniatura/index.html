@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es"><head><meta charset="UTF-8"/><meta name="viewport" content="width=1280, height=720"/>
+<title>Miniatura GTA VI</title><script src="assets/lib/gsap.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1280px; height: 720px; overflow: hidden; background: #12062a; }
+#root { position: relative; width: 1280px; height: 720px; overflow: hidden; font-family: Inter; color: #fff; }
+.cielo { position: absolute; inset: 0; background: linear-gradient(180deg, #12062a 0%, #5b1a7a 40%, #ff2e88 64%, #12062a 64.3%, #07020f 100%); }
+.sol { position: absolute; left: 560px; top: 70px; width: 420px; height: 420px; border-radius: 50%;
+  background: linear-gradient(180deg, #ffd166 0%, #ff8c42 45%, #ff2e88 100%);
+  -webkit-mask: linear-gradient(180deg, #000 0 52%, transparent 52%), repeating-linear-gradient(180deg, #000 0 22px, transparent 22px 31px);
+  box-shadow: 0 0 120px rgba(255,46,136,.7); }
+.rc { position: absolute; inset: 0; perspective: 260px; perspective-origin: 50% 462px; overflow: hidden; }
+.rej { position: absolute; left: -900px; right: -900px; top: 462px; height: 900px; transform-origin: 50% 0; transform: rotateX(74deg);
+  background-image: linear-gradient(#ff2e88cc 3px, transparent 3px), linear-gradient(90deg, #ff2e88cc 3px, transparent 3px); background-size: 80px 80px; }
+.palm { position: absolute; bottom: 0; height: 640px; width: 220px; }
+.palm.izq { left: -70px; } .palm.der { right: -70px; height: 560px; }
+.lg { position: absolute; left: 40px; top: 18px; font-family: "League Gothic"; font-size: 300px; line-height: .88; letter-spacing: 6px;
+  text-shadow: 0 0 24px #ff2e88, 0 0 60px #ff2e88, 0 10px 0 #7b2ff7; }
+.lg b { font-weight: 400; color: #ffd166; text-shadow: 0 0 24px #ff8c42, 0 0 60px #ff8c42, 0 10px 0 #7b2ff7; }
+.tx { position: absolute; left: 40px; top: 300px; font-family: "League Gothic"; font-size: 112px; line-height: .95; letter-spacing: 2px; }
+.tx span { display: inline-block; background: #ffd166; color: #12062a; padding: 2px 22px; border-radius: 12px; box-shadow: 0 10px 0 #ff2e88; }
+.tx span.b { background: #fff; margin-top: 18px; }
+.fecha { position: absolute; left: 40px; top: 568px; font-family: "League Gothic"; font-size: 104px; letter-spacing: 6px; color: #00e5ff;
+  text-shadow: 0 0 18px #00b3ff, 0 0 46px #00b3ff, 0 6px 0 #12062a; }
+.pj { position: absolute; left: 640px; top: 200px; width: 660px; height: 540px; filter: drop-shadow(0 14px 0 rgba(0,0,0,.35)); }
+.sello { position: absolute; right: 30px; top: 40px; font-family: "League Gothic"; font-size: 64px; letter-spacing: 3px; color: #fff; background: #ff3b4d;
+  padding: 4px 22px; border-radius: 12px; transform: rotate(6deg); box-shadow: 0 0 30px rgba(255,59,77,.8), 0 8px 0 #7a0a1a; }
+</style></head>
+<body><div id="root" data-composition-id="main" data-start="0" data-duration="1" data-width="1280" data-height="720">
+  <div class="cielo"></div><div class="sol"></div><div class="rc"><div class="rej"></div></div>
+  <svg viewBox="0 0 300 900" class="palm izq" preserveAspectRatio="xMidYMax meet"><g fill="#0b0414">
+<path d="M150 900 C 140 700, 170 520, 150 300 L 162 300 C 184 520, 156 700, 168 900 Z"/>
+<path d="M156 300 C 90 240, 30 260, 0 320 C 50 270, 100 270, 156 312 Z"/>
+<path d="M156 300 C 230 230, 280 250, 300 310 C 250 265, 210 268, 156 314 Z"/>
+<path d="M156 298 C 110 200, 60 170, 20 180 C 80 200, 120 240, 150 310 Z"/>
+<path d="M156 298 C 200 190, 250 170, 290 190 C 230 205, 190 245, 162 312 Z"/>
+<path d="M156 300 C 150 220, 160 160, 190 120 C 175 180, 168 240, 162 306 Z"/>
+<path d="M156 300 C 120 300, 80 340, 60 400 C 100 350, 130 330, 156 316 Z"/>
+<path d="M156 300 C 200 305, 240 345, 255 405 C 220 355, 190 335, 158 318 Z"/>
+</g></svg>
+  <svg viewBox="0 0 300 900" class="palm der" preserveAspectRatio="xMidYMax meet"><g fill="#0b0414">
+<path d="M150 900 C 140 700, 170 520, 150 300 L 162 300 C 184 520, 156 700, 168 900 Z"/>
+<path d="M156 300 C 90 240, 30 260, 0 320 C 50 270, 100 270, 156 312 Z"/>
+<path d="M156 300 C 230 230, 280 250, 300 310 C 250 265, 210 268, 156 314 Z"/>
+<path d="M156 298 C 110 200, 60 170, 20 180 C 80 200, 120 240, 150 310 Z"/>
+<path d="M156 298 C 200 190, 250 170, 290 190 C 230 205, 190 245, 162 312 Z"/>
+<path d="M156 300 C 150 220, 160 160, 190 120 C 175 180, 168 240, 162 306 Z"/>
+<path d="M156 300 C 120 300, 80 340, 60 400 C 100 350, 130 330, 156 316 Z"/>
+<path d="M156 300 C 200 305, 240 345, 255 405 C 220 355, 190 335, 158 318 Z"/>
+</g></svg>
+  <div class="pj"><svg viewBox="0 0 640 520" style="width:100%;height:100%;overflow:visible">
+  <g id="lu" class="pj" transform="translate(-10 40) scale(1.05)">
+  <path d="M60 470 C70 380 130 350 200 346 C270 350 330 380 340 470 Z" fill="#ff2e88"/>
+  <path d="M150 352 C170 380 230 380 250 352 L262 470 L138 470 Z" fill="#c21d68"/>
+  <rect x="172" y="290" width="56" height="70" rx="18" fill="#c98a5e"/>
+  <path d="M104 190 C96 100 150 58 204 58 C262 58 306 102 296 196 C300 260 306 300 330 330 C290 336 270 300 266 270 Z" fill="#2a160e"/>
+  <ellipse cx="200" cy="186" rx="80" ry="100" fill="#d79b6c"/>
+  <path d="M118 170 C120 110 160 82 206 82 C250 84 282 112 284 168 C262 132 226 116 190 120 C160 124 136 140 118 170 Z" fill="#2a160e"/>
+  <circle cx="122" cy="214" r="13" fill="none" stroke="#ffd166" stroke-width="5"/><circle cx="278" cy="214" r="13" fill="none" stroke="#ffd166" stroke-width="5"/>
+  <rect x="150" y="158" width="38" height="7" rx="3" fill="#2a160e" transform="rotate(-6 169 161)"/><rect x="212" y="158" width="38" height="7" rx="3" fill="#2a160e" transform="rotate(6 231 161)"/>
+  <g id="lu-ojos" style="transform-origin:200.0px 186px"><circle cx="170" cy="186" r="8" fill="#1b1b1b"/><circle cx="230" cy="186" r="8" fill="#1b1b1b"/></g>
+  <path d="M200 194 L191 224 Q200 230 209 224 Z" fill="#c4865a"/>
+  <path d="M180 248 Q200 260 220 248" stroke="#8a2a3a" stroke-width="6" fill="none" stroke-linecap="round"/>
+</g>
+  <g id="ja" class="pj" transform="translate(250 30) scale(1.08)">
+  <path d="M40 470 C55 380 120 350 200 346 C280 350 345 380 360 470 Z" fill="#2b6cb0"/>
+  <path d="M160 350 L200 470 L240 350 Z" fill="#e8e3d6"/>
+  <path d="M160 350 L140 470 L118 470 L140 360 Z M240 350 L260 470 L282 470 L260 360 Z" fill="#1f4f86"/>
+  <rect x="166" y="286" width="68" height="74" rx="20" fill="#d9a77f"/>
+  <ellipse cx="112" cy="196" rx="17" ry="26" fill="#d9a77f"/><ellipse cx="288" cy="196" rx="17" ry="26" fill="#d9a77f"/>
+  <ellipse cx="200" cy="186" rx="88" ry="106" fill="#e6b48c"/>
+  <path d="M110 170 C104 90 152 62 206 64 C262 66 300 98 292 172 C282 128 258 108 230 104 C200 98 160 104 140 118 C122 132 114 150 110 170 Z" fill="#5a3a22"/>
+  <path d="M114 200 C118 276 160 304 200 306 C240 304 282 276 286 200 C276 236 262 256 240 262 C222 250 178 250 160 262 C138 256 124 236 114 200 Z" fill="#7a5236" opacity=".55"/>
+  <rect x="146" y="152" width="44" height="9" rx="4" fill="#5a3a22"/><rect x="210" y="152" width="44" height="9" rx="4" fill="#5a3a22"/>
+  <g id="ja-ojos" style="transform-origin:200.0px 184px"><circle cx="170" cy="184" r="8" fill="#1b1b1b"/><circle cx="230" cy="184" r="8" fill="#1b1b1b"/></g>
+  <path d="M200 190 L189 226 Q200 233 211 226 Z" fill="#cf9a72"/>
+  <path d="M182 258 Q200 266 218 258" stroke="#6a2f22" stroke-width="6" fill="none" stroke-linecap="round"/>
+</g>
+</svg></div>
+  <div class="lg">GTA <b>VI</b></div>
+  <div class="tx"><span>TODO LO QUE</span><br><span class="b">SABEMOS</span></div>
+  <div class="fecha">19 · 11 · 2026</div>
+  <div class="sello">¿VERDAD O RUMOR?</div>
+</div>
+<script>window.__timelines["main"] = gsap.timeline({ paused: true }); window.__timelines["main"].to({}, { duration: 1 });</script>
+</body></html>
