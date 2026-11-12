@@ -1,0 +1,58 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; overflow: hidden; background: var(--a); font-family: Inter; }
+.rays { position: absolute; left: -50%; top: -30%; width: 200%; height: 160%;
+        background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.07) 0deg 7deg, transparent 7deg 18deg); }
+.vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%); }
+.pill { position: absolute; left: 0; right: 0; text-align: center; }
+.pill span { display: inline-block; font-weight: 900; font-size: 46px; letter-spacing: .5px; padding: 14px 34px; border-radius: 60px;
+             box-shadow: 0 10px 0 rgba(0,0,0,.25); }
+.am span { background: #ffd43b; color: #1a1d33; } .ro span { background: #ff3b47; color: #fff; }
+.bl span { background: #fff; color: #1a1d33; } .az span { background: #2f6bff; color: #fff; } .ve span { background: #3ccf6e; color: #fff; }
+.nombre { position: absolute; text-align: center; }
+.nombre span { display: inline-block; font-weight: 900; font-size: 38px; padding: 10px 28px; border-radius: 40px; background: #fff; color: #1a1d33;
+               box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+.pj { position: absolute; }
+.card { position: absolute; background: #fbf7ee; border-radius: 26px; box-shadow: 0 16px 0 rgba(0,0,0,.25); color: #1a1d33; }
+.sello { position: absolute; font-weight: 900; color: #e5323e; border: 10px solid #e5323e; border-radius: 16px; padding: 6px 26px; text-align: center;
+         background: rgba(251,247,238,.85); line-height: 1.05; }
+.silla, .micro, .ico { position: absolute; }
+.big { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; color: #ffd43b; text-shadow: 0 10px 0 rgba(0,0,0,.3); }
+</style>
+  <div id="root" data-composition-id="m2" data-width="1080" data-height="1920" style="--a:#0b1430">
+    <div id="m2-rays" class="rays" style="background-color:#163a6b"></div>
+    <div class="vig"></div>
+
+    <div id="t-tv" class="card" style="left:140px;top:440px;width:800px;height:470px;background:#1a1d33;border:14px solid #2c3152;padding:0">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column">
+        <div style="font-weight:900;font-size:40px;color:#9aa3d6;letter-spacing:3px">GRABACIÓN ÍNTEGRA</div>
+        <div id="t-num" style="font-weight:900;font-size:190px;color:#fff;line-height:1">0</div>
+        <div style="font-weight:900;font-size:56px;color:#ffd43b">MINUTOS SIN EMITIR</div></div>
+    </div>
+    <div id="t-tij" style="position:absolute;left:820px;top:380px;width:200px"><svg viewBox="0 0 160 120" class="ico" style="width:200px"><circle cx="30" cy="30" r="22" stroke="#ff4d5a" stroke-width="10" fill="none"/><circle cx="30" cy="90" r="22" stroke="#ff4d5a" stroke-width="10" fill="none"/><path d="M48 42 L150 96 M48 78 L150 24" stroke="#e8ebf5" stroke-width="10" stroke-linecap="round"/></svg></div>
+    <div id="t-tve" class="pill bl" style="top:960px"><span>TVE + EL TERRAT</span></div>
+    <div id="t-can" style="position:absolute;left:470px;top:1060px;width:140px"><svg viewBox="0 0 120 140" class="ico" style="width:140px"><path d="M30 60 V40 a30 30 0 0 1 60 0 V60" stroke="#ffd43b" stroke-width="14" fill="none"/><rect x="14" y="58" width="92" height="76" rx="14" fill="#ffd43b"/><circle cx="60" cy="92" r="10" fill="#1a1d33"/></svg></div>
+    <div id="t-sec" class="pill ro" style="top:1230px"><span>«ESTÁ SECUESTRANDO 40 MINUTOS»</span></div>
+
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 12.751 }, 0);
+      tl.fromTo("#m2-rays", { rotation: 0 }, { rotation: 51.0, duration: 12.751, ease: "none" }, 0);
+      document.querySelectorAll("#root .pj").forEach((el, i) => {
+        tl.fromTo(el, { y: 0 }, { y: -10, duration: 0.9, yoyo: true, repeat: Math.max(1, Math.floor(12.751 / 0.9) - 1), ease: "sine.inOut" }, i * 0.3);
+      });
+      document.querySelectorAll("#root [id$='-ojos']").forEach((el, i) => {
+        for (let s = 1.2 + i * 0.7; s < 12.751 - 0.3; s += 2.6) tl.fromTo(el, { scaleY: 1 }, { scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1 }, s);
+      });
+      tl.fromTo("#t-tv", { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 0.05);
+      tl.fromTo("#t-tve", { scale: 0.4, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 1.427);
+      tl.fromTo("#t-tij", { x: 200, opacity: 0, rotation: 40 }, { x: 0, opacity: 1, rotation: 0, duration: 0.4, ease: "back.out(2)" }, 3.875);
+      (() => { const o = { v: 0 }, el = document.getElementById("t-num"); tl.fromTo(o, { v: 0 }, { v: 40, duration: 0.9, ease: "power2.out", onUpdate: () => { el.textContent = Math.round(o.v); } }, 4.581); })();
+      tl.fromTo("#t-can", { scale: 0.2, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 9.225);
+      tl.fromTo("#t-sec", { scale: 0.3, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 9.455);
+      window.__timelines["m2"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,53 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; overflow: hidden; background: var(--a); font-family: Inter; }
+.rays { position: absolute; left: -50%; top: -30%; width: 200%; height: 160%;
+        background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.07) 0deg 7deg, transparent 7deg 18deg); }
+.vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%); }
+.pill { position: absolute; left: 0; right: 0; text-align: center; }
+.pill span { display: inline-block; font-weight: 900; font-size: 46px; letter-spacing: .5px; padding: 14px 34px; border-radius: 60px;
+             box-shadow: 0 10px 0 rgba(0,0,0,.25); }
+.am span { background: #ffd43b; color: #1a1d33; } .ro span { background: #ff3b47; color: #fff; }
+.bl span { background: #fff; color: #1a1d33; } .az span { background: #2f6bff; color: #fff; } .ve span { background: #3ccf6e; color: #fff; }
+.nombre { position: absolute; text-align: center; }
+.nombre span { display: inline-block; font-weight: 900; font-size: 38px; padding: 10px 28px; border-radius: 40px; background: #fff; color: #1a1d33;
+               box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+.pj { position: absolute; }
+.card { position: absolute; background: #fbf7ee; border-radius: 26px; box-shadow: 0 16px 0 rgba(0,0,0,.25); color: #1a1d33; }
+.sello { position: absolute; font-weight: 900; color: #e5323e; border: 10px solid #e5323e; border-radius: 16px; padding: 6px 26px; text-align: center;
+         background: rgba(251,247,238,.85); line-height: 1.05; }
+.silla, .micro, .ico { position: absolute; }
+.big { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; color: #ffd43b; text-shadow: 0 10px 0 rgba(0,0,0,.3); }
+</style>
+  <div id="root" data-composition-id="gancho" data-width="1080" data-height="1920" style="--a:#141a3d">
+    <div id="gancho-rays" class="rays" style="background-color:#2a3480"></div>
+    <div class="vig"></div>
+
+    <div id="g-pl" class="pill am" style="top:440px"><span>THE WILD PROJECT · HOY</span></div>
+    <div id="g-silla" style="position:absolute;left:70px;top:820px;width:400px;height:480px"><svg viewBox="0 0 300 360" class="silla" style="left:40px;top:60px;width:320px"><rect x="40" y="20" width="220" height="190" rx="40" fill="#3a3f55"/><rect x="20" y="190" width="260" height="60" rx="26" fill="#4a5070"/><rect x="138" y="250" width="24" height="70" fill="#2b2f42"/><rect x="70" y="315" width="160" height="18" rx="9" fill="#2b2f42"/></svg></div>
+    <div id="g-n1" class="nombre" style="left:90px;top:1330px;width:360px"><span>ABASCAL</span></div>
+    <div id="g-x" class="sello" style="left:120px;top:960px;font-size:90px;border-width:12px">PLANTADO</div>
+    <div style="position:absolute;left:470px;top:1000px;width:110px"><svg viewBox="0 0 120 260" class="micro" style="width:110px"><rect x="35" y="0" width="50" height="110" rx="25" fill="#c7cad6"/><g stroke="#8d91a3" stroke-width="4"><line x1="40" y1="30" x2="80" y2="30"/><line x1="40" y1="50" x2="80" y2="50"/><line x1="40" y1="70" x2="80" y2="70"/></g><rect x="54" y="110" width="12" height="130" fill="#5b6075"/><rect x="20" y="236" width="80" height="16" rx="8" fill="#5b6075"/></svg></div>
+    <svg id="g-jw" class="pj" style="left:560px;top:820px;width:460px" viewBox="0 0 400 480"><path d="M10 480 C25 385 110 352 200 348 C290 352 375 385 390 480 Z" fill="#161616"/><ellipse cx="112" cy="205" rx="18" ry="28" fill="#dba783"/><ellipse cx="288" cy="205" rx="18" ry="28" fill="#dba783"/><rect x="168" y="290" width="64" height="72" rx="20" fill="#dba783"/><ellipse cx="200" cy="192" rx="88" ry="108" fill="#e9b893"/><ellipse cx="200" cy="120" rx="80" ry="40" fill="#c99876" opacity=".35"/><path d="M112 200 C110 300 150 372 200 378 C250 372 290 300 288 200 C278 246 262 268 238 272 C222 258 178 258 162 272 C138 268 122 246 112 200 Z" fill="#3d2a1e"/><path d="M164 250 C182 236 218 236 236 250 C220 258 180 258 164 250 Z" fill="#2f2017"/><path d="M186 266 Q200 272 214 266" stroke="#e9b893" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="158" width="42" height="9" rx="4" fill="#3d2a1e"/><rect x="210" y="158" width="42" height="9" rx="4" fill="#3d2a1e"/><g id="g-jw-ojos" style="transform-origin:200px 188px"><circle cx="170" cy="188" r="8" fill="#1b1b1b"/><circle cx="230" cy="188" r="8" fill="#1b1b1b"/></g><path d="M200 192 L189 228 Q200 235 211 228 Z" fill="#e0a986"/></svg>
+    <div id="g-n2" class="nombre" style="left:580px;top:1330px;width:420px"><span>JORDI WILD</span></div>
+    <div id="g-cul" class="pill ro" style="top:620px"><span>¿LA CULPA? LA REVUELTA</span></div>
+
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 5.68 }, 0);
+      tl.fromTo("#gancho-rays", { rotation: 0 }, { rotation: 22.7, duration: 5.68, ease: "none" }, 0);
+      document.querySelectorAll("#root .pj").forEach((el, i) => {
+        tl.fromTo(el, { y: 0 }, { y: -10, duration: 0.9, yoyo: true, repeat: Math.max(1, Math.floor(5.68 / 0.9) - 1), ease: "sine.inOut" }, i * 0.3);
+      });
+      document.querySelectorAll("#root [id$='-ojos']").forEach((el, i) => {
+        for (let s = 1.2 + i * 0.7; s < 5.68 - 0.3; s += 2.6) tl.fromTo(el, { scaleY: 1 }, { scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1 }, s);
+      });
+      tl.fromTo("#g-pl", { scale: 0.8, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 0.0);
+      tl.fromTo("#g-x", { scale: 2.6, opacity: 0, rotation: -18 }, { scale: 1, opacity: 1, rotation: -8, duration: 0.2, ease: "power4.in" }, 1.219);
+      tl.fromTo("#g-cul", { scale: 0.3, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.3, ease: "back.out(2.2)" }, 3.908);
+      window.__timelines["gancho"] = tl;
+    })();
+  </script>
+</template>

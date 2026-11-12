@@ -1,0 +1,56 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; overflow: hidden; background: var(--a); font-family: Inter; }
+.rays { position: absolute; left: -50%; top: -30%; width: 200%; height: 160%;
+        background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.07) 0deg 7deg, transparent 7deg 18deg); }
+.vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%); }
+.pill { position: absolute; left: 0; right: 0; text-align: center; }
+.pill span { display: inline-block; font-weight: 900; font-size: 46px; letter-spacing: .5px; padding: 14px 34px; border-radius: 60px;
+             box-shadow: 0 10px 0 rgba(0,0,0,.25); }
+.am span { background: #ffd43b; color: #1a1d33; } .ro span { background: #ff3b47; color: #fff; }
+.bl span { background: #fff; color: #1a1d33; } .az span { background: #2f6bff; color: #fff; } .ve span { background: #3ccf6e; color: #fff; }
+.nombre { position: absolute; text-align: center; }
+.nombre span { display: inline-block; font-weight: 900; font-size: 38px; padding: 10px 28px; border-radius: 40px; background: #fff; color: #1a1d33;
+               box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+.pj { position: absolute; }
+.card { position: absolute; background: #fbf7ee; border-radius: 26px; box-shadow: 0 16px 0 rgba(0,0,0,.25); color: #1a1d33; }
+.sello { position: absolute; font-weight: 900; color: #e5323e; border: 10px solid #e5323e; border-radius: 16px; padding: 6px 26px; text-align: center;
+         background: rgba(251,247,238,.85); line-height: 1.05; }
+.silla, .micro, .ico { position: absolute; }
+.big { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; color: #ffd43b; text-shadow: 0 10px 0 rgba(0,0,0,.3); }
+</style>
+  <div id="root" data-composition-id="final" data-width="1080" data-height="1920" style="--a:#2a0f4a">
+    <div id="final-rays" class="rays" style="background-color:#5b2a9a"></div>
+    <div class="vig"></div>
+
+    <div id="f-q" class="card" style="left:110px;top:450px;width:860px;padding:34px 40px;text-align:center;font-weight:900;font-size:66px;line-height:1.1">¿QUEJA JUSTA<br>O MIEDO?</div>
+    <div id="f-si" class="pill" style="top:720px;left:-420px"><span style="background:#3ccf6e;color:#fff">QUEJA JUSTA</span></div>
+    <div id="f-no" class="pill" style="top:720px;left:520px"><span style="background:#ff3b47;color:#fff">MIEDO</span></div>
+    <svg id="f-ab" class="pj" style="left:20px;top:880px;width:460px" viewBox="0 0 400 480"><path d="M10 480 C25 385 110 352 200 348 C290 352 375 385 390 480 Z" fill="#1f2a44"/><path d="M150 352 L200 425 L250 352 L238 346 L200 398 L162 346 Z" fill="#4f7396"/><ellipse cx="112" cy="205" rx="18" ry="28" fill="#e3b08c"/><ellipse cx="288" cy="205" rx="18" ry="28" fill="#e3b08c"/><rect x="168" y="290" width="64" height="72" rx="20" fill="#e3b08c"/><ellipse cx="200" cy="192" rx="88" ry="108" fill="#f0c4a0"/><path d="M112 178 C106 100 150 70 205 72 C262 72 298 106 290 178 C284 140 268 118 244 110 C214 100 168 102 148 118 C126 134 117 152 112 178 Z" fill="#8e9196"/><path d="M114 205 C117 282 160 316 200 318 C240 316 283 282 286 205 C276 242 262 264 240 270 C224 256 176 256 160 270 C138 264 124 242 114 205 Z" fill="#a7a8ac"/><path d="M166 250 C182 237 218 237 234 250 C220 257 180 257 166 250 Z" fill="#8a8b8f"/><path d="M184 264 Q200 271 216 264" stroke="#7a3a2a" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="158" width="42" height="9" rx="4" fill="#5f6166"/><rect x="210" y="158" width="42" height="9" rx="4" fill="#5f6166"/><g id="f-ab-ojos" style="transform-origin:200px 188px"><circle cx="170" cy="188" r="8" fill="#1b1b1b"/><circle cx="230" cy="188" r="8" fill="#1b1b1b"/></g><path d="M200 192 L189 228 Q200 235 211 228 Z" fill="#e0a986"/></svg>
+    <svg id="f-br" class="pj" style="left:600px;top:880px;width:460px" viewBox="0 0 400 480"><path d="M10 480 C25 385 110 352 200 348 C290 352 375 385 390 480 Z" fill="#1c2340"/><path d="M160 350 L200 410 L240 350 Z" fill="#0f0f14"/><ellipse cx="112" cy="205" rx="18" ry="28" fill="#e0ad88"/><ellipse cx="288" cy="205" rx="18" ry="28" fill="#e0ad88"/><rect x="168" y="290" width="64" height="72" rx="20" fill="#e0ad88"/><ellipse cx="200" cy="192" rx="88" ry="108" fill="#efc19c"/><path d="M110 182 C104 96 152 66 206 68 C264 70 300 104 292 182 C286 138 262 114 236 108 C206 100 168 104 148 116 C126 132 116 154 110 182 Z" fill="#2e211a"/><path d="M116 210 C120 274 160 304 200 306 C240 304 280 274 284 210 C276 240 262 258 242 262 C226 252 174 252 158 262 C138 258 124 240 116 210 Z" fill="#3a2a20" opacity=".9"/><path d="M184 262 Q200 270 216 262" stroke="#7a3a2a" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="158" width="42" height="9" rx="4" fill="#2e211a"/><rect x="210" y="158" width="42" height="9" rx="4" fill="#2e211a"/><g id="f-br-ojos" style="transform-origin:200px 188px"><circle cx="170" cy="188" r="8" fill="#1b1b1b"/><circle cx="230" cy="188" r="8" fill="#1b1b1b"/></g><path d="M200 192 L189 228 Q200 235 211 228 Z" fill="#e0a986"/></svg>
+    <div class="nombre" style="left:60px;top:1350px;width:380px"><span>ABASCAL</span></div>
+    <div class="nombre" style="left:640px;top:1350px;width:380px"><span>BRONCANO</span></div>
+    <div id="f-com" class="pill bl" style="top:1450px"><span>TE LEO EN COMENTARIOS</span></div>
+    <div id="f-sig" class="pill ro" style="top:1560px"><span>SÍGUEME · ESTO NO HA ACABADO</span></div>
+
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 17.239 }, 0);
+      tl.fromTo("#final-rays", { rotation: 0 }, { rotation: 69.0, duration: 17.239, ease: "none" }, 0);
+      document.querySelectorAll("#root .pj").forEach((el, i) => {
+        tl.fromTo(el, { y: 0 }, { y: -10, duration: 0.9, yoyo: true, repeat: Math.max(1, Math.floor(17.239 / 0.9) - 1), ease: "sine.inOut" }, i * 0.3);
+      });
+      document.querySelectorAll("#root [id$='-ojos']").forEach((el, i) => {
+        for (let s = 1.2 + i * 0.7; s < 17.239 - 0.3; s += 2.6) tl.fromTo(el, { scaleY: 1 }, { scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1 }, s);
+      });
+      tl.fromTo("#f-q", { scale: 0.5, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 0.1);
+      tl.fromTo("#f-si", { scale: 0.3, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 0.487);
+      tl.fromTo("#f-no", { scale: 0.3, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 1.882);
+      tl.fromTo("#f-com", { scale: 0.4, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 4.554);
+      tl.fromTo("#f-sig", { scale: 0.4, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 5.624);
+      window.__timelines["final"] = tl;
+    })();
+  </script>
+</template>
