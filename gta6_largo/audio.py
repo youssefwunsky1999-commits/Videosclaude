@@ -1,0 +1,302 @@
+"""Paso 2: coloca la voz de cada escena en la línea de tiempo, sintetiza la música synthwave y los efectos con NumPy
+(mismos instrumentos que gta6/audio.py) y lo mezcla todo.
+
+    python3 audio.py      -> build/mezcla.wav + build/tiempos.json (lo que lee construir.py)"""
+import json
+import os
+import subprocess
+
+import numpy as np
+
+AQUI = os.path.dirname(os.path.abspath(__file__))
+BUILD = os.path.join(AQUI, "build")
+SR = 44100
+INICIO = 0.25      # la voz arranca casi en el fotograma 0: el gancho no espera
+HUECO = 0.45       # respiro entre escenas del mismo capítulo
+HUECO_CAP = 1.3    # entre capítulos: golpe + whoosh
+COLA = 3.0         # el cierre se queda en pantalla tras la última palabra
+BPM = 104
+
+
+def leer(ruta):
+    raw = subprocess.check_output(["ffmpeg", "-v", "error", "-i", ruta, "-f", "s16le", "-ac", "1", "-ar", str(SR), "-"])
+    return np.frombuffer(raw, np.int16).astype(np.float32) / 32768
+
+
+def colocar(buf, x, t0, g=1.0):
+    i = int(t0 * SR)
+    if i >= len(buf):
+        return
+    x = x[: len(buf) - i]
+    buf[i:i + len(x)] += x * g
+
+
+def nf(m):
+    return 440 * 2 ** ((m - 69) / 12)
+
+
+def env(m, a=0.005, r=0.3):
+    u = np.arange(m) / SR
+    return np.minimum(1, u / a) * np.exp(-u / r)
+
+
+def ruido(m, seed, lp=None):
+    r = np.random.default_rng(seed).standard_normal(m).astype(np.float32)
+    if lp:
+        k = int(lp)
+        r = np.convolve(r, np.ones(k) / k, mode="same")
+    return r
+
+
+def bombo():
+    m = int(0.35 * SR)
+    u = np.arange(m) / SR
+    f = 50 + 90 * np.exp(-u * 30)
+    return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-u * 9)).astype(np.float32)
+
+
+def hat(seed):
+    m = int(0.06 * SR)
+    r = ruido(m, seed)
+    r = r - np.convolve(r, np.ones(6) / 6, mode="same")
+    return (r * env(m, 0.001, 0.015)).astype(np.float32)
+
+
+def palmada(seed):
+    m = int(0.2 * SR)
+    return (ruido(m, seed, 3) * env(m, 0.002, 0.05)).astype(np.float32)
+
+
+def pluck(f, dur=0.5):
+    m = int(dur * SR)
+    u = np.arange(m) / SR
+    s = sum(np.sin(2 * np.pi * f * h * u) / h ** 1.6 for h in range(1, 6))
+    return (s * env(m, 0.003, 0.18)).astype(np.float32)
+
+
+def pad(fs, dur):
+    m = int(dur * SR)
+    u = np.arange(m) / SR
+    s = np.zeros(m, np.float32)
+    for f in fs:
+        for d in (-0.15, 0.15):
+            ff = f * 2 ** (d / 12)
+            s += np.sin(2 * np.pi * ff * u + np.sin(2 * np.pi * 0.3 * u)) * 0.5
+    fade = np.minimum(1, np.minimum(u / 0.25, (dur - u) / 0.4))
+    return (s * np.clip(fade, 0, 1) / len(fs)).astype(np.float32)
+
+
+def whoosh(seed, dur=0.55):
+    m = int(dur * SR)
+    u = np.arange(m) / SR
+    r = ruido(m, seed)
+    out = np.zeros(m, np.float32)
+    # barrido de filtro: media móvil cada vez más corta (de grave a agudo) y vuelta
+    for k, w in enumerate((40, 24, 14, 8, 5, 8, 14)):
+        a, b = int(k * m / 7), int((k + 1) * m / 7)
+        out[a:b] = np.convolve(r, np.ones(w) / w, mode="same")[a:b]
+    return (out * np.sin(np.pi * u / dur) ** 2 * 1.6).astype(np.float32)
+
+
+def pop(f=880):
+    m = int(0.12 * SR)
+    u = np.arange(m) / SR
+    return (np.sin(2 * np.pi * (f + 900 * np.exp(-u * 40)) * u) * env(m, 0.001, 0.04)).astype(np.float32)
+
+
+def teclas(n, seed):
+    out = np.zeros(int(n * 0.075 * SR + SR * 0.1), np.float32)
+    rng = np.random.default_rng(seed)
+    for k in range(n):
+        m = int(0.03 * SR)
+        colocar(out, (ruido(m, seed + k, 2) * env(m, 0.001, 0.008)).astype(np.float32), k * 0.075 + rng.uniform(0, 0.02), 0.5)
+    return out
+
+
+def brillo():
+    m = int(1.2 * SR)
+    out = np.zeros(m, np.float32)
+    for k, n in enumerate((84, 88, 91, 96)):
+        colocar(out, pluck(nf(n), 0.8) * 0.5, k * 0.07)
+    return out
+
+
+def b808(f, dur, glide=None):
+    m = int(dur * SR)
+    u = np.arange(m) / SR
+    ff = f if glide is None else f + (glide - f) * np.clip((u - dur * 0.5) / (dur * 0.4), 0, 1)
+    s = np.sin(2 * np.pi * np.cumsum(ff) / SR + 2 * np.exp(-u * 40))
+    s = np.tanh(s * 1.8) * np.minimum(1, u / 0.004) * np.exp(-u * 1.6)
+    return s.astype(np.float32)
+
+
+def snare(seed):
+    m = int(0.25 * SR)
+    u = np.arange(m) / SR
+    r = ruido(m, seed + 99)
+    r = r - np.convolve(r, np.ones(4) / 4, mode="same")
+    tono = np.sin(2 * np.pi * 190 * u) * np.exp(-u * 30)
+    return ((r * np.exp(-u * 18) * 0.8 + tono * 0.6)).astype(np.float32)
+
+
+def campana(f):
+    m = int(0.9 * SR)
+    u = np.arange(m) / SR
+    s = np.sin(2 * np.pi * f * u + 1.5 * np.sin(2 * np.pi * f * 1.41 * u) * np.exp(-u * 4))
+    return (s * np.exp(-u * 5) * np.minimum(1, u / 0.002)).astype(np.float32)
+
+
+def sierra(f, dur=0.16):
+    m = int(dur * SR)
+    u = np.arange(m) / SR
+    s = sum(np.sin(2 * np.pi * f * h * u) / h for h in range(1, 9)) + sum(np.sin(2 * np.pi * f * 1.006 * h * u) / h for h in range(1, 9))
+    return (s * 0.5 * np.minimum(1, u / 0.003) * np.exp(-u * 14)).astype(np.float32)
+
+
+def tic(f):
+    m = int(0.05 * SR)
+    u = np.arange(m) / SR
+    return (np.sin(2 * np.pi * f * u) * np.exp(-u * 160)).astype(np.float32)
+
+
+def subida(dur):
+    m = int(dur * SR)
+    u = np.arange(m) / SR
+    r = ruido(m, 5)
+    out = np.zeros(m, np.float32)
+    for k, w in enumerate((60, 40, 26, 16, 10, 6, 4, 3)):
+        a, b = int(k * m / 8), int((k + 1) * m / 8)
+        out[a:b] = np.convolve(r, np.ones(w) / w, mode="same")[a:b]
+    f = 200 * 2 ** (u / dur * 3)
+    tono = np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.3
+    return ((out * 1.5 + tono) * (u / dur) ** 2).astype(np.float32)
+
+
+def braam(dur=1.6):
+    m = int(dur * SR)
+    u = np.arange(m) / SR
+    s = np.zeros(m, np.float32)
+    for f, g in ((36.7, 1), (73.4, .6), (55, .5), (110, .3), (146.8, .2)):
+        ph = 2 * np.pi * f * u
+        s += g * (2 * ((ph / (2 * np.pi)) % 1) - 1)   # diente de sierra
+    s = np.convolve(s, np.ones(12) / 12, mode="same")
+    return (np.tanh(s * 1.2) * np.minimum(1, u / 0.01) * np.exp(-u * 2.2)).astype(np.float32)
+
+
+def golpe_seco():
+    m = int(0.3 * SR)
+    u = np.arange(m) / SR
+    s = np.sin(2 * np.pi * (60 + 120 * np.exp(-u * 50)) * u) * np.exp(-u * 14)
+    return (s + ruido(m, 3, 6) * np.exp(-u * 40) * 0.4).astype(np.float32)
+
+
+def main():
+    from guion import SEGMENTOS
+    datos = json.load(open(os.path.join(BUILD, "palabras.json")))
+    voces = [leer(os.path.join(BUILD, f"voz_{i}.wav")) for i in range(len(datos))]
+    t = INICIO
+    escenas = []
+    for k, (d, v, seg) in enumerate(zip(datos, voces, SEGMENTOS)):
+        if k and seg["cap"] != SEGMENTOS[k - 1]["cap"]:
+            t += HUECO_CAP - HUECO
+        dur = len(v) / SR
+        escenas.append({"escena": d["escena"], "cap": seg["cap"], "t0": round(t, 3), "dur_voz": round(dur, 3), "texto": d["texto"],
+                        "palabras": [{"t": round(max(0.0, w["t"]) + t, 3), "d": round(w["d"], 3), "w": w["w"]} for w in d["palabras"]]})
+        t += dur + HUECO
+    total = round(t - HUECO + COLA, 2)
+    for i, e in enumerate(escenas):
+        ini = 0.0 if i == 0 else round(e["t0"] - min(HUECO, e["t0"] - escenas[i - 1]["t0"] - escenas[i - 1]["dur_voz"]) / 2, 3)
+        e["ini"] = ini
+    for i, e in enumerate(escenas):
+        fin = total if i == len(escenas) - 1 else escenas[i + 1]["ini"]
+        e["dur"] = round(fin - e["ini"], 3)
+
+    n = int(total * SR) + SR
+    voz = np.zeros(n, np.float32)
+    for e, v in zip(escenas, voces):
+        colocar(voz, v, e["t0"])
+    voz *= 1.0 / (np.abs(voz).max() + 1e-6)
+    voz = np.tanh(voz * 2.2) / np.tanh(2.2) * 0.92   # compresión suave
+
+    # música: synthwave a 104 BPM. Cada capítulo tiene su progresión; en el de rumores (c7) el beat se corta y queda
+    # un tic-tac de reloj con el bajo; en las portadas de capítulo entra un golpe grave.
+    mus = np.zeros(n, np.float32)
+    sem = 60 / BPM / 4
+    progs = {
+        "a": ([30, 26, 33, 28], [[54, 57, 61], [50, 54, 57], [57, 61, 64], [52, 56, 59]]),   # F#m–D–A–E
+        "b": ([33, 29, 26, 28], [[57, 60, 64], [53, 57, 60], [50, 53, 57], [52, 55, 59]]),   # Am–F–Dm–Em
+        "c": ([26, 31, 33, 28], [[50, 54, 57], [55, 59, 62], [57, 61, 64], [52, 56, 59]]),   # D–G–A–E
+    }
+    prog_cap = {"intro": "a", "c1": "a", "c2": "b", "c3": "c", "c4": "a", "c5": "c", "c6": "b", "c7": "b", "c8": "a", "cierre": "c"}
+    cap_en = lambda tt: next((e["cap"] for e in reversed(escenas) if e["ini"] <= tt), "intro")
+    k = 0
+    while k * sem < total:
+        t0 = k * sem
+        pos, compas = k % 16, int(k // 16)
+        i = compas % 4
+        cap = cap_en(t0)
+        raiz, ac = progs[prog_cap[cap]]
+        if pos == 0:
+            colocar(mus, pad([nf(m) for m in ac[i]], 16 * sem + 0.3), t0, 0.10)
+        if pos in (0, 10):
+            colocar(mus, b808(nf(raiz[i]), 1.4 if pos == 0 else 0.7, glide=nf(raiz[(i + 1) % 4]) if pos == 10 else None), t0, 0.30)
+        if cap == "c7":
+            if pos % 4 == 0:
+                colocar(mus, tic(1800 if (pos // 4) % 2 == 0 else 1400), t0, 0.16)
+            k += 1
+            continue
+        if t0 < 1.0:
+            k += 1
+            continue
+        if pos in (0, 7, 10):
+            colocar(mus, bombo(), t0, 0.32)
+        if pos in (4, 12):
+            colocar(mus, snare(k), t0, 0.14)
+            colocar(mus, palmada(k), t0, 0.10)
+        if pos % 2 == 0:
+            colocar(mus, hat(k), t0, 0.045 if pos % 4 == 2 else 0.03)
+        if pos in (0, 3, 6, 10, 13):
+            colocar(mus, campana(nf(ac[i][(pos // 3) % 3] + 24)), t0, 0.025)
+        colocar(mus, sierra(nf(ac[i][pos % 3] + 12 * (1 + (pos // 8) % 2))), t0, 0.028)
+        k += 1
+    voz_env = np.convolve(np.abs(voz), np.ones(int(0.2 * SR)) / (0.2 * SR), mode="same")
+    mus *= 0.85 * (1 - 0.55 * np.clip(voz_env / 0.05, 0, 1))
+    fin = int((total - 2.0) * SR)
+    mus[fin:] *= np.linspace(1, 0, n - fin)
+
+    # efectos: golpe + whoosh en cada portada de capítulo, whoosh suave entre escenas, golpe en las tarjetas grandes
+    sfx = np.zeros(n, np.float32)
+    for i, (e, seg) in enumerate(zip(escenas, SEGMENTOS)):
+        if i == 0:
+            colocar(sfx, braam(), 0.0, 0.35)
+            colocar(sfx, bombo(), 0.0, 0.5)
+            continue
+        if seg["tipo"] == "portada":
+            colocar(sfx, subida(1.0), e["t0"] - 1.05, 0.2)
+            colocar(sfx, braam(), e["t0"] - 0.05, 0.3)
+            colocar(sfx, bombo(), e["t0"] - 0.05, 0.45)
+        else:
+            colocar(sfx, whoosh(i), e["t0"] - 0.4, 0.16)
+        for it in seg.get("items", []):
+            if it.get("k") != "g" or "en" not in it:
+                continue
+            palabra, nn = (it["en"].split("#") + ["1"])[:2]
+            hits = [w for w in e["palabras"] if w["w"].lower() == palabra.lower()]
+            if len(hits) >= int(nn):
+                colocar(sfx, golpe_seco(), hits[int(nn) - 1]["t"] - 0.03, 0.22)
+                colocar(sfx, pop(1000), hits[int(nn) - 1]["t"] - 0.03, 0.06)
+
+    mezcla = voz + mus + sfx
+    mezcla *= 0.95 / np.abs(mezcla).max()
+    pcm = (np.clip(mezcla, -1, 1) * 32767).astype(np.int16)
+    est = np.stack([pcm, pcm], 1).tobytes()
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "s16le", "-ar", str(SR), "-ac", "2", "-i", "-",
+                    "-t", str(total), os.path.join(BUILD, "mezcla.wav")], input=est, check=True)
+    json.dump({"total": total, "escenas": escenas}, open(os.path.join(BUILD, "tiempos.json"), "w"), ensure_ascii=False, indent=1)
+    for e in escenas:
+        print(f"{e['escena']:7s} host {e['ini']:7.2f} +{e['dur']:6.2f}   voz {e['t0']:7.2f} +{e['dur_voz']:.2f}")
+    print("total", total)
+
+
+if __name__ == "__main__":
+    main()
