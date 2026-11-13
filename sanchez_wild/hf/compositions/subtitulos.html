@@ -1,0 +1,257 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; pointer-events: none; }
+    .sb-g { position: absolute; left: 60px; right: 60px; top: 236px; text-align: center; }
+    .sb-w { display: inline-block; margin: 0 10px; font-family: Inter; font-weight: 900; font-size: 64px; line-height: 1.12; color: rgba(255,255,255,.35);
+            text-shadow: 0 6px 16px rgba(0,0,0,.55); }
+  </style>
+  <div id="root" data-composition-id="subtitulos" data-width="1080" data-height="1920">
+    <div id="sb-0" class="sb-g clip" data-start="0.250" data-duration="1.917"><span id="sb-0-0" class="sb-w">Pedro</span> <span id="sb-0-1" class="sb-w">Sánchez</span> <span id="sb-0-2" class="sb-w">se</span> <span id="sb-0-3" class="sb-w">sentó</span> <span id="sb-0-4" class="sb-w">con</span> <span id="sb-0-5" class="sb-w">Jordi</span></div>
+    <div id="sb-1" class="sb-g clip" data-start="2.167" data-duration="0.853"><span id="sb-1-0" class="sb-w">Wild</span></div>
+    <div id="sb-2" class="sb-g clip" data-start="3.020" data-duration="1.419"><span id="sb-2-0" class="sb-w">Y</span> <span id="sb-2-1" class="sb-w">soltó</span> <span id="sb-2-2" class="sb-w">cinco</span> <span id="sb-2-3" class="sb-w">frases</span> <span id="sb-2-4" class="sb-w">que</span> <span id="sb-2-5" class="sb-w">van</span></div>
+    <div id="sb-3" class="sb-g clip" data-start="4.439" data-duration="1.751"><span id="sb-3-0" class="sb-w">a</span> <span id="sb-3-1" class="sb-w">dar</span> <span id="sb-3-2" class="sb-w">mucho</span> <span id="sb-3-3" class="sb-w">que</span> <span id="sb-3-4" class="sb-w">hablar</span></div>
+    <div id="sb-4" class="sb-g clip" data-start="6.190" data-duration="1.090"><span id="sb-4-0" class="sb-w">Atento</span> <span id="sb-4-1" class="sb-w">a</span> <span id="sb-4-2" class="sb-w">la</span> <span id="sb-4-3" class="sb-w">última</span></div>
+    <div id="sb-5" class="sb-g clip" data-start="7.280" data-duration="0.710"><span id="sb-5-0" class="sb-w">Una</span></div>
+    <div id="sb-6" class="sb-g clip" data-start="7.990" data-duration="1.110"><span id="sb-6-0" class="sb-w">Sobre</span> <span id="sb-6-1" class="sb-w">Ábalos</span></div>
+    <div id="sb-7" class="sb-g clip" data-start="9.100" data-duration="1.689"><span id="sb-7-0" class="sb-w">yo</span> <span id="sb-7-1" class="sb-w">no</span> <span id="sb-7-2" class="sb-w">sabía</span> <span id="sb-7-3" class="sb-w">que</span> <span id="sb-7-4" class="sb-w">Ábalos</span> <span id="sb-7-5" class="sb-w">consumía</span></div>
+    <div id="sb-8" class="sb-g clip" data-start="10.789" data-duration="1.151"><span id="sb-8-0" class="sb-w">prostitución</span></div>
+    <div id="sb-9" class="sb-g clip" data-start="11.940" data-duration="1.531"><span id="sb-9-0" class="sb-w">Era</span> <span id="sb-9-1" class="sb-w">una</span> <span id="sb-9-2" class="sb-w">persona</span> <span id="sb-9-3" class="sb-w">muy</span> <span id="sb-9-4" class="sb-w">brillante</span></div>
+    <div id="sb-10" class="sb-g clip" data-start="13.471" data-duration="1.414"><span id="sb-10-0" class="sb-w">pero</span> <span id="sb-10-1" class="sb-w">tenía</span> <span id="sb-10-2" class="sb-w">una</span> <span id="sb-10-3" class="sb-w">cara</span> <span id="sb-10-4" class="sb-w">be</span> <span id="sb-10-5" class="sb-w">que</span></div>
+    <div id="sb-11" class="sb-g clip" data-start="14.885" data-duration="1.135"><span id="sb-11-0" class="sb-w">no</span> <span id="sb-11-1" class="sb-w">conocía</span></div>
+    <div id="sb-12" class="sb-g clip" data-start="16.020" data-duration="0.750"><span id="sb-12-0" class="sb-w">Dos</span></div>
+    <div id="sb-13" class="sb-g clip" data-start="16.770" data-duration="1.560"><span id="sb-13-0" class="sb-w">Sobre</span> <span id="sb-13-1" class="sb-w">Ábalos</span> <span id="sb-13-2" class="sb-w">y</span> <span id="sb-13-3" class="sb-w">Cerdán</span></div>
+    <div id="sb-14" class="sb-g clip" data-start="18.330" data-duration="1.590"><span id="sb-14-0" class="sb-w">creía</span> <span id="sb-14-1" class="sb-w">que</span> <span id="sb-14-2" class="sb-w">eran</span> <span id="sb-14-3" class="sb-w">amigos</span></div>
+    <div id="sb-15" class="sb-g clip" data-start="19.920" data-duration="1.568"><span id="sb-15-0" class="sb-w">Tú</span> <span id="sb-15-1" class="sb-w">no</span> <span id="sb-15-2" class="sb-w">has</span> <span id="sb-15-3" class="sb-w">conocido</span> <span id="sb-15-4" class="sb-w">a</span> <span id="sb-15-5" class="sb-w">gente</span></div>
+    <div id="sb-16" class="sb-g clip" data-start="21.488" data-duration="1.982"><span id="sb-16-0" class="sb-w">que</span> <span id="sb-16-1" class="sb-w">te</span> <span id="sb-16-2" class="sb-w">haya</span> <span id="sb-16-3" class="sb-w">decepcionado</span></div>
+    <div id="sb-17" class="sb-g clip" data-start="23.470" data-duration="1.150"><span id="sb-17-0" class="sb-w">Tres</span></div>
+    <div id="sb-18" class="sb-g clip" data-start="24.620" data-duration="1.090"><span id="sb-18-0" class="sb-w">Sobre</span> <span id="sb-18-1" class="sb-w">Zapatero</span></div>
+    <div id="sb-19" class="sb-g clip" data-start="25.710" data-duration="0.306"><span id="sb-19-0" class="sb-w">pongo</span> <span id="sb-19-1" class="sb-w">la</span> <span id="sb-19-2" class="sb-w">mano</span> <span id="sb-19-3" class="sb-w">en</span> <span id="sb-19-4" class="sb-w">el</span> <span id="sb-19-5" class="sb-w">fuego</span></div>
+    <div id="sb-20" class="sb-g clip" data-start="26.016" data-duration="0.654"><span id="sb-20-0" class="sb-w">por</span> <span id="sb-20-1" class="sb-w">él</span></div>
+    <div id="sb-21" class="sb-g clip" data-start="26.670" data-duration="0.820"><span id="sb-21-0" class="sb-w">Cuatro</span></div>
+    <div id="sb-22" class="sb-g clip" data-start="27.490" data-duration="0.750"><span id="sb-22-0" class="sb-w">Ceuta</span></div>
+    <div id="sb-23" class="sb-g clip" data-start="28.240" data-duration="1.360"><span id="sb-23-0" class="sb-w">Wild</span> <span id="sb-23-1" class="sb-w">le</span> <span id="sb-23-2" class="sb-w">suelta</span></div>
+    <div id="sb-24" class="sb-g clip" data-start="29.600" data-duration="1.377"><span id="sb-24-0" class="sb-w">no</span> <span id="sb-24-1" class="sb-w">puedo</span> <span id="sb-24-2" class="sb-w">entender</span> <span id="sb-24-3" class="sb-w">que</span> <span id="sb-24-4" class="sb-w">durante</span> <span id="sb-24-5" class="sb-w">la</span></div>
+    <div id="sb-25" class="sb-g clip" data-start="30.977" data-duration="1.893"><span id="sb-25-0" class="sb-w">crisis</span> <span id="sb-25-1" class="sb-w">te</span> <span id="sb-25-2" class="sb-w">vayas</span> <span id="sb-25-3" class="sb-w">de</span> <span id="sb-25-4" class="sb-w">vacaciones</span></div>
+    <div id="sb-26" class="sb-g clip" data-start="32.990" data-duration="0.870"><span id="sb-26-0" class="sb-w">Y</span> <span id="sb-26-1" class="sb-w">Sánchez</span></div>
+    <div id="sb-27" class="sb-g clip" data-start="33.860" data-duration="1.504"><span id="sb-27-0" class="sb-w">no</span> <span id="sb-27-1" class="sb-w">tengo</span> <span id="sb-27-2" class="sb-w">información</span> <span id="sb-27-3" class="sb-w">para</span> <span id="sb-27-4" class="sb-w">acusar</span> <span id="sb-27-5" class="sb-w">a</span></div>
+    <div id="sb-28" class="sb-g clip" data-start="35.364" data-duration="1.066"><span id="sb-28-0" class="sb-w">Marruecos</span></div>
+    <div id="sb-29" class="sb-g clip" data-start="36.570" data-duration="1.444"><span id="sb-29-0" class="sb-w">Justo</span> <span id="sb-29-1" class="sb-w">lo</span> <span id="sb-29-2" class="sb-w">contrario</span> <span id="sb-29-3" class="sb-w">de</span> <span id="sb-29-4" class="sb-w">lo</span> <span id="sb-29-5" class="sb-w">que</span></div>
+    <div id="sb-30" class="sb-g clip" data-start="38.014" data-duration="1.946"><span id="sb-30-0" class="sb-w">dijo</span> <span id="sb-30-1" class="sb-w">Colau</span> <span id="sb-30-2" class="sb-w">esa</span> <span id="sb-30-3" class="sb-w">misma</span> <span id="sb-30-4" class="sb-w">mañana</span></div>
+    <div id="sb-31" class="sb-g clip" data-start="39.960" data-duration="0.531"><span id="sb-31-0" class="sb-w">Y</span> <span id="sb-31-1" class="sb-w">cinco</span></div>
+    <div id="sb-32" class="sb-g clip" data-start="40.491" data-duration="1.239"><span id="sb-32-0" class="sb-w">el</span> <span id="sb-32-1" class="sb-w">zasca</span></div>
+    <div id="sb-33" class="sb-g clip" data-start="41.750" data-duration="0.810"><span id="sb-33-0" class="sb-w">Sánchez</span></div>
+    <div id="sb-34" class="sb-g clip" data-start="42.560" data-duration="1.730"><span id="sb-34-0" class="sb-w">se</span> <span id="sb-34-1" class="sb-w">ha</span> <span id="sb-34-2" class="sb-w">cruzado</span> <span id="sb-34-3" class="sb-w">una</span> <span id="sb-34-4" class="sb-w">línea</span></div>
+    <div id="sb-35" class="sb-g clip" data-start="44.290" data-duration="0.762"><span id="sb-35-0" class="sb-w">Y</span> <span id="sb-35-1" class="sb-w">Jordi</span> <span id="sb-35-2" class="sb-w">Wild</span></div>
+    <div id="sb-36" class="sb-g clip" data-start="45.052" data-duration="1.208"><span id="sb-36-0" class="sb-w">sin</span> <span id="sb-36-1" class="sb-w">pestañear</span></div>
+    <div id="sb-37" class="sb-g clip" data-start="46.260" data-duration="1.950"><span id="sb-37-0" class="sb-w">los</span> <span id="sb-37-1" class="sb-w">dos</span> <span id="sb-37-2" class="sb-w">la</span> <span id="sb-37-3" class="sb-w">habéis</span> <span id="sb-37-4" class="sb-w">cruzado</span></div>
+    <div id="sb-38" class="sb-g clip" data-start="48.210" data-duration="1.378"><span id="sb-38-0" class="sb-w">Quién</span> <span id="sb-38-1" class="sb-w">ganó</span> <span id="sb-38-2" class="sb-w">la</span> <span id="sb-38-3" class="sb-w">entrevista</span></div>
+    <div id="sb-39" class="sb-g clip" data-start="49.588" data-duration="1.432"><span id="sb-39-0" class="sb-w">Sánchez</span> <span id="sb-39-1" class="sb-w">o</span> <span id="sb-39-2" class="sb-w">Wild</span></div>
+    <div id="sb-40" class="sb-g clip" data-start="51.020" data-duration="1.290"><span id="sb-40-0" class="sb-w">Te</span> <span id="sb-40-1" class="sb-w">leo</span> <span id="sb-40-2" class="sb-w">en</span> <span id="sb-40-3" class="sb-w">comentarios</span></div>
+    <div id="sb-41" class="sb-g clip" data-start="52.310" data-duration="0.565"><span id="sb-41-0" class="sb-w">Y</span> <span id="sb-41-1" class="sb-w">sígueme</span></div>
+    <div id="sb-42" class="sb-g clip" data-start="52.875" data-duration="1.489"><span id="sb-42-0" class="sb-w">que</span> <span id="sb-42-1" class="sb-w">esta</span> <span id="sb-42-2" class="sb-w">campaña</span> <span id="sb-42-3" class="sb-w">va</span> <span id="sb-42-4" class="sb-w">a</span> <span id="sb-42-5" class="sb-w">ser</span></div>
+    <div id="sb-43" class="sb-g clip" data-start="54.364" data-duration="1.266"><span id="sb-43-0" class="sb-w">una</span> <span id="sb-43-1" class="sb-w">locura</span></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 61.5 }, 0);
+      tl.fromTo("#sb-0", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 0.250);
+      tl.fromTo("#sb-0-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-0-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 0.300);
+      tl.fromTo("#sb-0-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-0-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 0.646);
+      tl.fromTo("#sb-0-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-0-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 1.099);
+      tl.fromTo("#sb-0-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-0-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 1.285);
+      tl.fromTo("#sb-0-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-0-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 1.631);
+      tl.fromTo("#sb-0-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-0-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 1.871);
+      tl.fromTo("#sb-1", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 2.167);
+      tl.fromTo("#sb-1-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-1-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 2.217);
+      tl.fromTo("#sb-2", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 3.020);
+      tl.fromTo("#sb-2-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-2-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 3.070);
+      tl.fromTo("#sb-2-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-2-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 3.181);
+      tl.fromTo("#sb-2-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-2-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 3.469);
+      tl.fromTo("#sb-2-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-2-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 3.757);
+      tl.fromTo("#sb-2-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-2-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 4.090);
+      tl.fromTo("#sb-2-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-2-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 4.290);
+      tl.fromTo("#sb-3", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 4.439);
+      tl.fromTo("#sb-3-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-3-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 4.489);
+      tl.fromTo("#sb-3-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-3-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 4.600);
+      tl.fromTo("#sb-3-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-3-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 4.800);
+      tl.fromTo("#sb-3-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-3-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 5.088);
+      tl.fromTo("#sb-3-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-3-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 5.287);
+      tl.fromTo("#sb-4", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 6.190);
+      tl.fromTo("#sb-4-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-4-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 6.240);
+      tl.fromTo("#sb-4-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-4-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 6.444);
+      tl.fromTo("#sb-4-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-4-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 6.511);
+      tl.fromTo("#sb-4-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-4-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 6.606);
+      tl.fromTo("#sb-5", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 7.280);
+      tl.fromTo("#sb-5-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-5-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 7.330);
+      tl.fromTo("#sb-6", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 7.990);
+      tl.fromTo("#sb-6-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-6-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 8.040);
+      tl.fromTo("#sb-6-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-6-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 8.254);
+      tl.fromTo("#sb-7", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 9.100);
+      tl.fromTo("#sb-7-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-7-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 9.150);
+      tl.fromTo("#sb-7-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-7-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 9.319);
+      tl.fromTo("#sb-7-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-7-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 9.488);
+      tl.fromTo("#sb-7-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-7-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 9.801);
+      tl.fromTo("#sb-7-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-7-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 10.018);
+      tl.fromTo("#sb-7-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-7-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 10.380);
+      tl.fromTo("#sb-8", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 10.789);
+      tl.fromTo("#sb-8-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-8-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 10.839);
+      tl.fromTo("#sb-9", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 11.940);
+      tl.fromTo("#sb-9-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-9-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 11.990);
+      tl.fromTo("#sb-9-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-9-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 12.202);
+      tl.fromTo("#sb-9-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-9-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 12.414);
+      tl.fromTo("#sb-9-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-9-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 12.814);
+      tl.fromTo("#sb-9-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-9-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 13.027);
+      tl.fromTo("#sb-10", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 13.471);
+      tl.fromTo("#sb-10-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-10-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 13.521);
+      tl.fromTo("#sb-10-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-10-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 13.780);
+      tl.fromTo("#sb-10-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-10-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 14.087);
+      tl.fromTo("#sb-10-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-10-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 14.299);
+      tl.fromTo("#sb-10-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-10-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 14.558);
+      tl.fromTo("#sb-10-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-10-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 14.723);
+      tl.fromTo("#sb-11", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 14.885);
+      tl.fromTo("#sb-11-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-11-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 14.935);
+      tl.fromTo("#sb-11-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-11-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 15.100);
+      tl.fromTo("#sb-12", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 16.020);
+      tl.fromTo("#sb-12-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-12-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 16.070);
+      tl.fromTo("#sb-13", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 16.770);
+      tl.fromTo("#sb-13-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-13-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 16.820);
+      tl.fromTo("#sb-13-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-13-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 17.113);
+      tl.fromTo("#sb-13-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-13-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 17.450);
+      tl.fromTo("#sb-13-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-13-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 17.562);
+      tl.fromTo("#sb-14", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 18.330);
+      tl.fromTo("#sb-14-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-14-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 18.380);
+      tl.fromTo("#sb-14-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-14-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 18.672);
+      tl.fromTo("#sb-14-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-14-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 18.875);
+      tl.fromTo("#sb-14-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-14-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 19.122);
+      tl.fromTo("#sb-15", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 19.920);
+      tl.fromTo("#sb-15-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-15-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 19.970);
+      tl.fromTo("#sb-15-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-15-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 20.153);
+      tl.fromTo("#sb-15-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-15-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 20.336);
+      tl.fromTo("#sb-15-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-15-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 20.571);
+      tl.fromTo("#sb-15-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-15-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 21.068);
+      tl.fromTo("#sb-15-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-15-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 21.199);
+      tl.fromTo("#sb-16", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 21.488);
+      tl.fromTo("#sb-16-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-16-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 21.538);
+      tl.fromTo("#sb-16-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-16-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 21.774);
+      tl.fromTo("#sb-16-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-16-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 21.957);
+      tl.fromTo("#sb-16-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-16-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 22.244);
+      tl.fromTo("#sb-17", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 23.470);
+      tl.fromTo("#sb-17-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-17-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 23.520);
+      tl.fromTo("#sb-18", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 24.620);
+      tl.fromTo("#sb-18-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-18-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 24.670);
+      tl.fromTo("#sb-18-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-18-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 25.048);
+      tl.fromTo("#sb-19", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 25.710);
+      tl.fromTo("#sb-19-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-19-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 25.760);
+      tl.fromTo("#sb-19-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-19-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 25.829);
+      tl.fromTo("#sb-19-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-19-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 25.865);
+      tl.fromTo("#sb-19-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-19-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 25.923);
+      tl.fromTo("#sb-19-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-19-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 25.960);
+      tl.fromTo("#sb-19-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-19-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 25.997);
+      tl.fromTo("#sb-20", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 26.016);
+      tl.fromTo("#sb-20-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-20-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 26.066);
+      tl.fromTo("#sb-20-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-20-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 26.113);
+      tl.fromTo("#sb-21", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 26.670);
+      tl.fromTo("#sb-21-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-21-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 26.720);
+      tl.fromTo("#sb-22", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 27.490);
+      tl.fromTo("#sb-22-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-22-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 27.540);
+      tl.fromTo("#sb-23", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 28.240);
+      tl.fromTo("#sb-23-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-23-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 28.290);
+      tl.fromTo("#sb-23-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-23-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 28.563);
+      tl.fromTo("#sb-23-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-23-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 28.737);
+      tl.fromTo("#sb-24", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 29.600);
+      tl.fromTo("#sb-24-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-24-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 29.650);
+      tl.fromTo("#sb-24-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-24-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 29.784);
+      tl.fromTo("#sb-24-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-24-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 30.032);
+      tl.fromTo("#sb-24-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-24-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 30.396);
+      tl.fromTo("#sb-24-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-24-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 30.568);
+      tl.fromTo("#sb-24-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-24-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 30.893);
+      tl.fromTo("#sb-25", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 30.977);
+      tl.fromTo("#sb-25-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-25-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 31.027);
+      tl.fromTo("#sb-25-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-25-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 31.314);
+      tl.fromTo("#sb-25-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-25-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 31.448);
+      tl.fromTo("#sb-25-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-25-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 31.696);
+      tl.fromTo("#sb-25-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-25-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 31.830);
+      tl.fromTo("#sb-26", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 32.990);
+      tl.fromTo("#sb-26-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-26-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 33.040);
+      tl.fromTo("#sb-26-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-26-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 33.108);
+      tl.fromTo("#sb-27", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 33.860);
+      tl.fromTo("#sb-27-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-27-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 33.910);
+      tl.fromTo("#sb-27-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-27-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 34.049);
+      tl.fromTo("#sb-27-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-27-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 34.306);
+      tl.fromTo("#sb-27-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-27-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 34.801);
+      tl.fromTo("#sb-27-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-27-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 35.018);
+      tl.fromTo("#sb-27-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-27-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 35.315);
+      tl.fromTo("#sb-28", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 35.364);
+      tl.fromTo("#sb-28-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-28-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 35.414);
+      tl.fromTo("#sb-29", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 36.570);
+      tl.fromTo("#sb-29-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-29-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 36.620);
+      tl.fromTo("#sb-29-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-29-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 36.913);
+      tl.fromTo("#sb-29-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-29-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 37.071);
+      tl.fromTo("#sb-29-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-29-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 37.545);
+      tl.fromTo("#sb-29-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-29-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 37.703);
+      tl.fromTo("#sb-29-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-29-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 37.861);
+      tl.fromTo("#sb-30", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 38.014);
+      tl.fromTo("#sb-30-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-30-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 38.064);
+      tl.fromTo("#sb-30-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-30-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 38.312);
+      tl.fromTo("#sb-30-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-30-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 38.605);
+      tl.fromTo("#sb-30-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-30-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 38.808);
+      tl.fromTo("#sb-30-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-30-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 39.102);
+      tl.fromTo("#sb-31", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 39.960);
+      tl.fromTo("#sb-31-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-31-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 40.010);
+      tl.fromTo("#sb-31-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-31-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 40.157);
+      tl.fromTo("#sb-32", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 40.491);
+      tl.fromTo("#sb-32-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-32-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 40.541);
+      tl.fromTo("#sb-32-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-32-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 40.747);
+      tl.fromTo("#sb-33", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 41.750);
+      tl.fromTo("#sb-33-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-33-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 41.800);
+      tl.fromTo("#sb-34", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 42.560);
+      tl.fromTo("#sb-34-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-34-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 42.610);
+      tl.fromTo("#sb-34-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-34-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 42.766);
+      tl.fromTo("#sb-34-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-34-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 42.922);
+      tl.fromTo("#sb-34-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-34-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 43.300);
+      tl.fromTo("#sb-34-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-34-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 43.501);
+      tl.fromTo("#sb-35", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 44.290);
+      tl.fromTo("#sb-35-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-35-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 44.340);
+      tl.fromTo("#sb-35-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-35-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 44.471);
+      tl.fromTo("#sb-35-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-35-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 44.813);
+      tl.fromTo("#sb-36", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 45.052);
+      tl.fromTo("#sb-36-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-36-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 45.102);
+      tl.fromTo("#sb-36-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-36-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 45.338);
+      tl.fromTo("#sb-37", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 46.260);
+      tl.fromTo("#sb-37-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-37-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 46.310);
+      tl.fromTo("#sb-37-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-37-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 46.528);
+      tl.fromTo("#sb-37-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-37-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 46.746);
+      tl.fromTo("#sb-37-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-37-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 46.915);
+      tl.fromTo("#sb-37-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-37-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 47.278);
+      tl.fromTo("#sb-38", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 48.210);
+      tl.fromTo("#sb-38-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-38-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 48.260);
+      tl.fromTo("#sb-38-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-38-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 48.592);
+      tl.fromTo("#sb-38-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-38-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 48.872);
+      tl.fromTo("#sb-38-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-38-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 49.051);
+      tl.fromTo("#sb-39", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 49.588);
+      tl.fromTo("#sb-39-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-39-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 49.638);
+      tl.fromTo("#sb-39-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-39-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 50.072);
+      tl.fromTo("#sb-39-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-39-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 50.199);
+      tl.fromTo("#sb-40", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 51.020);
+      tl.fromTo("#sb-40-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-40-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 51.070);
+      tl.fromTo("#sb-40-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-40-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 51.178);
+      tl.fromTo("#sb-40-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-40-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 51.317);
+      tl.fromTo("#sb-40-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-40-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 51.425);
+      tl.fromTo("#sb-41", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 52.310);
+      tl.fromTo("#sb-41-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-41-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 52.360);
+      tl.fromTo("#sb-41-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-41-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 52.488);
+      tl.fromTo("#sb-42", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 52.875);
+      tl.fromTo("#sb-42-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-42-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 52.925);
+      tl.fromTo("#sb-42-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-42-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 53.156);
+      tl.fromTo("#sb-42-2", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-42-2").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 53.438);
+      tl.fromTo("#sb-42-3", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-42-3").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 53.875);
+      tl.fromTo("#sb-42-4", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-42-4").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 54.054);
+      tl.fromTo("#sb-42-5", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-42-5").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 54.183);
+      tl.fromTo("#sb-43", { scale: 0.82, y: 16 }, { scale: 1, y: 0, duration: 0.14, ease: "back.out(2.5)" }, 54.364);
+      tl.fromTo("#sb-43-0", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-43-0").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 54.414);
+      tl.fromTo("#sb-43-1", { color: "rgba(255,255,255,.35)" }, { color: document.querySelector("#sb-43-1").textContent.length >= 7 ? "#ffd43b" : "#ffffff", duration: 0.01 }, 54.645);
+      window.__timelines["subtitulos"] = tl;
+    })();
+  </script>
+</template>
