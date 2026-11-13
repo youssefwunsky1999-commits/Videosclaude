@@ -1,0 +1,56 @@
+<template>
+  <style>
+#root { position: absolute; inset: 0; overflow: hidden; background: var(--a); font-family: Inter; }
+.rays { position: absolute; left: -50%; top: -30%; width: 200%; height: 160%;
+        background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.07) 0deg 7deg, transparent 7deg 18deg); }
+.vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%); }
+.pill { position: absolute; left: 0; right: 0; text-align: center; }
+.pill span { display: inline-block; font-weight: 900; font-size: 48px; padding: 14px 36px; border-radius: 60px; box-shadow: 0 10px 0 rgba(0,0,0,.25); }
+.am span { background: #ffd43b; color: #1a1d33; } .ro span { background: #ff3b47; color: #fff; } .bl span { background: #fff; color: #1a1d33; }
+.big { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; color: #ffd43b; text-shadow: 0 10px 0 rgba(0,0,0,.3); line-height: 1; }
+.big small { display: block; font-size: 40px; color: #fff; margin-top: 10px; text-shadow: none; }
+.card { position: absolute; left: 70px; right: 70px; background: #fbf7ee; border-radius: 24px; box-shadow: 0 14px 0 rgba(0,0,0,.25);
+        color: #1a1d33; padding: 22px 30px; display: flex; align-items: center; gap: 24px; font-weight: 800; font-size: 40px; line-height: 1.15; }
+.tag { flex: none; font-weight: 900; font-size: 34px; color: #fff; border-radius: 14px; padding: 8px 18px; }
+.nombre { position: absolute; text-align: center; }
+.nombre span { display: inline-block; font-weight: 900; font-size: 36px; padding: 8px 26px; border-radius: 40px; color: #fff; box-shadow: 0 8px 0 rgba(0,0,0,.25); }
+.pj { position: absolute; }
+.sello { position: absolute; font-weight: 900; color: #e5323e; border: 10px solid #e5323e; border-radius: 16px; padding: 6px 26px; text-align: center;
+         background: rgba(251,247,238,.9); line-height: 1.05; }
+.titulo { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; line-height: 1; }
+mark { background: #ffd43b; color: #1a1d33; padding: 0 8px; border-radius: 8px; }
+</style>
+  <div id="root" data-composition-id="final" data-width="1080" data-height="1920" style="--a:#0b2a5c">
+    <div id="final-rays" class="rays" style="background-color:#1d5fc4"></div>
+    <div class="vig"></div>
+
+    <div id="f-q" class="titulo" style="top:440px;font-size:100px;color:#fff">¿FEIJÓO<br>TE CONVENCE?</div>
+    <div id="f-a" class="sello" style="left:150px;top:700px;font-size:76px;color:#22a85a;border-color:#22a85a">SÍ</div>
+    <div id="f-b" class="sello" style="left:640px;top:720px;font-size:76px">NO</div>
+    <div id="f-com" class="pill bl" style="top:920px"><span>TE LEO EN COMENTARIOS</span></div>
+    <div id="f-per" class="pill am" style="top:1040px"><span>LA DE SÁNCHEZ, EN MI PERFIL</span></div>
+    <div id="f-sig" class="pill" style="top:1160px"><span style="background:#111;color:#fff">SÍGUEME</span></div>
+    <svg id="final-pf" class="pj" style="left:30px;top:1290px;width:470px" viewBox="0 0 400 480"><path d="M10 480 C25 385 110 352 200 348 C290 352 375 385 390 480 Z" fill="#1c2a4f"/><path d="M160 350 L200 420 L240 350 Z" fill="#fff"/><path d="M190 368 L210 368 L216 460 L200 476 L184 460 Z" fill="#2f7be0"/><ellipse cx="112" cy="205" rx="18" ry="28" fill="#e4b28e"/><ellipse cx="288" cy="205" rx="18" ry="28" fill="#e4b28e"/><rect x="168" y="290" width="64" height="72" rx="20" fill="#e4b28e"/><ellipse cx="200" cy="192" rx="88" ry="108" fill="#f2c6a3"/><path d="M108 210 C100 140 118 104 140 96 C130 130 132 160 138 186 Z" fill="#e8e8ea"/><path d="M292 210 C300 140 282 104 260 96 C270 130 268 160 262 186 Z" fill="#e8e8ea"/><path d="M140 100 C170 80 232 80 262 100 C240 92 160 92 140 100 Z" fill="#e8e8ea"/><path d="M150 128 Q200 118 250 128" stroke="#e0aa86" stroke-width="4" fill="none"/><path d="M180 262 Q200 274 220 262" stroke="#7a3a2a" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="158" width="42" height="9" rx="4" fill="#b9babd"/><rect x="210" y="158" width="42" height="9" rx="4" fill="#b9babd"/><g id="final-pf-ojos" style="transform-origin:200px 188px"><circle cx="170" cy="188" r="8" fill="#1b1b1b"/><circle cx="230" cy="188" r="8" fill="#1b1b1b"/></g><path d="M200 192 L189 228 Q200 235 211 228 Z" fill="#e0a986"/></svg><svg id="final-jw" class="pj" style="left:580px;top:1290px;width:470px" viewBox="0 0 400 480"><path d="M10 480 C25 385 110 352 200 348 C290 352 375 385 390 480 Z" fill="#161616"/><ellipse cx="112" cy="205" rx="18" ry="28" fill="#dba783"/><ellipse cx="288" cy="205" rx="18" ry="28" fill="#dba783"/><rect x="168" y="290" width="64" height="72" rx="20" fill="#dba783"/><ellipse cx="200" cy="192" rx="88" ry="108" fill="#e9b893"/><ellipse cx="200" cy="120" rx="80" ry="40" fill="#c99876" opacity=".35"/><path d="M112 200 C110 300 150 372 200 378 C250 372 290 300 288 200 C278 246 262 268 238 272 C222 258 178 258 162 272 C138 268 122 246 112 200 Z" fill="#3d2a1e"/><path d="M164 250 C182 236 218 236 236 250 C220 258 180 258 164 250 Z" fill="#2f2017"/><path d="M186 266 Q200 272 214 266" stroke="#e9b893" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="158" width="42" height="9" rx="4" fill="#3d2a1e"/><rect x="210" y="158" width="42" height="9" rx="4" fill="#3d2a1e"/><g id="final-jw-ojos" style="transform-origin:200px 188px"><circle cx="170" cy="188" r="8" fill="#1b1b1b"/><circle cx="230" cy="188" r="8" fill="#1b1b1b"/></g><path d="M200 192 L189 228 Q200 235 211 228 Z" fill="#e0a986"/></svg><div class="nombre" style="left:30px;width:470px;top:1720px"><span style="background:#fff;color:#1d6fe0">FEIJÓO</span></div><div class="nombre" style="left:580px;width:470px;top:1720px"><span style="background:#111318">JORDI WILD</span></div>
+
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.to({}, { duration: 17.439 }, 0);
+      tl.fromTo("#final-rays", { rotation: 0 }, { rotation: 69.8, duration: 17.439, ease: "none" }, 0);
+      document.querySelectorAll("#root .pj").forEach((el, i) => {
+        tl.fromTo(el, { y: 0 }, { y: -10, duration: 0.9, yoyo: true, repeat: Math.max(1, Math.floor(17.439 / 0.9) - 1), ease: "sine.inOut" }, i * 0.3);
+      });
+      document.querySelectorAll("#root [id$='-ojos']").forEach((el, i) => {
+        for (let s = 1.2 + i * 0.7; s < 17.439 - 0.3; s += 2.6) tl.fromTo(el, { scaleY: 1 }, { scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1 }, s);
+      });
+      tl.fromTo("#f-q", { scale: 0.6, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 0.05);
+      tl.fromTo("#f-a", { scale: 2.6, opacity: 0, rotation: -16 }, { scale: 1, opacity: 1, rotation: -6, duration: 0.2, ease: "power4.in" }, 0.728);
+      tl.fromTo("#f-b", { scale: 2.6, opacity: 0, rotation: -4 }, { scale: 1, opacity: 1, rotation: 6, duration: 0.2, ease: "power4.in" }, 1.326);
+      tl.fromTo("#f-com", { scale: 0.4, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 2.359);
+      tl.fromTo("#f-per", { scale: 0.4, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 5.295);
+      tl.fromTo("#f-sig", { scale: 0.4, opacity: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.35, ease: "back.out(2.2)" }, 6.06);
+      window.__timelines["final"] = tl;
+    })();
+  </script>
+</template>
